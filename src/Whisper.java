@@ -84,7 +84,7 @@ public class Whisper {
         System.out.println("Error Result: " + errorResult);
     }
 
-    public String audioToString() throws IOException {
+    public static String audioToString() throws IOException {
         
         File file = new File(FILE_PATH);
         
