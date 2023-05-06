@@ -12,6 +12,7 @@ public class ChatGPT {
     private static final String API_ENDPOINT = "https://api.openai.com/v1/completions";
     private static final String API_KEY = "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";
     private static final String MODEL = "text-davinci-003";
+
     public static String askQuestion(String query) throws IOException, InterruptedException{
         // Set request parameters
         String prompt = query;
@@ -35,8 +36,7 @@ public class ChatGPT {
          .header("Authorization", String.format("Bearer %s", API_KEY))
          .POST(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
          .build();
-
-         System.out.println(requestBody.toString());
+         
         // Send the request and recieve the response
         HttpResponse<String> response = client.send(
             request,
