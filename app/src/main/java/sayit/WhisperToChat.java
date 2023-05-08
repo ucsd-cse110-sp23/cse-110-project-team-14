@@ -15,7 +15,6 @@ public class WhisperToChat {
                 System.out.println("Microphone didn't pick up any noise");
                 return null;
             } else {
-                System.out.println("WE FOUND IT");
                 return ChatGPT.askQuestion(query);
             }
         } catch (Exception e) {
