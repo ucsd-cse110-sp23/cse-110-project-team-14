@@ -76,7 +76,7 @@ public class sideBar extends JScrollPane {
     }
 
     /*
-     * JPanel that the viewport of sideBar views. Contains a List Panel that dynamically updates.
+     * JPanel that the viewport of sideBar views. Contains a List Panel that dynamically updates with question history.
      */
     class sideBarPanel extends JPanel{
         JLabel sideBarHeader = new JLabel("Question History");
@@ -86,15 +86,14 @@ public class sideBar extends JScrollPane {
             this.setLayout(BORDERLAYOUT);
             this.setMinimumSize(minSize);
             this.setPreferredSize(minSize);
-
             sideBarHeader.setHorizontalAlignment(JLabel.CENTER);
             sideBarHeader.setPreferredSize(new Dimension(200, 100));
             sideBarHeader.setBackground(DARKGRAY);
+            sideBarHeader.setPreferredSize(new Dimension(300,200));
+            sideBarHeader.setForeground(new Color(0,0,0));
             this.add(sideBarHeader,BORDERLAYOUT.PAGE_START);
             this.add(sideBarList);
-            //this.setMinimumSize(minSize);
-            //this.setPreferredSize(prefSize);
-            this.setBackground(BLUE);
+            this.setBackground(LIGHTGRAY);
             this.setVisible(true);
             this.revalidate();
         }
@@ -102,24 +101,8 @@ public class sideBar extends JScrollPane {
 
     class sideBarList extends JPanel{
         sideBarList(){
-            Dimension prefSizeList = new Dimension(400, 1900);
-            Dimension minSizeList = new Dimension(400, 1900);
-            this.setBackground(GREEN);
+            this.setBackground(MEDGRAY);
             this.setLayout(HISTORYGRID);
-            //this.setMinimumSize(minSizeList);
-            //this.setPreferredSize(minSizeList);
-            // for (String question : questionAnswerHashMap.keySet()){
-            //     JButton button = new JButton(question);
-            //     buttonArray.add(button);
-            //     this.add(button);
-            // }
-
-            // for(int x = 0; x<10; x++){
-            //     JButton button = new JButton("Button" + x);
-            //     button.setMinimumSize(new Dimension(0,900));
-            //     button.setPreferredSize(new Dimension(0,900));
-            //     this.add(button);
-            // }
         }
     }
 
