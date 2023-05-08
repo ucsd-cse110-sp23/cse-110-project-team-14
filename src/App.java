@@ -25,6 +25,7 @@ class AppFrame extends JFrame {
         this.add(stopButton);
 
         addListeners(); // Give click functionality
+        revalidate();
     }
 
     public void addListeners() {
