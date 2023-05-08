@@ -1,5 +1,6 @@
 package sayit;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,63 +8,73 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-class AppFrame extends JFrame {
-    private JButton askButton; // Create Ask Button
-    private boolean askStop = false; // Toggle for Button
-    private AudioRecorder recorder; // Create Listening Device
+// class AppFrame extends JFrame {
+//     private static JButton askButton; // Create Ask Button
+//     private boolean askStop = false; // boolean toggle
+//     private AudioRecorder recorder; // Create Listening Device
 
-    AppFrame() {
-        setSize(300, 100); // Set AppFrame paremeters
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-        setLayout(new GridLayout(1, 3));
 
-        recorder = new AudioRecorder(); // Initialize buttons and recorder
+    // public void populateFrame(Frame frame){
 
-        askButton = new JButton("Ask Question");
-        this.add(askButton);
+    //     recorder = new AudioRecorder(); // Initialize buttons and recorder
 
-        addListeners(); // Give click functionality
-        revalidate(); // Reupdate the frame
-    }
+    //     askButton = new JButton("Ask Question");
+    //     frame.getAnswerFooter().add(askButton,BorderLayout.CENTER);
 
-    public void addListeners() {
-    askButton.addActionListener(new ActionListener() { // Start recording when Clicked
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (askStop) {
-                recorder.stopRecording();
-                askButton.setText("Ask Question");
-                askStop = false; // Turn Button into Ask
-                Thread t = new Thread( // Use another thread to not lag UI
-                    () -> {
-                    try {
-                        String question = Whisper.audioToString();
-                        if (question.equals("")) { // Check Mic input
-                            System.out.println("Microphone didn't pick up any noise");
-                        } else { // Only answer if input received
-                            String answer = ChatGPT.askQuestion(question);
-                            System.out.println(answer);
-                        }
-                    } catch (Exception ex) {
-                        System.out.println("Error occured");
-                    }
-                }
-                );
-                t.start(); // Start the threaded operation
-            } else {
-                recorder.startRecording();
-                askButton.setText("Stop Question");
-                askStop = true; // Turn button into Stop
-            }
-        }
-        }
-    );
-    }
-}
+    //     addListeners(); // Give click functionality
+    //     frame.revalidate(); // Reupdate the frame
+        
+    // }
+    // AppFrame() {
+    //     setSize(300, 100); // Set Appframe parameters
+    //     setDefaultCloseOperation(EXIT_ON_CLOSE);
+    //     //setVisible(true);
+    //     setLayout(new GridLayout(1, 3));
 
-public class App { // Main App Class
+    //     recorder = new AudioRecorder(); // Initialize buttons and recorder
+
+    //     askButton = new JButton("Ask Question");
+    //     this.add(askButton);
+
+    //     addListeners(); // Give click functionality
+    //     revalidate(); // Reupdate the frame
+    // }
+
+    // public void addListeners() {
+    // askButton.addActionListener(new ActionListener() { // start recording on click
+    //     @Override
+    //     public void actionPerformed(ActionEvent e) {
+    //         if (askStop) {
+    //             recorder.stopRecording();
+    //             askButton.setText("Ask Question"); //change button text
+    //             askStop = false; // change toggle
+    //             Thread t = new Thread( // use another thread for answer computation to not lag UI
+    //                 () -> {
+    //                 try {
+    //                     String question = Whisper.audioToString();
+    //                     String answer = ChatGPT.askQuestion(question);
+    //                     System.out.println(answer);
+    //                 } catch (Exception ex) {
+    //                     System.out.println("Error occured");
+    //                 }
+    //             }
+    //             );
+    //             t.start(); // start the new thread
+    //         } else {
+    //             recorder.startRecording();
+    //             askButton.setText("Stop Question"); // change text back
+    //             askStop = true; // change toggle back
+    //         }
+    //     }
+    //     }
+    // );
+    // }
+//}
+
+public class App { // main class
     public static void main(String[] args) throws Exception {
-        new AppFrame(); // call AppFrame
+        Frame frame = new Frame();  
+
+        
     }
 }
