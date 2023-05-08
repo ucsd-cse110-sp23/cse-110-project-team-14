@@ -29,7 +29,10 @@ public class Frame extends JFrame {
         return chatGPT.getFooter();
     }
 
-
+    /*
+     * Primary container for all panels. Frame is a JSplitPane, containing a fixed set sideBar and a dynamic query and
+     * response area for ChatGPT.
+     */
     Frame(){
         this.setSize(1600,900);
         this.setVisible(true);
@@ -50,6 +53,9 @@ public class Frame extends JFrame {
         Frame frame = new Frame();
     }
 
+    /*
+     * Adds a listener to the `Ask Question` Button
+     */
     public void addListeners() {
         askButton.addActionListener(new ActionListener() { // start recording on click
             @Override
@@ -61,6 +67,12 @@ public class Frame extends JFrame {
                     Thread t = new Thread( // use another thread for answer computation to not lag UI
                         () -> {
                         try {
+
+                            /*
+                             * Takes a recording and transcribes it into text using Whisper. After transcription, the 
+                             * string is saved as a question. Then, that string is asked to ChatGPT. The question/answer
+                             * pairs are then stored and displayed in the GUI.
+                             */
                             String question = Whisper.audioToString();
                             chatGPT.updateQuestionText(question);
                             chatGPT.revalidate();

@@ -8,7 +8,16 @@ import javax.swing.*;
 import java.util.*;
 import java.util.Objects;
 
+
+
+/*
+ * askPanel is one of the two panels that will be displayed on in the appframe. AskPanel will consists of three 
+ * seperate panels, a footer, a query and response panel. The query and response panel will contain the query sent to
+ * ChatGPT as well as its response. The footer panel currently contains the button to ask a question and receive an
+ * answer. askPanel contains subclasses for all of these respective panels.
+ */
 public class askPanel extends JPanel{
+    /*Defining common variables */
     static Dimension PREFSIZE = new Dimension(1000,900);
     static Color RED = new Color(255, 0, 0);
     static Color BLUE = new Color(0,0,255);
@@ -24,45 +33,61 @@ public class askPanel extends JPanel{
     Footer footer = new Footer();
     Answer answer = new Answer();
 
+/**
+ * Updates text of query panel. Used when displaying history or given query.
+ * 
+ * @param string A String variable to be displayed.
+ */
     public void updateQuestionText(String string){
         this.question.updateText(string);
     }
-
+/**
+ * Updates text of query panel. Used when displaying history or given answer.
+ * 
+ * @param string A String variable to be displayed.
+ */
     public void updateAnswerText(String string){
         this.answer.updateText(string);
     }
 
+/*
+ * Getter for footer panel.
+ */
     public Footer getFooter() {
         return footer;
     }
 
-
+/*
+* Constructor for askPanel. Creates a panel with BorderLayout that contains the footer, query and response panel.
+*/
     askPanel(){
-        this.setBackground(BLUE);
+        this.setBackground(DARKGRAY);
         this.setLayout(BORDERLAYOUT);
         this.setPreferredSize(PREFSIZE);
         this.add(footer, BorderLayout.SOUTH);
         this.add(question, BorderLayout.NORTH);
         this.add(answer, BorderLayout.CENTER);
-        question.updateText("Test 4");
         question.revalidate();
         this.revalidate();
     }
-
+/*
+ * Footer subclass. Used to hold in askQuestion button.
+ */
     class Footer extends JPanel{
         static Dimension PREFSIZE = new Dimension(1000,100);
         Footer(){
-            this.setBackground(RED);
+            this.setBackground(MEDGRAY);
             this.setPreferredSize(PREFSIZE);
             this.setMinimumSize(PREFSIZE);
         }
     }
 
+    /*
+     * Question subclass. Used to hold response query. Contains a JTextArea that is populated by user query.
+     */
     class Question extends JPanel{
-        
-
         JLabel label = new JLabel("Question Asked");
-        JTextArea text = new JTextArea("TEST3");
+        JTextArea text = new JTextArea(" ");
         static Dimension PREFSIZE = new Dimension (1000,300);
 
         public void updateText(String string){
@@ -70,21 +95,28 @@ public class askPanel extends JPanel{
         }
 
         Question(){
-            this.setBackground(GREEN);
+            this.setBackground(MEDGRAY);
             this.setPreferredSize(PREFSIZE);
             this.setMinimumSize(PREFSIZE);
             this.setLayout(new BorderLayout());
             this.add(label, BorderLayout.PAGE_START);
             label.setHorizontalAlignment(JLabel.CENTER);
+            label.setBackground(DARKGRAY);
+            label.setForeground(new Color(255,255,255));
+
+            
             this.add(text, BorderLayout.CENTER);
             text.setAlignmentX(CENTER_ALIGNMENT);
             text.setAlignmentY(CENTER_ALIGNMENT);
         }
     }
 
+    /*
+     * Answer subclass. Used to hold response query. Contains a JTextArea that is populated by ChatGPT response.
+     */
     class Answer extends JPanel{
         JLabel label = new JLabel("Response");
-        JTextArea text = new JTextArea("TEST 5");
+        JTextArea text = new JTextArea(" ");
         static Dimension PREFSIZE = new Dimension (1000,300);
         
         public void updateText(String string){
@@ -92,12 +124,13 @@ public class askPanel extends JPanel{
         }
 
         Answer(){
-            this.setBackground(BLUE);
+            this.setBackground(LIGHTGRAY);
             this.setPreferredSize(PREFSIZE);
             this.setMinimumSize(PREFSIZE);
             this.setLayout(new BorderLayout());
             this.add(label, BorderLayout.PAGE_START);
             label.setHorizontalAlignment(JLabel.CENTER);
+            label.setForeground(new Color(255,255,255));
             this.add(text, BorderLayout.CENTER);
             text.setAlignmentX(CENTER_ALIGNMENT);
             text.setAlignmentY(CENTER_ALIGNMENT);
