@@ -40,13 +40,18 @@ class AppFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             recorder.stopRecording();
-            try {
-                String question = Whisper.audioToString();
-                String answer = ChatGPT.askQuestion(question);
-                System.out.println(answer);
-            } catch (Exception ex) {
-                System.out.println("Error occured");
+            Thread t = new Thread(
+                () -> {
+                try {
+                    String question = Whisper.audioToString();
+                    String answer = ChatGPT.askQuestion(question);
+                    System.out.println(answer);
+                } catch (Exception ex) {
+                    System.out.println("Error occured");
+                }
             }
+            );
+            t.start();
         }
         }
     );
