@@ -73,11 +73,11 @@ public class askPanel extends JPanel{
  * Footer subclass. Used to hold in askQuestion button.
  */
     class Footer extends JPanel{
-        static Dimension PREFSIZE = new Dimension(1000,100);
+        private Dimension FTSIZE = new Dimension(1000,100);
         Footer(){
             this.setBackground(MEDGRAY);
-            this.setPreferredSize(PREFSIZE);
-            this.setMinimumSize(PREFSIZE);
+            this.setPreferredSize(FTSIZE);
+            this.setMinimumSize(FTSIZE);
         }
     }
 
@@ -87,7 +87,7 @@ public class askPanel extends JPanel{
     class Question extends JPanel{
         JLabel label = new JLabel("Question Asked");
         JTextArea text = new JTextArea(" ");
-        static Dimension PREFSIZE = new Dimension (1000,300);
+        private Dimension QSIZE = new Dimension (1000,300);
 
         public void updateText(String string){
             text.setText(string);
@@ -95,8 +95,8 @@ public class askPanel extends JPanel{
 
         Question(){
             this.setBackground(MEDGRAY);
-            this.setPreferredSize(PREFSIZE);
-            this.setMinimumSize(PREFSIZE);
+            this.setPreferredSize(QSIZE);
+            this.setMinimumSize(QSIZE);
             this.setLayout(new BorderLayout());
             this.add(label, BorderLayout.PAGE_START);
             label.setHorizontalAlignment(JLabel.CENTER);
@@ -116,7 +116,7 @@ public class askPanel extends JPanel{
     class Answer extends JPanel{
         JLabel label = new JLabel("Response");
         JTextArea text = new JTextArea(" ");
-        static Dimension PREFSIZE = new Dimension (1000,300);
+        private Dimension ASIZE = new Dimension (1000,300);
         
         public void updateText(String string){
             text.setText(string);
@@ -124,8 +124,8 @@ public class askPanel extends JPanel{
 
         Answer(){
             this.setBackground(LIGHTGRAY);
-            this.setPreferredSize(PREFSIZE);
-            this.setMinimumSize(PREFSIZE);
+            this.setPreferredSize(ASIZE);
+            this.setMinimumSize(ASIZE);
             this.setLayout(new BorderLayout());
             this.add(label, BorderLayout.PAGE_START);
             label.setHorizontalAlignment(JLabel.CENTER);
@@ -135,5 +135,4 @@ public class askPanel extends JPanel{
             text.setAlignmentY(CENTER_ALIGNMENT);
         }
     }
-
 }
