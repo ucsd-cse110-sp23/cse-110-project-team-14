@@ -85,8 +85,16 @@ public class Whisper {
     }
 
     public static String audioToString() throws IOException {
+        return audioToString(FILE_PATH);    
+    }
+    
+    /**
+     * 
+     * Used for testing purposes
+     */
+    public static String audioToString(String fileName) throws IOException {
         
-        File file = new File(FILE_PATH);
+        File file = new File(fileName);
         
 
         URL url = new URL(API_ENDPOINT);
