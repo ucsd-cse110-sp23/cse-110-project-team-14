@@ -9,11 +9,11 @@ import javax.swing.JFrame;
 
 class AppFrame extends JFrame {
     private JButton askButton; // Create Ask Button
-    private boolean askStop = false; // boolean toggle
+    private boolean askStop = false; // Toggle for Button
     private AudioRecorder recorder; // Create Listening Device
 
     AppFrame() {
-        setSize(300, 100); // Set Appframe parameters
+        setSize(300, 100); // Set AppFrame paremeters
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setLayout(new GridLayout(1, 3));
@@ -28,20 +28,20 @@ class AppFrame extends JFrame {
     }
 
     public void addListeners() {
-    askButton.addActionListener(new ActionListener() { // start recording on click
+    askButton.addActionListener(new ActionListener() { // Start recording when Clicked
         @Override
         public void actionPerformed(ActionEvent e) {
             if (askStop) {
                 recorder.stopRecording();
-                askButton.setText("Ask Question"); //change button text
-                askStop = false; // change toggle
-                Thread t = new Thread( // use another thread for answer computation to not lag UI
+                askButton.setText("Ask Question");
+                askStop = false; // Turn Button into Ask
+                Thread t = new Thread( // Use another thread to not lag UI
                     () -> {
                     try {
                         String question = Whisper.audioToString();
-                        if (question.equals("")) {
+                        if (question.equals("")) { // Check Mic input
                             System.out.println("Microphone didn't pick up any noise");
-                        } else {
+                        } else { // Only answer if input received
                             String answer = ChatGPT.askQuestion(question);
                             System.out.println(answer);
                         }
@@ -50,11 +50,11 @@ class AppFrame extends JFrame {
                     }
                 }
                 );
-                t.start(); // start the new thread
+                t.start(); // Start the threaded operation
             } else {
                 recorder.startRecording();
-                askButton.setText("Stop Question"); // change text back
-                askStop = true; // change toggle back
+                askButton.setText("Stop Question");
+                askStop = true; // Turn button into Stop
             }
         }
         }
@@ -62,7 +62,7 @@ class AppFrame extends JFrame {
     }
 }
 
-public class App { // main class
+public class App { // Main App Class
     public static void main(String[] args) throws Exception {
         new AppFrame(); // call AppFrame
     }
