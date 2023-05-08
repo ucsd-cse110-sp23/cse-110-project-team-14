@@ -39,8 +39,12 @@ class AppFrame extends JFrame {
                     () -> {
                     try {
                         String question = Whisper.audioToString();
-                        String answer = ChatGPT.askQuestion(question);
-                        System.out.println(answer);
+                        if (question.equals("")) {
+                            System.out.println("Microphone didn't pick up any noise");
+                        } else {
+                            String answer = ChatGPT.askQuestion(question);
+                            System.out.println(answer);
+                        }
                     } catch (Exception ex) {
                         System.out.println("Error occured");
                     }
