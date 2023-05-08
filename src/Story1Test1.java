@@ -35,7 +35,7 @@ public class Story1Test1 extends JFrame {
           try {
             String temp = Whisper.audioToString("ST1.wav");
             System.out.println(ChatGPT.askQuestion(temp));
-          } catch (Exception e) {
+          } catch (Exception ex) {
             System.out.println("Error occured");
           }
         }
