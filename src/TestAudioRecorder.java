@@ -54,8 +54,8 @@ public class TestAudioRecorder extends JFrame {
           audioRecorder.stopRecording();
           recordingLabel.setVisible(false);
           try {
-            String query = Whisper.audioToString();
-            System.out.println(ChatGPT.askQuestion(query));
+            String answer = WhisperToChat.connect();
+            if(!answer.equals(null)) System.out.println(answer);
           } catch (Exception ex) {
             System.out.println("Error occured");
           }
