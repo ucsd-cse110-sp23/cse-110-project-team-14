@@ -1,72 +1,59 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-class Footer extends JPanel {
-    JButton askButton;
-    JButton delButton;
-    JButton clrButton;
-
-    Color bgColor = new Color(50, 55, 65);
-    
-    Footer() {
-        this.setPreferredSize(new Dimension(600, 100));
-        this.setBackground(bgColor);
-
-        clrButton = new JButton("Clear All", null);
-        this.add(clrButton);
-
-        delButton = new JButton("Delete Question", null);
-        this.add(delButton);
-
-        askButton = new JButton("Ask Question", null);
-        this.add(askButton);
-    }
-
-    public JButton getAskButton() {
-        return askButton;
-    }
-
-    public JButton getClrButton() {
-        return clrButton;
-    }
-
-    public JButton getDelButton() {
-        return delButton;
-    }
-}
 
 class AppFrame extends JFrame {
-    //private SideBar sidebar;
-    //private ChatShow chat;
-    private Footer footer;
-
-    private JButton askButton;
-    private JButton delButton;
-    private JButton clrButton;
+    private JButton askButton; // Create Ask Button
+    private JButton stopButton; // Create Stop Button
+    private AudioRecorder recorder; // Create Listening Device
 
     AppFrame() {
-        this.setSize(600, 600);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
+        setSize(300, 100); // Set Appframe parameters
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        setLayout(new GridLayout(1, 3));
 
-        //sidebar = new Sidebar();
-        //chat = new Chat();
-        footer = new Footer();
+        recorder = new AudioRecorder(); // Initialize buttons and recorder
 
-        //this.add(sidebar);
-        //this.add(chat);
-        this.add(footer);
+        askButton = new JButton("Ask Question");
+        this.add(askButton);
+
+        stopButton = new JButton("Stop Question");
+        this.add(stopButton);
+
+        addListeners(); // Give click functionality
+    }
+
+    public void addListeners() {
+    askButton.addActionListener(new ActionListener() { // start recording on click
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            recorder.startRecording();
+        }
+        }
+    );
+    stopButton.addActionListener(new ActionListener() { // stop recording and save the answer as string
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            recorder.stopRecording();
+            try {
+                String question = Whisper.audioToString();
+                String answer = ChatGPT.askQuestion(question);
+                System.out.println(answer);
+            } catch (Exception ex) {
+                System.out.println("Error occured");
+            }
+        }
+        }
+    );
     }
 }
 
-public class App {
+public class App { // main class
     public static void main(String[] args) throws Exception {
-        new AppFrame();
+        new AppFrame(); // call AppFrame
     }
 }
