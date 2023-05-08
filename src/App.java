@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 class AppFrame extends JFrame {
     private JButton askButton; // Create Ask Button
-    private JButton stopButton; // Create Stop Button
+    private boolean askStop = false; // boolean toggle
     private AudioRecorder recorder; // Create Listening Device
 
     AppFrame() {
@@ -21,9 +21,6 @@ class AppFrame extends JFrame {
         askButton = new JButton("Ask Question");
         this.add(askButton);
 
-        stopButton = new JButton("Stop Question");
-        this.add(stopButton);
-
         addListeners(); // Give click functionality
         revalidate(); // Reupdate the frame
     }
@@ -32,26 +29,27 @@ class AppFrame extends JFrame {
     askButton.addActionListener(new ActionListener() { // start recording on click
         @Override
         public void actionPerformed(ActionEvent e) {
-            recorder.startRecording();
-        }
-        }
-    );
-    stopButton.addActionListener(new ActionListener() { // stop recording and save the answer as string
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            recorder.stopRecording();
-            Thread t = new Thread( // use another thread for answer computation to not lag UI
-                () -> {
-                try {
-                    String question = Whisper.audioToString();
-                    String answer = ChatGPT.askQuestion(question);
-                    System.out.println(answer);
-                } catch (Exception ex) {
-                    System.out.println("Error occured");
+            if (askStop) {
+                recorder.stopRecording();
+                askButton.setText("Ask Question"); //change button text
+                askStop = false; // change toggle
+                Thread t = new Thread( // use another thread for answer computation to not lag UI
+                    () -> {
+                    try {
+                        String question = Whisper.audioToString();
+                        String answer = ChatGPT.askQuestion(question);
+                        System.out.println(answer);
+                    } catch (Exception ex) {
+                        System.out.println("Error occured");
+                    }
                 }
+                );
+                t.start(); // start the new thread
+            } else {
+                recorder.startRecording();
+                askButton.setText("Stop Question"); // change text back
+                askStop = true; // change toggle back
             }
-            );
-            t.start(); // start the new thread
         }
         }
     );
