@@ -5,9 +5,10 @@ package sayit;
  * Whisper and ChatGPT,
  */
 public class WhisperToChat {
+    private static String FILE_PATH = "recording.wav";
     public static String connect(String fileName) {
         if (fileName == null) {
-            fileName = "recording.wav";
+            fileName = FILE_PATH;
         }
         try {
             String query = Whisper.audioToString(fileName);

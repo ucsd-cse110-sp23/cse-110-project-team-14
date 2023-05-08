@@ -35,21 +35,22 @@ public class Frame extends JFrame {
      * Primary container for all panels. Frame is a JSplitPane, containing a fixed set sideBar and a dynamic query and
      * response area for ChatGPT.
      */
-    Frame(){
+    Frame() {
         this.setSize(1600,900);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         questionHistory = new sideBar();
         chatGPT = new askPanel();
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,questionHistory,chatGPT);
-        this.add(splitPane, BorderLayout.CENTER);
-
         recorder = new AudioRecorder();
         askButton = new JButton("Ask Question");
-        this.getAnswerFooter().add(askButton);
-        addListeners();
 
-        this.revalidate();
+        this.add(splitPane, BorderLayout.CENTER);
+        this.getAnswerFooter().add(askButton);
+
+        addListeners();
+        revalidate();
     }
 
     /*
@@ -64,7 +65,7 @@ public class Frame extends JFrame {
                     askButton.setText("Ask Question"); //change button text
                     askStop = false; // change toggle
                     Thread t = new Thread( // use another thread for answer computation to not lag UI
-                        () -> {
+                    () -> {
                         try {
 
                             /*
@@ -74,13 +75,12 @@ public class Frame extends JFrame {
                              */
                             String question = Whisper.audioToString();
                             chatGPT.updateQuestionText(question);
-                            chatGPT.revalidate();
                             String answer = ChatGPT.askQuestion(question);
                             System.out.println(answer);
                             chatGPT.updateAnswerText(answer);
-                            chatGPT.revalidate();
                             storage.addQuestion(question, answer);
                             JButton b = new JButton(question);
+
                             b.addActionListener(
                                 (ActionEvent event) -> {
                                     updateQuestionBox(b.getText());
@@ -88,6 +88,7 @@ public class Frame extends JFrame {
                                     System.out.println("BUTTON PRESSED");
                                 }
                             );
+
                             questionHistory.sideBarAddButton(b);
                         } catch (Exception ex) {
                             System.out.println("Error occured");
@@ -104,5 +105,4 @@ public class Frame extends JFrame {
             }
         );
     }
-
 }

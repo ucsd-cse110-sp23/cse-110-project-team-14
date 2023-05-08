@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
  * ChatGPT as well as its response. The footer panel currently contains the button to ask a question and receive an
  * answer. askPanel contains subclasses for all of these respective panels.
  */
-public class askPanel extends JPanel{
+public class askPanel extends JPanel {
     /*Defining common variables */
     static Dimension PREFSIZE = new Dimension(1000,900);
     static Color RED = new Color(255, 0, 0);
@@ -40,6 +40,7 @@ public class askPanel extends JPanel{
     public void updateQuestionText(String string){
         this.question.updateText(string);
     }
+
 /**
  * Updates text of query panel. Used when displaying history or given answer.
  * 
@@ -69,6 +70,7 @@ public class askPanel extends JPanel{
         question.revalidate();
         this.revalidate();
     }
+
 /*
  * Footer subclass. Used to hold in askQuestion button.
  */
@@ -81,9 +83,9 @@ public class askPanel extends JPanel{
         }
     }
 
-    /*
-     * Question subclass. Used to hold response query. Contains a JTextArea that is populated by user query.
-     */
+/*
+* Question subclass. Used to hold response query. Contains a JTextArea that is populated by user query.
+*/
     class Question extends JPanel{
         JLabel label = new JLabel("Question Asked");
         JTextArea text = new JTextArea(" ");
@@ -110,9 +112,9 @@ public class askPanel extends JPanel{
         }
     }
 
-    /*
-     * Answer subclass. Used to hold response query. Contains a JTextArea that is populated by ChatGPT response.
-     */
+/*
+* Answer subclass. Used to hold response query. Contains a JTextArea that is populated by ChatGPT response.
+*/
     class Answer extends JPanel{
         JLabel label = new JLabel("Response");
         JTextArea text = new JTextArea(" ");

@@ -45,7 +45,6 @@ public class sideBar extends JScrollPane {
         sideBarPanel = new sideBarPanel();
         this.setViewportView(sideBarPanel);
         this.setVisible(true);
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.setMinimumSize(minSize);
         this.setMaximumSize(minSize);
@@ -68,7 +67,7 @@ public class sideBar extends JScrollPane {
      */
     public HashMap<String,String> loadQuestions(File file){
         HashMap<String,String> questionAnswerMap = new HashMap<String,String>();
-        try{
+        try {
             FileReader reader = new FileReader(file);
             BufferedReader buf = new BufferedReader(reader);
             while(buf.ready()){
@@ -76,8 +75,9 @@ public class sideBar extends JScrollPane {
                 questionAnswerMap.put(split[0], split[1]);
             }
             buf.close();
+        } catch(Exception e) {
+
         }
-        catch(Exception e){}
         return questionAnswerMap;
     }
 
@@ -88,20 +88,23 @@ public class sideBar extends JScrollPane {
         JLabel sideBarHeader = new JLabel("Question History");
         JPanel sideBarList = new sideBarList();
         
-        sideBarPanel(){
+        sideBarPanel() {
             this.setLayout(BORDERLAYOUT);
             this.setMinimumSize(minSize);
             this.setPreferredSize(minSize);
+            this.setBackground(LIGHTGRAY);
+            this.setVisible(true);
+
             sideBarHeader.setHorizontalAlignment(JLabel.CENTER);
             sideBarHeader.setPreferredSize(new Dimension(200, 100));
             sideBarHeader.setBackground(DARKGRAY);
             sideBarHeader.setPreferredSize(new Dimension(300,200));
             sideBarHeader.setForeground(new Color(0,0,0));
+
             this.add(sideBarHeader, BorderLayout.PAGE_START);
             this.add(sideBarList);
-            this.setBackground(LIGHTGRAY);
-            this.setVisible(true);
-            this.revalidate();
+
+            revalidate();
         }
     }
 
@@ -111,5 +114,4 @@ public class sideBar extends JScrollPane {
             this.setLayout(HISTORYGRID);
         }
     }
-
 }
