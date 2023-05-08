@@ -2,9 +2,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "CITestNEW" ]
+    branches: [ "CIUpdate1" ]
   pull_request:
-    branches: [ "CITestNEW" ]
+    branches: [ "CIUpdate1" ]
 
 permissions:
   contents: read
