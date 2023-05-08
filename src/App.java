@@ -25,7 +25,7 @@ class AppFrame extends JFrame {
         this.add(stopButton);
 
         addListeners(); // Give click functionality
-        revalidate();
+        revalidate(); // Reupdate the frame
     }
 
     public void addListeners() {
@@ -40,7 +40,7 @@ class AppFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             recorder.stopRecording();
-            Thread t = new Thread(
+            Thread t = new Thread( // use another thread for answer computation to not lag UI
                 () -> {
                 try {
                     String question = Whisper.audioToString();
@@ -51,7 +51,7 @@ class AppFrame extends JFrame {
                 }
             }
             );
-            t.start();
+            t.start(); // start the new thread
         }
         }
     );
