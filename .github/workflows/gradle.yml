@@ -2,9 +2,9 @@ name: SayIt Tests
 
 on:
     push:
-        branches: [ "CIUpdate1" ]
+        branches: [ "NoSoundUI" ]
     pull_request:
-        branches: [ "CIUpdate1" ]
+        branches: [ "NoSoundUI" ]
 
 permissions:
     contents: read
