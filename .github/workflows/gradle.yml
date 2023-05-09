@@ -2,9 +2,9 @@ name: SayIt Tests
 
 on:
     push:
-        branches: [ "NoSoundUI" ]
+        branches: [ "main" ]
     pull_request:
-        branches: [ "NoSoundUI" ]
+        branches: [ "main" ]
 
 permissions:
     contents: read
