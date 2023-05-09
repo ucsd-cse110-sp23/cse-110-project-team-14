@@ -74,22 +74,28 @@ public class Frame extends JFrame {
                              * pairs are then stored and displayed in the GUI.
                              */
                             String question = Whisper.audioToString();
-                            chatGPT.updateQuestionText(question);
-                            chatGPT.revalidate();
-                            String answer = ChatGPT.askQuestion(question);
-                            System.out.println(answer);
-                            chatGPT.updateAnswerText(answer);
-                            chatGPT.revalidate();
-                            storage.addQuestion(question, answer);
-                            JButton b = new JButton(question);
-                            b.addActionListener(
-                                (ActionEvent event) -> {
-                                    updateQuestionBox(b.getText());
-                                    updateAnswerBox(storage.getAnswer(b.getText()));
-                                    System.out.println("BUTTON PRESSED");
-                                }
+                            if(question.equals("")) {
+                                chatGPT.updateQuestionText("Microphone didn't pickup any sound");
+                                chatGPT.revalidate();
+                            } else {
+                                chatGPT.updateQuestionText(question);
+                                chatGPT.revalidate();
+                                String answer = ChatGPT.askQuestion(question);
+                                System.out.println(answer);
+                                chatGPT.updateAnswerText(answer);
+                                chatGPT.revalidate();
+                                storage.addQuestion(question, answer);
+                                JButton b = new JButton(question);
+                                b.addActionListener(
+                                    (ActionEvent event) -> {
+                                        updateQuestionBox(b.getText());
+                                        updateAnswerBox(storage.getAnswer(b.getText()));
+                                        System.out.println("BUTTON PRESSED");
+                                    }
                             );
                             questionHistory.sideBarAddButton(b);
+                            }
+                            
                         } catch (Exception ex) {
                             System.out.println("Error occured");
                         }
