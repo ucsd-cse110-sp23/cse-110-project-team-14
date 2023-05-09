@@ -1,15 +1,15 @@
-name: Java CI with Gradle
+name: SayIt Tests
 
 on:
-  push:
-    branches: [ "CITestNEW" ]
-  pull_request:
-    branches: [ "CITestNEW" ]
+    push:
+        branches: [ "CIUpdate1" ]
+    pull_request:
+        branches: [ "CIUpdate1" ]
 
 permissions:
-  contents: read
-  checks: write
-  id-token: write
+    contents: read
+    checks: write
+    id-token: write
 
 jobs:
   build:
@@ -27,8 +27,7 @@ jobs:
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: build
-    - name: Execute Gradle build
-      run: ./gradlew build
+        # report the results
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v3
       if: success() || failure() # always run even if the previous step fails

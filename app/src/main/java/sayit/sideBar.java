@@ -1,14 +1,19 @@
 package sayit;
 
-import java.awt.event.*;
-import java.io.*;
-import java.nio.MappedByteBuffer;
-import java.awt.*;
-import javax.management.Query;
-import javax.swing.*;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * The class sideBar is used to construct the sideBar in the JFrame for the SayItApp. The sideBar is a JScrollPane.
@@ -40,7 +45,6 @@ public class sideBar extends JScrollPane {
         sideBarPanel = new sideBarPanel();
         this.setViewportView(sideBarPanel);
         this.setVisible(true);
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.setMinimumSize(minSize);
         this.setMaximumSize(minSize);
@@ -63,15 +67,17 @@ public class sideBar extends JScrollPane {
      */
     public HashMap<String,String> loadQuestions(File file){
         HashMap<String,String> questionAnswerMap = new HashMap<String,String>();
-        try{
+        try {
             FileReader reader = new FileReader(file);
             BufferedReader buf = new BufferedReader(reader);
             while(buf.ready()){
                 String[] split = buf.readLine().split("[,]");
                 questionAnswerMap.put(split[0], split[1]);
             }
+            buf.close();
+        } catch(Exception e) {
+
         }
-        catch(Exception e){}
         return questionAnswerMap;
     }
 
@@ -82,20 +88,23 @@ public class sideBar extends JScrollPane {
         JLabel sideBarHeader = new JLabel("Question History");
         JPanel sideBarList = new sideBarList();
         
-        sideBarPanel(){
+        sideBarPanel() {
             this.setLayout(BORDERLAYOUT);
             this.setMinimumSize(minSize);
             this.setPreferredSize(minSize);
+            this.setBackground(LIGHTGRAY);
+            this.setVisible(true);
+
             sideBarHeader.setHorizontalAlignment(JLabel.CENTER);
             sideBarHeader.setPreferredSize(new Dimension(200, 100));
             sideBarHeader.setBackground(DARKGRAY);
             sideBarHeader.setPreferredSize(new Dimension(300,200));
             sideBarHeader.setForeground(new Color(0,0,0));
-            this.add(sideBarHeader,BORDERLAYOUT.PAGE_START);
+
+            this.add(sideBarHeader, BorderLayout.PAGE_START);
             this.add(sideBarList);
-            this.setBackground(LIGHTGRAY);
-            this.setVisible(true);
-            this.revalidate();
+
+            revalidate();
         }
     }
 
@@ -105,5 +114,4 @@ public class sideBar extends JScrollPane {
             this.setLayout(HISTORYGRID);
         }
     }
-
 }
