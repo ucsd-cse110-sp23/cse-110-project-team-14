@@ -19,6 +19,9 @@ public class Frame extends JFrame {
     private boolean askStop = false;
     static Storage storage = new Storage();
 
+    IAudioConverter converter;
+    IChatBot chat;
+
     public void updateQuestionBox(String string){
         chatGPT.updateQuestionText(string);
     }
@@ -35,7 +38,10 @@ public class Frame extends JFrame {
      * Primary container for all panels. Frame is a JSplitPane, containing a fixed set sideBar and a dynamic query and
      * response area for ChatGPT.
      */
-    Frame() {
+    Frame(IAudioConverter converter, IChatBot chat) {
+        this.converter = converter;
+        this.chat = chat;
+
         this.setSize(1600,900);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -73,14 +79,14 @@ public class Frame extends JFrame {
                              * string is saved as a question. Then, that string is asked to ChatGPT. The question/answer
                              * pairs are then stored and displayed in the GUI.
                              */
-                            String question = Whisper.audioToString();
+                            String question = converter.audioToString();
                             if(question.equals("")) {
                                 chatGPT.updateQuestionText("Microphone didn't pickup any sound");
                                 chatGPT.revalidate();
                             } else {
                                 chatGPT.updateQuestionText(question);
                                 chatGPT.revalidate();
-                                String answer = ChatGPT.askQuestion(question);
+                                String answer = chat.askQuestion(question);
                                 System.out.println(answer);
                                 chatGPT.updateAnswerText(answer);
                                 chatGPT.revalidate();

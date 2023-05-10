@@ -12,12 +12,17 @@ import javax.swing.*;
 public class Story1Test1 extends JFrame {
 
   private JButton startButton;
+  private IAudioConverter converter;
+  private IChatBot chat;
 
   public static void main(String[] args) {
-    new Story1Test1();
+    new Story1Test1(new Whisper(), new ChatGPT());
   }
 
-  public Story1Test1() {
+  public Story1Test1(IAudioConverter converter, IChatBot chat) {
+    this.converter = converter;
+    this.chat = chat;
+
     setTitle("Story Test 1");
     setLayout(new GridLayout(1, 3));
 
@@ -38,10 +43,13 @@ public class Story1Test1 extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
           try {
-            String answer = WhisperToChat.connect("ST1.wav");
-            if(answer == null) System.out.println(answer);
+            String question = converter.audioToString("app\\ST1.wav");
+            if(question.equals("")) {
+              throw new Exception("Test Failed");
+            }
+            System.out.println(chat.askQuestion(question));
           } catch (Exception ex) {
-            System.out.println("Error occured");
+            System.out.println(ex.getMessage());
           }
         }
       }

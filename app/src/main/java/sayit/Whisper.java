@@ -10,7 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import org.json.*;
 
-public class Whisper {
+public class Whisper implements IAudioConverter{
     private static final String API_ENDPOINT = "https://api.openai.com/v1/audio/transcriptions";
     private static final String TOKEN = "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";
     private static final String MODEL = "whisper-1";
@@ -78,7 +78,7 @@ public class Whisper {
         System.out.println("Error Result: " + errorResult);
     }
 
-    public static String audioToString() throws IOException {
+    public String audioToString() throws IOException {
         return audioToString(FILE_PATH);    
     }
     
@@ -86,7 +86,7 @@ public class Whisper {
      * 
      * Used for testing purposes
      */
-    public static String audioToString(String fileName) throws IOException {
+    public String audioToString(String fileName) throws IOException {
         File file = new File(fileName);
 
         URL url = new URL(API_ENDPOINT);
