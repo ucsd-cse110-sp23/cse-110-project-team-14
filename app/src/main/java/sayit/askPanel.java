@@ -1,14 +1,13 @@
 package sayit;
 
-import java.awt.event.*;
-import java.io.*;
-import java.awt.*;
-import javax.management.Query;
-import javax.swing.*;
-import java.util.*;
-import java.util.Objects;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 
-
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /*
  * askPanel is one of the two panels that will be displayed on in the appframe. AskPanel will consists of three 
@@ -16,7 +15,7 @@ import java.util.Objects;
  * ChatGPT as well as its response. The footer panel currently contains the button to ask a question and receive an
  * answer. askPanel contains subclasses for all of these respective panels.
  */
-public class askPanel extends JPanel{
+public class askPanel extends JPanel {
     /*Defining common variables */
     static Dimension PREFSIZE = new Dimension(1000,900);
     static Color RED = new Color(255, 0, 0);
@@ -74,21 +73,21 @@ public class askPanel extends JPanel{
  * Footer subclass. Used to hold in askQuestion button.
  */
     class Footer extends JPanel{
-        static Dimension PREFSIZE = new Dimension(1000,100);
+        private Dimension FTSIZE = new Dimension(1000,100);
         Footer(){
             this.setBackground(MEDGRAY);
-            this.setPreferredSize(PREFSIZE);
-            this.setMinimumSize(PREFSIZE);
+            this.setPreferredSize(FTSIZE);
+            this.setMinimumSize(FTSIZE);
         }
     }
 
-    /*
-     * Question subclass. Used to hold response query. Contains a JTextArea that is populated by user query.
-     */
+/*
+* Question subclass. Used to hold response query. Contains a JTextArea that is populated by user query.
+*/
     class Question extends JPanel{
         JLabel label = new JLabel("Question Asked");
         JTextArea text = new JTextArea(" ");
-        static Dimension PREFSIZE = new Dimension (1000,300);
+        private Dimension QSIZE = new Dimension (1000,300);
 
         public void updateText(String string){
             text.setText(string);
@@ -96,8 +95,8 @@ public class askPanel extends JPanel{
 
         Question(){
             this.setBackground(MEDGRAY);
-            this.setPreferredSize(PREFSIZE);
-            this.setMinimumSize(PREFSIZE);
+            this.setPreferredSize(QSIZE);
+            this.setMinimumSize(QSIZE);
             this.setLayout(new BorderLayout());
             this.add(label, BorderLayout.PAGE_START);
             label.setHorizontalAlignment(JLabel.CENTER);
@@ -111,13 +110,13 @@ public class askPanel extends JPanel{
         }
     }
 
-    /*
-     * Answer subclass. Used to hold response query. Contains a JTextArea that is populated by ChatGPT response.
-     */
+/*
+* Answer subclass. Used to hold response query. Contains a JTextArea that is populated by ChatGPT response.
+*/
     class Answer extends JPanel{
         JLabel label = new JLabel("Response");
         JTextArea text = new JTextArea(" ");
-        static Dimension PREFSIZE = new Dimension (1000,300);
+        private Dimension ASIZE = new Dimension (1000,300);
         
         public void updateText(String string){
             text.setText(string);
@@ -125,8 +124,8 @@ public class askPanel extends JPanel{
 
         Answer(){
             this.setBackground(LIGHTGRAY);
-            this.setPreferredSize(PREFSIZE);
-            this.setMinimumSize(PREFSIZE);
+            this.setPreferredSize(ASIZE);
+            this.setMinimumSize(ASIZE);
             this.setLayout(new BorderLayout());
             this.add(label, BorderLayout.PAGE_START);
             label.setHorizontalAlignment(JLabel.CENTER);
@@ -136,6 +135,4 @@ public class askPanel extends JPanel{
             text.setAlignmentY(CENTER_ALIGNMENT);
         }
     }
-
 }
-    

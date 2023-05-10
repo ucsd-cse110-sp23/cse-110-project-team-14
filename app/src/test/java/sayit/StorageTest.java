@@ -8,6 +8,7 @@ class StorageTest {
     @Test void addQuestion() {
         Storage store = new Storage();
         store.addQuestion("What is the capital of France?", "Paris");
+        
         assertEquals("Paris", store.getAnswer("What is the capital of France?"));
     }
 

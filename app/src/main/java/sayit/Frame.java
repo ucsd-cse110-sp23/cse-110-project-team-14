@@ -1,12 +1,14 @@
 package sayit;
 
-import java.awt.event.*;
-import java.io.*;
-import java.awt.*;
-import javax.management.Query;
-import javax.swing.*;
-import java.util.*;
-import java.util.Objects;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.WindowConstants;
 
 public class Frame extends JFrame {
     sideBar questionHistory;
@@ -33,24 +35,22 @@ public class Frame extends JFrame {
      * Primary container for all panels. Frame is a JSplitPane, containing a fixed set sideBar and a dynamic query and
      * response area for ChatGPT.
      */
-    Frame(){
+    Frame() {
         this.setSize(1600,900);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         questionHistory = new sideBar();
         chatGPT = new askPanel();
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,questionHistory,chatGPT);
-        this.add(splitPane, BorderLayout.CENTER);
-
         recorder = new AudioRecorder();
         askButton = new JButton("Ask Question");
-        this.getAnswerFooter().add(askButton);
-        addListeners();
 
-        this.revalidate();
-    }
-    public static void main(String[] args) {
-        Frame frame = new Frame();
+        this.add(splitPane, BorderLayout.CENTER);
+        this.getAnswerFooter().add(askButton);
+
+        addListeners();
+        revalidate();
     }
 
     /*
@@ -65,7 +65,7 @@ public class Frame extends JFrame {
                     askButton.setText("Ask Question"); //change button text
                     askStop = false; // change toggle
                     Thread t = new Thread( // use another thread for answer computation to not lag UI
-                        () -> {
+                    () -> {
                         try {
 
                             /*
@@ -74,22 +74,28 @@ public class Frame extends JFrame {
                              * pairs are then stored and displayed in the GUI.
                              */
                             String question = Whisper.audioToString();
-                            chatGPT.updateQuestionText(question);
-                            chatGPT.revalidate();
-                            String answer = ChatGPT.askQuestion(question);
-                            System.out.println(answer);
-                            chatGPT.updateAnswerText(answer);
-                            chatGPT.revalidate();
-                            storage.addQuestion(question, answer);
-                            JButton b = new JButton(question);
-                            b.addActionListener(
-                                (ActionEvent event) -> {
-                                    updateQuestionBox(b.getText());
-                                    updateAnswerBox(storage.getAnswer(b.getText()));
-                                    System.out.println("BUTTON PRESSED");
-                                }
+                            if(question.equals("")) {
+                                chatGPT.updateQuestionText("Microphone didn't pickup any sound");
+                                chatGPT.revalidate();
+                            } else {
+                                chatGPT.updateQuestionText(question);
+                                chatGPT.revalidate();
+                                String answer = ChatGPT.askQuestion(question);
+                                System.out.println(answer);
+                                chatGPT.updateAnswerText(answer);
+                                chatGPT.revalidate();
+                                storage.addQuestion(question, answer);
+                                JButton b = new JButton(question);
+                                b.addActionListener(
+                                    (ActionEvent event) -> {
+                                        updateQuestionBox(b.getText());
+                                        updateAnswerBox(storage.getAnswer(b.getText()));
+                                        System.out.println("BUTTON PRESSED");
+                                    }
                             );
                             questionHistory.sideBarAddButton(b);
+                            }
+                            
                         } catch (Exception ex) {
                             System.out.println("Error occured");
                         }
@@ -105,5 +111,4 @@ public class Frame extends JFrame {
             }
         );
     }
-
 }
