@@ -23,11 +23,7 @@ public class Whisper {
         String boundary
     ) throws IOException {
         outputStream.write(("--" + boundary + "\r\n").getBytes());
-        outputStream.write(
-            (
-                "Content-Disposition: form-data; name=\"" + parameterName + "\"\r\n\r\n"
-            ).getBytes()
-        );
+        outputStream.write(("Content-Disposition: form-data; name=\"" + parameterName + "\"\r\n\r\n").getBytes());
         outputStream.write((parameterValue + "\r\n").getBytes());
     }
    
@@ -37,12 +33,9 @@ public class Whisper {
         String boundary
     ) throws IOException {
         outputStream.write(("--" + boundary + "\r\n").getBytes());
-        outputStream.write(
-            (
-                "Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"\r\n"
-            ).getBytes()
-        );
+        outputStream.write(("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"\r\n").getBytes());
         outputStream.write(("Content-Type: audio/mpeg\r\n\r\n").getBytes());
+
         FileInputStream fileInputStream = new FileInputStream(file);
         byte[] buffer = new byte[1024];
         int bytesRead;
@@ -52,36 +45,35 @@ public class Whisper {
         fileInputStream.close();
     }
 
-    private static String handleSuccessResponse(HttpURLConnection connection)
-    throws IOException, JSONException {
+    private static String handleSuccessResponse(HttpURLConnection connection) throws IOException, JSONException {
         BufferedReader in = new BufferedReader(
             new InputStreamReader(connection.getInputStream())
         );
         String inputLine;
         StringBuilder response = new StringBuilder();
+
         while((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
         in.close();
 
         JSONObject responseJson = new JSONObject(response.toString());
-
         String generatedText = responseJson.getString("text");
-
         return generatedText;
     }
 
-    private static void handleErrorResponse(HttpURLConnection connection)
-    throws IOException, JSONException {
+    private static void handleErrorResponse(HttpURLConnection connection) throws IOException, JSONException {
         BufferedReader errorReader = new BufferedReader(
             new InputStreamReader(connection.getErrorStream())
         );
         String errorLine;
         StringBuilder errorResponse = new StringBuilder();
+
         while ((errorLine = errorReader.readLine()) != null) {
             errorResponse.append(errorLine);
         }
         errorReader.close();
+
         String errorResult = errorResponse.toString();
         System.out.println("Error Result: " + errorResult);
     }
@@ -95,9 +87,7 @@ public class Whisper {
      * Used for testing purposes
      */
     public static String audioToString(String fileName) throws IOException {
-        
         File file = new File(fileName);
-        
 
         URL url = new URL(API_ENDPOINT);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -105,18 +95,12 @@ public class Whisper {
         connection.setDoOutput(true);
 
         String boundary = "Boundary-" + System.currentTimeMillis();
-        connection.setRequestProperty(
-            "Content-Type",
-            "multipart/form-data; boundary=" + boundary
-        );
+        connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
         connection.setRequestProperty("Authorization", "Bearer " + TOKEN);
 
         OutputStream outputStream = connection.getOutputStream();
-
         writeParameterToOutputStream(outputStream, "model", MODEL, boundary);
-
         writeFileToOutputStream(outputStream, file, boundary);
-
         outputStream.write(("\r\n--" + boundary + "--\r\n").getBytes());
 
         outputStream.flush();

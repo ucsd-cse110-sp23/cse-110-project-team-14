@@ -33,13 +33,13 @@ public class ChatGPT {
 
         // Create the request onject
         HttpRequest request = HttpRequest
-         .newBuilder()
-         .uri(URI.create(API_ENDPOINT))
-         .header("Content-Type","application/json")
-         .header("Authorization", String.format("Bearer %s", API_KEY))
-         .POST(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
-         .build();
-         
+            .newBuilder()
+            .uri(URI.create(API_ENDPOINT))
+            .header("Content-Type","application/json")
+            .header("Authorization", String.format("Bearer %s", API_KEY))
+            .POST(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
+            .build();
+
         // Send the request and recieve the response
         HttpResponse<String> response = client.send(
             request,
@@ -55,5 +55,4 @@ public class ChatGPT {
 
         return generateText;
     }
- 
 }
