@@ -11,11 +11,14 @@ public class TestAudioRecorder extends JFrame {
   private JLabel recordingLabel;
   private AudioRecorder audioRecorder;
 
+  private IAudioConverter converter; 
+  private IChatBot chat;
+
   public static void main(String[] args) {
-    new TestAudioRecorder();
+    new TestAudioRecorder(new Whisper(), new ChatGPT());
   }
 
-  public TestAudioRecorder() {
+  public TestAudioRecorder(IAudioConverter converter, IChatBot chat) {
     setTitle("Audio Recorder");
     setLayout(new GridLayout(1, 3));
 
@@ -56,10 +59,14 @@ public class TestAudioRecorder extends JFrame {
           audioRecorder.stopRecording();
           recordingLabel.setVisible(false);
           try {
-            String answer = WhisperToChat.connect();
-            if(!answer.equals(null)) System.out.println(answer);
+            String question = converter.audioToString("app\\recording.wav");
+            if(question.equals("")) {
+              System.out.println("Microphone didn't pick up any sound");
+            } else {
+              System.out.println(chat.askQuestion(question));
+            }
           } catch (Exception ex) {
-            System.out.println("Error occured");
+            System.out.println(ex.getMessage());
           }
         }
       }

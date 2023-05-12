@@ -6,17 +6,21 @@ import javax.swing.*;
 /**
  * Manual Story test, Uses api calls
  * Test uses ST1.wav as audio input, which contains 3 seconds of no speaking
- * Should print out "Microphone didn't pick up any noise" and then "Test passed"
+ * Should print out "Microphone didn't pick up any sound" and then "Test passed"
  */
 public class Story1Test2 extends JFrame {
 
   private JButton startButton;
+  IAudioConverter converter;
+  IChatBot chat;
 
   public static void main(String[] args) {
-    new Story1Test2();
+    new Story1Test2(new Whisper(), new ChatGPT());
   }
 
-  public Story1Test2() {
+  public Story1Test2(IAudioConverter converter, IChatBot chat) {
+    this.converter = converter;
+    this.chat = chat;
     setTitle("Story Test 2");
     setLayout(new GridLayout(1, 3));
 
@@ -37,10 +41,14 @@ public class Story1Test2 extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
           try {
-            String answer = WhisperToChat.connect("ST2.wav");
-            if(answer == null) System.out.println("Test passed");
+            String question = converter.audioToString("app\\ST2.wav");
+            if(!question.equals("")) {
+              throw new Exception("Test Failed");
+            }
+            System.out.println("Microphone didn't pick up any sound");
+            System.out.println("Test Passed");
           } catch (Exception ex) {
-            System.out.println("Error occured");
+            System.out.println(ex.getMessage());
           }
         }
       }
