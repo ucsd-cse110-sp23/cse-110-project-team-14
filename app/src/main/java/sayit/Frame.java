@@ -1,9 +1,12 @@
 package sayit;
 
 import java.awt.BorderLayout;
+<<<<<<< HEAD
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+=======
+>>>>>>> e7c5bd6a1b9b3329ef5e51006a01b41aa6a07457
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
