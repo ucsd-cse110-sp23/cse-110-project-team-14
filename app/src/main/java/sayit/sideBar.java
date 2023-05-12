@@ -50,8 +50,6 @@ public class sideBar extends JScrollPane {
         this.setMaximumSize(minSize);
     }
 
-
-
     public void sideBarAddButton(String string){
         JButton b = new JButton(string);
         sideBarPanel.sideBarList.add(b);
