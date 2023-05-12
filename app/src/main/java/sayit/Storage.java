@@ -31,6 +31,17 @@ public class Storage {
         this.answers.clear();
     }
 
+    public int getIndex(String question) {
+        for (int i = 0; i < this.questions.size(); i++) {
+            // Iterate through the questions ArrayList
+            if (this.questions.get(i).equalsIgnoreCase(question)) {
+                // If the current question matches the given question (ignoring case), return the corresponding answer
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public String getAnswer(String question) {
         // Method to get the answer for a given question
         for (int i = 0; i < this.questions.size(); i++) {
