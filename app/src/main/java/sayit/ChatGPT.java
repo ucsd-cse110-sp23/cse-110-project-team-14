@@ -11,12 +11,12 @@ import org.json.JSONObject;
 
 //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
 
-public class ChatGPT {
+public class ChatGPT implements IChatBot{
     private static final String API_ENDPOINT = "https://api.openai.com/v1/completions";
     private static final String API_KEY = "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";
     private static final String MODEL = "text-davinci-003";
 
-    public static String askQuestion(String query) throws IOException, InterruptedException{
+    public String askQuestion(String query) throws IOException, InterruptedException{
         // Set request parameters
         String prompt = query;
         int maxTokens = 100;
