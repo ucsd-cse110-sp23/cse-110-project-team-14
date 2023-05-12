@@ -29,7 +29,6 @@ public class askPanel extends JPanel {
     static Color LIGHTGRAY = new Color(93,93,93);
 
     Question question = new Question();
-    Footer footer = new Footer();
     Answer answer = new Answer();
 
 /**
@@ -48,14 +47,6 @@ public class askPanel extends JPanel {
     public void updateAnswerText(String string){
         this.answer.updateText(string);
     }
-
-/*
- * Getter for footer panel.
- */
-    public Footer getFooter() {
-        return footer;
-    }
-
 /*
 * Constructor for askPanel. Creates a panel with BorderLayout that contains the footer, query and response panel.
 */
@@ -63,22 +54,10 @@ public class askPanel extends JPanel {
         this.setBackground(DARKGRAY);
         this.setLayout(BORDERLAYOUT);
         this.setPreferredSize(PREFSIZE);
-        this.add(footer, BorderLayout.SOUTH);
         this.add(question, BorderLayout.NORTH);
         this.add(answer, BorderLayout.CENTER);
         question.revalidate();
         this.revalidate();
-    }
-/*
- * Footer subclass. Used to hold in askQuestion button.
- */
-    class Footer extends JPanel{
-        private Dimension FTSIZE = new Dimension(1000,100);
-        Footer(){
-            this.setBackground(MEDGRAY);
-            this.setPreferredSize(FTSIZE);
-            this.setMinimumSize(FTSIZE);
-        }
     }
 
 /*
