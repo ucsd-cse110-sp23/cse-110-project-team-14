@@ -3,7 +3,11 @@ package sayit;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 
 /*
  * Footer subclass. Used to hold in askQuestion button.
@@ -22,6 +26,7 @@ public class Footer extends JPanel{
         this.setBackground(MEDGRAY);
         this.setPreferredSize(FTSIZE);
         this.setMinimumSize(FTSIZE);
-        this.setLayout(new BorderLayout());
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        
     }
 }

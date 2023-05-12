@@ -1,12 +1,14 @@
 package sayit;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
@@ -33,8 +35,14 @@ public class Frame extends JFrame {
     
     private void setButtons(Footer footer, JButton askButton, JButton clrButton) {
         footer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        footer.add(clrButton, BorderLayout.WEST);
-        footer.add(askButton, BorderLayout.EAST);
+        
+        // Add 150 pixels of space from the left of the panel
+        footer.add(Box.createRigidArea(new Dimension(150, 0)));
+        footer.add(clrButton);
+        
+        //Make the extra space go between the two buttons to space them apart
+        footer.add(Box.createHorizontalGlue());
+        footer.add(askButton);
     }
 
     /*
@@ -54,7 +62,7 @@ public class Frame extends JFrame {
         askButton = new JButton("Ask Question");
         clrButton = new JButton("Clear All");
         this.add(splitPane, BorderLayout.CENTER);
-        this.add(footer,BorderLayout.SOUTH);
+        this.add(footer, BorderLayout.SOUTH);
         setButtons(footer, askButton, clrButton);
 
         addListeners();
@@ -117,5 +125,12 @@ public class Frame extends JFrame {
             }
             }
         );
+
+        clrButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You clicked the clear all button!");
+            }
+        });
     }
 }
