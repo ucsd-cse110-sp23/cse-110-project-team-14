@@ -22,7 +22,9 @@ public class Frame extends JFrame {
     private AudioRecorder recorder;
     private JButton askButton;
     private JButton clrButton;
+    private JButton delButton;
     private boolean askStop = false;
+    private String curQuestion = null;
     static Storage storage = new Storage();
 
     IAudioConverter converter;
@@ -36,7 +38,7 @@ public class Frame extends JFrame {
         askPanel.updateAnswerText(string);
     }
     
-    private void setButtons(Footer footer, JButton askButton, JButton clrButton) {
+    private void setButtons(Footer footer, JButton askButton, JButton delButton, JButton clrButton) {
         footer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
         // Add 150 pixels of space from the left of the panel
@@ -45,7 +47,11 @@ public class Frame extends JFrame {
         
         //Make the extra space go between the two buttons to space them apart
         footer.add(Box.createHorizontalGlue());
+        footer.add(delButton);
+
+        footer.add(Box.createHorizontalGlue());
         footer.add(askButton);
+        footer.add(Box.createRigidArea(new Dimension(150, 0)));
     }
 
     /*
@@ -67,9 +73,10 @@ public class Frame extends JFrame {
         recorder = new AudioRecorder();
         askButton = new JButton("Ask Question");
         clrButton = new JButton("Clear All");
+        delButton = new JButton("Delete Question");
         this.add(splitPane, BorderLayout.CENTER);
         this.add(footer, BorderLayout.SOUTH);
-        setButtons(footer, askButton, clrButton);
+        setButtons(footer, askButton, delButton, clrButton);
 
         addListeners();
         revalidate();
@@ -98,6 +105,7 @@ public class Frame extends JFrame {
                             String question = converter.audioToString();
                             if(question.equals("")) {
                                 askPanel.updateQuestionText("Microphone didn't pickup any sound");
+                                curQuestion = null;
                                 askPanel.revalidate();
                             } else {
                                 askPanel.updateQuestionText(question);
@@ -110,6 +118,7 @@ public class Frame extends JFrame {
                                 b.addActionListener(
                                     (ActionEvent event) -> {
                                         updateQuestionBox(b.getText());
+                                        curQuestion = b.getText();
                                         updateAnswerBox(storage.getAnswer(b.getText()));
                                         System.out.println("BUTTON PRESSED");
                                     }
@@ -132,11 +141,20 @@ public class Frame extends JFrame {
             }
         );
 
+        delButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Deleted Question");
+            }
+        });
+
         clrButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("You clicked the clear all button!");
             }
         });
+
+        
     }
 }
