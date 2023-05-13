@@ -26,6 +26,7 @@ public class Frame extends JFrame {
     private boolean askStop = false;
     private String curQuestion = null;
     private JButton currButton = null;
+    private boolean curQ = false;
     static Storage storage = new Storage();
 
     IAudioConverter converter;
@@ -132,6 +133,8 @@ public class Frame extends JFrame {
                             );
                             questionHistory.sideBarAddButton(b);
                             currButton = b;
+                            curQ = false;
+                            System.out.println("CurQ = false");
                             }
                             
                         } catch (Exception ex) {
@@ -143,7 +146,10 @@ public class Frame extends JFrame {
                 } else {
                     recorder.startRecording();
                     askButton.setText("Stop Question"); // change text back
+                    System.out.println("CurQ = true");
+                    curQ = true;
                     askStop = true; // change toggle back
+
                 }
             }
             }
@@ -175,16 +181,22 @@ public class Frame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Thread t = new Thread(
                     ()->{
-                        System.out.println("You clicked the clear all button!");
-                        questionHistory.deleteAll();
-                        storage.clearAll();
-                        currButton = null;
-                        curQuestion = null;
-                        updateAnswerBox(" ");
-                        updateQuestionBox(" ");
-                        questionHistory.revalidate();
-                        questionHistory.repaint();
-                        revalidate();
+                        if (curQ){
+                            System.out.println("Unable to clear all. Currently asking question.");
+                        }
+
+                        else{
+                            System.out.println("You clicked the clear all button!");
+                            questionHistory.deleteAll();
+                            storage.clearAll();
+                            currButton = null;
+                            curQuestion = null;
+                            updateAnswerBox(" ");
+                            updateQuestionBox(" ");
+                            questionHistory.revalidate();
+                            questionHistory.repaint();
+                            revalidate();
+                        }
                     }
                 );
                 t.start();
