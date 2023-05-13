@@ -1,13 +1,8 @@
 package sayit;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.SpringLayout;
 
 /*
  * Footer subclass. Used to hold in askQuestion button.
