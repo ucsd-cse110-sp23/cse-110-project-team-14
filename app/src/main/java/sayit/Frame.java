@@ -16,7 +16,7 @@ import javax.swing.WindowConstants;
 
 public class Frame extends JFrame {
     sideBar questionHistory;
-    static askPanel askPanel;
+    askPanel askPanel;
     JSplitPane splitPane;
     Footer footer;
     private AudioRecorder recorder;
@@ -25,6 +25,7 @@ public class Frame extends JFrame {
     private JButton delButton;
     private boolean askStop = false;
     private String curQuestion = null;
+    private JButton currButton = null;
     static Storage storage = new Storage();
 
     IAudioConverter converter;
@@ -36,6 +37,10 @@ public class Frame extends JFrame {
 
     public void updateAnswerBox(String string){
         askPanel.updateAnswerText(string);
+    }
+
+    public void revalidateSideBar(){
+        questionHistory.revalidateComponents();
     }
     
     private void setButtons(Footer footer, JButton askButton, JButton delButton, JButton clrButton) {
@@ -119,11 +124,13 @@ public class Frame extends JFrame {
                                     (ActionEvent event) -> {
                                         updateQuestionBox(b.getText());
                                         curQuestion = b.getText();
+                                        currButton = b;
                                         updateAnswerBox(storage.getAnswer(b.getText()));
                                         System.out.println("BUTTON PRESSED");
                                     }
                             );
                             questionHistory.sideBarAddButton(b);
+                            currButton = b;
                             }
                             
                         } catch (Exception ex) {
@@ -145,6 +152,15 @@ public class Frame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Deleted Question");
+                storage.deleteQuestion(currButton.getText());
+                questionHistory.deleteButton(currButton);
+                currButton = null;
+                curQuestion = null;
+                updateAnswerBox(" ");
+                updateQuestionBox(" ");
+                revalidateSideBar();
+                splitPane.revalidate();
+                revalidate();
             }
         });
 

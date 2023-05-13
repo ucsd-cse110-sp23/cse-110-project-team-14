@@ -21,20 +21,17 @@ import javax.swing.JScrollPane;
  * @author Apollo Larragoitia
  */
 public class sideBar extends JScrollPane {
-    static Dimension prefSize = new Dimension(900,900);
-    static Dimension minSize = new Dimension(400,900);
-    static Dimension minBoxSize = new Dimension(400, 19000);
-    static GridLayout HISTORYGRID = new GridLayout(0,1,5,5);
-    static BorderLayout BORDERLAYOUT = new BorderLayout();
-    static Color BLUE = new Color(0,0,255);
-    static Color RED = new Color(255,0,0);
-    static Color GREEN = new Color(0,0,255);
-    static Color DARKGRAY = new Color(36,36,36);
-    static Color MEDGRAY = new Color(65,65,65);
-    static Color LIGHTGRAY = new Color(93,93,93);
-    static sideBarPanel sideBarPanel;
-    static JPanel sideBarHeader;
-    ArrayList<JButton> buttonArray;
+    private Dimension prefSize = new Dimension(900,900);
+    private Dimension minSize = new Dimension(400,900);
+    private Dimension minBoxSize = new Dimension(400, 19000);
+    private GridLayout HISTORYGRID = new GridLayout(0,1,5,5);
+    private BorderLayout BORDERLAYOUT = new BorderLayout();
+    private Color DARKGRAY = new Color(36,36,36);
+    private Color MEDGRAY = new Color(65,65,65);
+    private Color LIGHTGRAY = new Color(93,93,93);
+    private sideBarPanel sideBarPanel;
+    private sideBarList sideBarList;
+    HashMap<String, JButton> buttonMap;
 
     /**
      * The following method creates and returns a JScrollPane. The JScrollPane will have its primary viewport set to
@@ -42,6 +39,7 @@ public class sideBar extends JScrollPane {
      * @return JScrolLPane
      */
     public sideBar(){
+        buttonMap = new HashMap<String,JButton>();
         sideBarPanel = new sideBarPanel();
         this.setViewportView(sideBarPanel);
         this.setVisible(true);
@@ -53,10 +51,36 @@ public class sideBar extends JScrollPane {
     public void sideBarAddButton(String string){
         JButton b = new JButton(string);
         sideBarPanel.sideBarList.add(b);
+        buttonMap.put(string,b);
+        
     }
 
     public void sideBarAddButton(JButton b){
         sideBarPanel.sideBarList.add(b);
+        buttonMap.put(b.getText(),b);
+    }
+
+    public void deleteButton(JButton b){
+        buttonMap.remove(b.getText());
+        sideBarPanel.sideBarList.remove(b);
+        sideBarPanel.sideBarList.revalidate();
+        sideBarPanel.revalidate();
+        this.revalidate();
+    }
+
+    public void deleteButton(String string){
+        sideBarPanel.sideBarList.remove(buttonMap.get(string));
+        buttonMap.remove(string);
+        sideBarPanel.sideBarList.revalidate();
+        sideBarPanel.revalidate();
+        this.revalidate();
+    }
+
+    public void revalidateComponents(){
+        revalidate();
+        sideBarPanel.revalidate();
+        //sideBarList.revalidate();
+        revalidate();
     }
 
     /**
