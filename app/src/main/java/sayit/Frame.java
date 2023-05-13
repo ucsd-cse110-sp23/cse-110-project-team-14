@@ -1,7 +1,9 @@
 package sayit;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +16,7 @@ import javax.swing.WindowConstants;
 
 public class Frame extends JFrame {
     sideBar questionHistory;
-    static askPanel askPanel;
+    askPanel askPanel;
     JSplitPane splitPane;
     Footer footer;
     private AudioRecorder recorder;
@@ -23,6 +25,7 @@ public class Frame extends JFrame {
     private JButton delButton;
     private boolean askStop = false;
     private String curQuestion = null;
+    private JButton currButton = null;
     private boolean curQ = false;
     static Storage storage = new Storage();
 
@@ -36,6 +39,11 @@ public class Frame extends JFrame {
     public void updateAnswerBox(String string){
         askPanel.updateAnswerText(string);
     }
+
+    public void revalidateSideBar(){
+        questionHistory.revalidateComponents();
+    }
+    
     
     private void setButtons(Footer footer, JButton askButton, JButton delButton, JButton clrButton) {
         footer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -93,7 +101,7 @@ public class Frame extends JFrame {
                     askButton.setText("Ask Question"); //change button text
                     askStop = false; // change toggle
                     Thread t = new Thread( // use another thread for answer computation to not lag UI
-                    () -> {
+                    () ->  {
                         try {
 
                             /*
@@ -101,7 +109,6 @@ public class Frame extends JFrame {
                              * string is saved as a question. Then, that string is asked to ChatGPT. The question/answer
                              * pairs are then stored and displayed in the GUI.
                              */
-                            curQ = true;
                             String question = converter.audioToString();
                             if(question.equals("")) {
                                 askPanel.updateQuestionText("Microphone didn't pickup any sound");
@@ -119,12 +126,15 @@ public class Frame extends JFrame {
                                     (ActionEvent event) -> {
                                         updateQuestionBox(b.getText());
                                         curQuestion = b.getText();
+                                        currButton = b;
                                         updateAnswerBox(storage.getAnswer(b.getText()));
                                         System.out.println("BUTTON PRESSED");
                                     }
                             );
                             questionHistory.sideBarAddButton(b);
+                            currButton = b;
                             curQ = false;
+                            System.out.println("CurQ = false");
                             }
                             
                         } catch (Exception ex) {
@@ -136,7 +146,10 @@ public class Frame extends JFrame {
                 } else {
                     recorder.startRecording();
                     askButton.setText("Stop Question"); // change text back
+                    System.out.println("CurQ = true");
+                    curQ = true;
                     askStop = true; // change toggle back
+
                 }
             }
             }
@@ -145,18 +158,48 @@ public class Frame extends JFrame {
         delButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Deleted Question");
+                Thread t = new Thread(
+                    () -> {
+                        System.out.println("Deleted Question");
+                        storage.deleteQuestion(currButton.getText());
+                        questionHistory.deleteButton(currButton);
+                        currButton = null;
+                        curQuestion = null;
+                        updateAnswerBox(" ");
+                        updateQuestionBox(" ");
+                        questionHistory.revalidate();
+                        questionHistory.repaint();
+                        revalidate();
+                    }
+                ); 
+                t.start();
             }
         });
 
         clrButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (curQ) {
-                    System.out.println("Currently asking question");
-                } else {
-                    System.out.println("You clicked the clear all button!");
-                }
+                Thread t = new Thread(
+                    ()->{
+                        if (curQ){
+                            System.out.println("Unable to clear all. Currently asking question.");
+                        }
+
+                        else{
+                            System.out.println("You clicked the clear all button!");
+                            questionHistory.deleteAll();
+                            storage.clearAll();
+                            currButton = null;
+                            curQuestion = null;
+                            updateAnswerBox(" ");
+                            updateQuestionBox(" ");
+                            questionHistory.revalidate();
+                            questionHistory.repaint();
+                            revalidate();
+                        }
+                    }
+                );
+                t.start();
             }
         });
 
