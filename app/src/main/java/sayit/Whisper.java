@@ -8,7 +8,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import org.json.*;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Whisper implements IAudioConverter{
     private static final String API_ENDPOINT = "https://api.openai.com/v1/audio/transcriptions";

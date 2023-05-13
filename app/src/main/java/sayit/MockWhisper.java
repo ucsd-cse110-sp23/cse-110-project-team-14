@@ -3,7 +3,6 @@ package sayit;
 import java.io.IOException;
 
 public class MockWhisper implements IAudioConverter {
-
     public String audioToString() throws IOException {
         return audioToString("ST1.wav");
     }
@@ -17,5 +16,4 @@ public class MockWhisper implements IAudioConverter {
             throw new IOException("Unrecognized file name");
         }
     }
-    
 }

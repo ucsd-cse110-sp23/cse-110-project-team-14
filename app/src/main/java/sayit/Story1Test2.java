@@ -1,8 +1,11 @@
 package sayit;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 /**
  * Manual Story test, Uses api calls
  * Test uses ST1.wav as audio input, which contains 3 seconds of no speaking
