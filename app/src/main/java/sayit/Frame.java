@@ -1,9 +1,7 @@
 package sayit;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,6 +23,7 @@ public class Frame extends JFrame {
     private JButton delButton;
     private boolean askStop = false;
     private String curQuestion = null;
+    private boolean curQ = false;
     static Storage storage = new Storage();
 
     IAudioConverter converter;
@@ -102,6 +101,7 @@ public class Frame extends JFrame {
                              * string is saved as a question. Then, that string is asked to ChatGPT. The question/answer
                              * pairs are then stored and displayed in the GUI.
                              */
+                            curQ = true;
                             String question = converter.audioToString();
                             if(question.equals("")) {
                                 askPanel.updateQuestionText("Microphone didn't pickup any sound");
@@ -124,6 +124,7 @@ public class Frame extends JFrame {
                                     }
                             );
                             questionHistory.sideBarAddButton(b);
+                            curQ = false;
                             }
                             
                         } catch (Exception ex) {
@@ -151,7 +152,11 @@ public class Frame extends JFrame {
         clrButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("You clicked the clear all button!");
+                if (curQ) {
+                    System.out.println("Currently asking question");
+                } else {
+                    System.out.println("You clicked the clear all button!");
+                }
             }
         });
 
