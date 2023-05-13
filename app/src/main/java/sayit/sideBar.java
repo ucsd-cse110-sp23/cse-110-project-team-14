@@ -29,8 +29,8 @@ public class sideBar extends JScrollPane {
     private Color DARKGRAY = new Color(36,36,36);
     private Color MEDGRAY = new Color(65,65,65);
     private Color LIGHTGRAY = new Color(93,93,93);
+    public sideBarList sideBarList = new sideBarList();
     private sideBarPanel sideBarPanel;
-    private sideBarList sideBarList;
     HashMap<String, JButton> buttonMap;
 
     /**
@@ -50,36 +50,45 @@ public class sideBar extends JScrollPane {
 
     public void sideBarAddButton(String string){
         JButton b = new JButton(string);
-        sideBarPanel.sideBarList.add(b);
+        sideBarList.add(b);
         buttonMap.put(string,b);
         
     }
 
     public void sideBarAddButton(JButton b){
-        sideBarPanel.sideBarList.add(b);
+        sideBarList.add(b);
         buttonMap.put(b.getText(),b);
     }
 
     public void deleteButton(JButton b){
         buttonMap.remove(b.getText());
-        sideBarPanel.sideBarList.remove(b);
-        sideBarPanel.sideBarList.revalidate();
+        sideBarList.remove(b);
+        sideBarList.revalidate();
         sideBarPanel.revalidate();
         this.revalidate();
     }
 
     public void deleteButton(String string){
-        sideBarPanel.sideBarList.remove(buttonMap.get(string));
+        sideBarList.remove(buttonMap.get(string));
         buttonMap.remove(string);
-        sideBarPanel.sideBarList.revalidate();
+        sideBarList.revalidate();
+        sideBarList.repaint();
         sideBarPanel.revalidate();
+        sideBarPanel.repaint();
         this.revalidate();
+        this.repaint();
+    }
+
+    public void deleteAll(){
+        buttonMap.clear();
+        sideBarList.removeAll();
+        sideBarList.revalidate();
     }
 
     public void revalidateComponents(){
         revalidate();
         sideBarPanel.revalidate();
-        //sideBarList.revalidate();
+        sideBarList.revalidate();
         revalidate();
     }
 
@@ -110,7 +119,6 @@ public class sideBar extends JScrollPane {
      */
     class sideBarPanel extends JPanel{
         JLabel sideBarHeader = new JLabel("Question History");
-        JPanel sideBarList = new sideBarList();
         
         sideBarPanel() {
             this.setLayout(BORDERLAYOUT);
@@ -118,7 +126,6 @@ public class sideBar extends JScrollPane {
             this.setPreferredSize(minSize);
             this.setBackground(LIGHTGRAY);
             this.setVisible(true);
-
             sideBarHeader.setHorizontalAlignment(JLabel.CENTER);
             sideBarHeader.setPreferredSize(new Dimension(200, 100));
             sideBarHeader.setBackground(DARKGRAY);
@@ -137,5 +144,6 @@ public class sideBar extends JScrollPane {
             this.setBackground(MEDGRAY);
             this.setLayout(HISTORYGRID);
         }
+
     }
 }

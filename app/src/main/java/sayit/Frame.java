@@ -43,6 +43,7 @@ public class Frame extends JFrame {
         questionHistory.revalidateComponents();
     }
     
+    
     private void setButtons(Footer footer, JButton askButton, JButton delButton, JButton clrButton) {
         footer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
@@ -99,7 +100,7 @@ public class Frame extends JFrame {
                     askButton.setText("Ask Question"); //change button text
                     askStop = false; // change toggle
                     Thread t = new Thread( // use another thread for answer computation to not lag UI
-                    () -> {
+                    () ->  {
                         try {
 
                             /*
@@ -151,23 +152,42 @@ public class Frame extends JFrame {
         delButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Deleted Question");
-                storage.deleteQuestion(currButton.getText());
-                questionHistory.deleteButton(currButton);
-                currButton = null;
-                curQuestion = null;
-                updateAnswerBox(" ");
-                updateQuestionBox(" ");
-                revalidateSideBar();
-                splitPane.revalidate();
-                revalidate();
+                Thread t = new Thread(
+                    () -> {
+                        System.out.println("Deleted Question");
+                        storage.deleteQuestion(currButton.getText());
+                        questionHistory.deleteButton(currButton);
+                        currButton = null;
+                        curQuestion = null;
+                        updateAnswerBox(" ");
+                        updateQuestionBox(" ");
+                        questionHistory.revalidate();
+                        questionHistory.repaint();
+                        revalidate();
+                    }
+                ); 
+                t.start();
             }
         });
 
         clrButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("You clicked the clear all button!");
+                Thread t = new Thread(
+                    ()->{
+                        System.out.println("You clicked the clear all button!");
+                        questionHistory.deleteAll();
+                        storage.clearAll();
+                        currButton = null;
+                        curQuestion = null;
+                        updateAnswerBox(" ");
+                        updateQuestionBox(" ");
+                        questionHistory.revalidate();
+                        questionHistory.repaint();
+                        revalidate();
+                    }
+                );
+                t.start();
             }
         });
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="sayit.ConnectTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-05-13T03:28:04" hostname="DESKTOP-R65DMBE" time="0.012">
+<testsuite name="sayit.ConnectTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-05-13T04:00:48" hostname="DESKTOP-R65DMBE" time="0.011">
   <properties/>
-  <testcase name="audioNotFound()" classname="sayit.ConnectTest" time="0.011"/>
+  <testcase name="audioNotFound()" classname="sayit.ConnectTest" time="0.01"/>
   <testcase name="audioFound()" classname="sayit.ConnectTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
