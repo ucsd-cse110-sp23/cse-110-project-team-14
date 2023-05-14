@@ -1,3 +1,5 @@
+package sayit;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,11 +29,11 @@ public class Story3Test2 {
         storage.deleteQuestion(selectedQuestion);
 
         // Verify that the selected question and answer are deleted
-        assertFalse(storage.questionAnswerMap.containsKey(selectedQuestion));
+        assertFalse(storage.containsQuestion(selectedQuestion));
 
         // Verify that the other question and answer remain in the storage
         HashMap<String, String> expectedQuestionAnswerMap = new HashMap<>();
         expectedQuestionAnswerMap.put("Question 2", "Answer 2");
-        assertEquals(expectedQuestionAnswerMap, storage.questionAnswerMap);
+        assertEquals(expectedQuestionAnswerMap, storage.getHashMap());
     }
 }

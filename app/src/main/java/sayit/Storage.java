@@ -25,10 +25,26 @@ public class Storage {
         questionAnswerMap.clear();
     }
 
+    public int getSize(){
+        return questionAnswerMap.size();
+    }
+
     public String getAnswer(String question) {
         if (questionAnswerMap.containsKey(question)) {
             return questionAnswerMap.get(question);
         } else
             return "Sorry, I don't have an answer for that.";
     }
-}
+
+    public boolean containsQuestion(String question){
+        return questionAnswerMap.containsKey(question);
+    }  
+
+    public boolean containsAnswer(String answer){
+        return questionAnswerMap.containsValue(answer);
+    }
+
+    public HashMap<String,String> getHashMap(){
+        return questionAnswerMap;
+    }
+ }
