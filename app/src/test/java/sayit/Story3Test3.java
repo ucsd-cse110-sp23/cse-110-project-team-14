@@ -1,12 +1,12 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Story3Test3 {
-    private Story3Test3 storage;
+    private Storage storage;
 
     @BeforeEach
     public void setup() {
@@ -23,14 +23,9 @@ public class Story3Test3 {
         String questionBeingAsked = "Question 1";
 
         // Get the initial state of the storage
-        ArrayList<String> initialQuestions = new ArrayList<>(storage.questions);
-        ArrayList<String> initialAnswers = new ArrayList<>(storage.answers);
+        HashMap<String, String> initialQuestionAnswerMap = new HashMap<>(storage.questionAnswerMap);
 
         // Attempt to delete a question while it is being asked
-        storage.deleteQuestion(storage.getIndex(questionBeingAsked));
+        storage.deleteQuestion(questionBeingAsked);
 
-        // Verify that no question is altered or deleted
-        assertEquals(initialQuestions, storage.questions);
-        assertEquals(initialAnswers, storage.answers);
-    }
-}
+        // Verify that no
