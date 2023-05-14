@@ -16,7 +16,7 @@ class StorageTest {
         Storage store = new Storage();
         store.addQuestion("What is the capital of France?", "Paris");
         store.addQuestion("What is the capital of Italy?", "Rome");
-        store.deleteQuestion(1);
+        store.deleteQuestion("What is the capital of Italy?");
         
         assertEquals("Paris", store.getAnswer("What is the capital of France?"));
         assertEquals("Sorry, I don't have an answer for that.", store.getAnswer("What is the capital of Italy?"));
