@@ -3,6 +3,8 @@ package sayit;
 import javax.swing.JButton;
 
 import java.awt.event.ActionEvent;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class AskQuestion {
     AudioRecorder recorder;
@@ -35,6 +37,8 @@ public class AskQuestion {
             askStop = false; // change toggle
             Thread t = new Thread( // use another thread for answer computation to not lag UI
                     () -> {
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss MM/dd/uuuu");
+                        LocalDateTime currTime = LocalDateTime.now();
                         try {
                             /*
                              * Takes a recording and transcribes it into text using Whisper. After
@@ -51,13 +55,14 @@ public class AskQuestion {
                                 buttonCoordinator.setCurQ(false);
                                 buttonCoordinator.setCurButton(null);
                             } else {
+                                String questionTime = question +" "+ dtf.format(currTime);
                                 frame.updateQuestionBox(question);
                                 String answer = chat.askQuestion(question);
                                 System.out.println(answer);
                                 frame.updateAnswerBox(answer);
-                                storage.addQuestion(question, answer);
+                                storage.addQuestion(questionTime, answer);
                                 askPanel.revalidate();
-                                JButton b = new JButton(question);
+                                JButton b = new JButton(questionTime);
                                 b.addActionListener(
                                         (ActionEvent event) -> {
                                             frame.updateQuestionBox(b.getText());
