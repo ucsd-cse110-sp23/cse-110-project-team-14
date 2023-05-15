@@ -22,15 +22,15 @@ import javax.swing.JScrollPane;
  * 
  * @author Apollo Larragoitia
  */
-public class sideBar extends JScrollPane {
+public class MySideBar extends JScrollPane {
     private Dimension minSize = new Dimension(400, 900);
     private GridLayout HISTORYGRID = new GridLayout(0, 1, 5, 5);
     private BorderLayout BORDERLAYOUT = new BorderLayout();
     private Color DARKGRAY = new Color(36, 36, 36);
     private Color MEDGRAY = new Color(65, 65, 65);
     private Color LIGHTGRAY = new Color(93, 93, 93);
-    public sideBarList sideBarList = new sideBarList();
-    private sideBarPanel sideBarPanel;
+    public SideBarList sideBarList = new SideBarList();
+    private SideBarPanel sideBarPanel;
     HashMap<String, JButton> buttonMap;
 
     /**
@@ -40,9 +40,9 @@ public class sideBar extends JScrollPane {
      * 
      * @return JScrolLPane
      */
-    public sideBar() {
+    public MySideBar() {
         buttonMap = new HashMap<String, JButton>();
-        sideBarPanel = new sideBarPanel();
+        sideBarPanel = new SideBarPanel();
         this.setViewportView(sideBarPanel);
         this.setVisible(true);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -61,7 +61,6 @@ public class sideBar extends JScrollPane {
         JButton b = new JButton(string);
         sideBarList.add(b);
         buttonMap.put(string, b);
-
     }
 
     /**
@@ -162,10 +161,10 @@ public class sideBar extends JScrollPane {
      * JPanel that the viewport of sideBar views. Contains a List Panel that
      * dynamically updates with question history.
      */
-    class sideBarPanel extends JPanel {
+    class SideBarPanel extends JPanel {
         JLabel sideBarHeader = new JLabel("Question History");
 
-        sideBarPanel() {
+        SideBarPanel() {
             this.setLayout(BORDERLAYOUT);
             this.setMinimumSize(minSize);
             this.setPreferredSize(minSize);
@@ -184,8 +183,8 @@ public class sideBar extends JScrollPane {
         }
     }
 
-    class sideBarList extends JPanel {
-        sideBarList() {
+    class SideBarList extends JPanel {
+        SideBarList() {
             this.setBackground(MEDGRAY);
             this.setLayout(HISTORYGRID);
         }

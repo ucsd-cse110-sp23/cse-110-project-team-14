@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
  * ChatGPT as well as its response. The footer panel currently contains the button to ask a question and receive an
  * answer. askPanel contains subclasses for all of these respective panels.
  */
-public class askPanel extends JPanel {
+public class MyAskPanel extends JPanel {
     /*Defining common variables */
     static Dimension PREFSIZE = new Dimension(1000,900);
     static Color RED = new Color(255, 0, 0);
@@ -31,26 +31,25 @@ public class askPanel extends JPanel {
     Question question = new Question();
     Answer answer = new Answer();
 
-/**
- * Updates text of query panel. Used when displaying history or given query.
- * 
- * @param string A String variable to be displayed.
- */
-    public void updateQuestionText(String string){
-        this.question.updateText(string);
+    /**
+     * Getter for question field
+     * @return question field
+     */
+    public Question getQuestion() {
+        return question;
     }
-/**
- * Updates text of query panel. Used when displaying history or given answer.
- * 
- * @param string A String variable to be displayed.
- */
-    public void updateAnswerText(String string){
-        this.answer.updateText(string);
+
+    /**
+     * Getter for answer field
+     * @return answer field
+     */
+    public Answer getAnswer() {
+        return answer;
     }
 /*
 * Constructor for askPanel. Creates a panel with BorderLayout that contains the footer, query and response panel.
 */
-    askPanel(){
+    MyAskPanel() {
         this.setBackground(DARKGRAY);
         this.setLayout(BORDERLAYOUT);
         this.setPreferredSize(PREFSIZE);
@@ -72,7 +71,7 @@ public class askPanel extends JPanel {
             text.setText(string);
         }
 
-        Question(){
+        Question() {
             this.setBackground(MEDGRAY);
             this.setPreferredSize(QSIZE);
             this.setMinimumSize(QSIZE);
@@ -86,6 +85,8 @@ public class askPanel extends JPanel {
             this.add(text, BorderLayout.CENTER);
             text.setAlignmentX(CENTER_ALIGNMENT);
             text.setAlignmentY(CENTER_ALIGNMENT);
+            text.setLineWrap(true);
+            text.setEditable(false);
         }
     }
 
@@ -112,6 +113,8 @@ public class askPanel extends JPanel {
             this.add(text, BorderLayout.CENTER);
             text.setAlignmentX(CENTER_ALIGNMENT);
             text.setAlignmentY(CENTER_ALIGNMENT);
+            text.setLineWrap(true);
+            text.setEditable(false);
         }
     }
 }
