@@ -1,3 +1,170 @@
 How to run Manual Tests
 
-Story 1:
+For all tests: 
+    clear "questions.txt" file
+    "gradle build" in terminal to build app
+    "gradle run" in terminal to start app
+
+Story 1: 
+    Test 1: Click ask question and ask a question (Can also use TestChatWhisper1, will output to terminal)
+        Step 1: Start app
+        Step 2: Click "Ask Question" button and wait 1 second
+        Step 3: Say "What is 1 plus 1" and wait 1 second
+        Step 4: Click "Stop Question" button and wait for response
+        Step 5: Check output
+            a: In top panel, text saying "What is 1 plus 1?" should appear
+            b: In bottom panel, text saying "1 plus 1 is 2." should appear
+            c: In side panel, button with "What is 1 plus 1" should appear
+
+    Test 2: Click ask question button without asking question (Can also use TestChatWhisper2, will output to terminal)
+        Step 1: start app
+        Step 2: click "Ask Question" button and wait 3 seconds
+        Step 3: click "Stop Question" button and wait for response
+        Step 4: Check output
+            a: In top panel, text saying "Microphone didn't pickup any sound" should appear
+            b: In bottom panel, nothing should appear
+            c: In side panel, nothing should appear
+
+Story 2:
+    Test 1: View history with no questions asked
+        Step 1: Start app
+        Step 2: Check UI
+            a: Side bar should have no buttons
+            b: top panel should be blank
+            c: bottom panel should be blank
+            d: footer should have 3 buttons, "Clear All", "Delete Question", and "Ask Question", in this order
+
+    Test 2: View history after asking a question (same as US1 Test 1)
+        Step 1: Start app
+        Step 2: click "Ask Question" button and wait 1 second
+        Step 3: Say "What is 1 plus 1" and wait 1 second
+        Step 4: Click "Stop Question" button and wait for response
+        Step 5: Check output
+            a: In top panel, text saying "What is 1 plus 1?" should appear
+            b: In bottom panel, text saying "1 plus 1 is 2." should appear
+            c: In side panel, button with "What is 1 plus 1" should appear
+
+    Test 3: Click Quesion Button on sidebar
+        Step 1: Start app
+        Step 2: click "Ask Question" button and wait 1 second
+        Step 3: Say "What is 1 plus 1" and wait 1 second
+        Step 4: Click "Stop Question" button and wait for response
+        Step 5: click "Ask Question" button and wait 1 second
+        Step 6: Say "What is 2 plus 2" and wait 1 second
+        Step 7: Click "Stop Question" button and wait for response
+        Step 8: Click "What is 1 plus 1" button on side bar
+        Step 9: Check output
+            a: In top panel, text saying "What is 2 plus 2?" should change to "What is 1 plus 1?"
+            b: In bottom panel, text saying "2 plus 2 is 4." should change to "1 plus 1 is 2."
+
+Story 3:
+    Test 1: Click Delete question without any question selected
+        Step 1: Start app
+        Step 2: Click delete question
+        Step 3: Check UI
+            a: Side bar should have no questions
+            b: In top panel, there should be no question text
+            c: In bottom panel, there should be no answer text
+            
+    Test 2: Click Delete question with question selected
+        Step 1: Start app
+        Step 2: click "Ask Question" button and wait 1 second
+        Step 3: Say "What is 1 plus 1" and wait 1 second
+        Step 4: Click "Stop Question" button and wait for response
+        Step 5: click "Ask Question" button and wait 1 second
+        Step 6: Say "What is 2 plus 2" and wait 1 second
+        Step 7: Click "Stop Question" button and wait for response
+        Step 8: Click "What is 1 plus 1" button on side bar
+        Step 9: Click "Delete question" button
+        Step 10: Check UI
+            a: In the top panel, there should be no question text
+            b: In the bottom panel, there should be no answer text
+            c: In the side bar, "What is 1 plus 1" button should disappear
+
+    Test 3: Click Delete question while question is being asked
+        Step 1: Start app
+        Step 2: click "Ask Question" button and wait 1 second
+        Step 3: Say "What is 1 plus 1" and wait 1 second
+        Step 4: Click "Stop Question" button and wait for response 
+        Step 5: click "Ask Question" button and wait 1 second
+        Step 6: Say "What is 2 plus 2"
+        Step 7: Before an answer is generated click "What is 1 plus 1" button on side bar
+        Step 8: Before an answer is generated click "Delete question"
+        Step 8: Before an answer is generated check UI
+            a: In the top panel, it should still display "What is 2 plus 2"
+            b: In the bottom panel, it should either still be blank from loading
+            c: In the sidebar, "What is 1 plus 1" should still be present
+    
+Story 4:
+    Test 1: User clears history with no question and answer in history
+        Step 1 : Start app
+        Step 2: Click "Clear" button
+        Step 3: Check UI
+            a: Side bar should have no questions
+            b: In top panel, there should be no question text
+            c: In bottom panel, there should be no answer text
+
+
+
+    Test 2: User clears history 
+        Step 1: Start app
+        Step 2: click "Ask Question" button and wait 1 second
+        Step 3: Say "What is 1 plus 1" and wait 1 second
+        Step 4: Click "Stop Question" button and wait for response 
+        Step 5: click "Ask Question" button and wait 1 second
+        Step 6: Say "What is 2 plus 2" and wait 1 second
+        Step 7: Click "Stop Question" button and wait for response
+        Step 8: Click "Clear" button
+        Step 9: Check UI:
+            a: Side bar should have no questions
+            b: In top panel, there should be no question text
+            c: In botton panel, there should be no answer text
+    
+    
+
+    
+    Test 3: User clears history while answer to question is still loading
+        Step 1: Start app
+        Step 2: click "Ask Question" button and wait 1 second
+        Step 3: Say "What is 1 plus 1" and wait 1 second
+        Step 4: Click "Stop Question" button
+        Step 5: Click "Clear" button before response is generated.
+        Step 6: Check UI after response is generated:
+            a: Side bar should have one question button: "What is 1 plus 1?"
+            b: Top Panel should have the question "What is 1 plus 1?"
+            b: Bottom Panel should have the response "1 plus 1 is 2."
+        Step 7: click "Ask Question" button and wait 1 second
+        Step 8: Say "What is 2 plus 2" and wait 1 second
+        Step 9: Click "Stop Question" 
+        Step 10: Click "Clear" button before response is generated.
+        Step 11: Check UI after response is generated:
+            a: Side bar should have two question buttons: "What is 1 plus 1?", and "What is 2 plus 2?"
+            b: Top Panel should have the question "What is 2 plus 2?"
+            b: Bottom Panel should have the response "2 plus 2 is 4."
+
+
+
+
+
+Story 5:
+    Test 1: Test that Ctrl-C allows for copying highlighted text
+        Step 1: Start app
+        Step 2: click "Ask Question" button and wait 1 second
+        Step 3: Say "What is 1 plus 1" and wait 1 second
+        Step 4: Click "Stop Question" button and wait for response
+        Step 5: Highlight the text in the bottom panel and use Ctrl-C
+        Step 6: Open a place where you can paste text and use Ctrl-V
+        Step 7: Check output
+            a: Should paste "1 plus 1 is 2."
+
+    Test 2: Test that Ctrl-V allows for pasting copied text (Same as US5 Test 1)
+        Step 1: Start app
+        Step 2: click "Ask Question" button and wait 1 second
+        Step 3: Say "What is 1 plus 1" and wait 1 second
+        Step 4: Click "Stop Question" button and wait for response
+        Step 5: Highlight the text in the bottom panel and use Ctrl-C
+        Step 6: Open a place where you can paste text and use Ctrl-V
+        Step 7: Check output
+            a: Should paste "1 plus 1 is 2."
+
+

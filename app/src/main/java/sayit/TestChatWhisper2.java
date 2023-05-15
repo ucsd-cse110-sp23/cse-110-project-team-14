@@ -11,17 +11,17 @@ import javax.swing.JFrame;
  * Test uses ST1.wav as audio input, which contains 3 seconds of no speaking
  * Should print out "Microphone didn't pick up any sound" and then "Test passed"
  */
-public class Story1Test2 extends JFrame {
+public class TestChatWhisper2 extends JFrame {
 
   private JButton startButton;
   IAudioConverter converter;
   IChatBot chat;
 
   public static void main(String[] args) {
-    new Story1Test2(new Whisper(), new ChatGPT());
+    new TestChatWhisper2(new Whisper(), new ChatGPT());
   }
 
-  public Story1Test2(IAudioConverter converter, IChatBot chat) {
+  public TestChatWhisper2(IAudioConverter converter, IChatBot chat) {
     this.converter = converter;
     this.chat = chat;
     setTitle("Story Test 2");
