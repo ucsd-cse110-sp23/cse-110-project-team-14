@@ -55,8 +55,8 @@ public class AskQuestion {
                                 buttonCoordinator.setCurQ(false);
                                 buttonCoordinator.setCurButton(null);
                             } else {
-                                String questionTime = question +" "+ dtf.format(currTime);
-                                frame.updateQuestionBox(question);
+                                String questionTime = question +"\t"+ dtf.format(currTime);
+                                frame.updateQuestionBox(questionTime);
                                 String answer = chat.askQuestion(question);
                                 System.out.println(answer);
                                 frame.updateAnswerBox(answer);
