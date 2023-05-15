@@ -46,7 +46,10 @@ public class AskQuestion {
                             String question = converter.audioToString();
                             if (question.equals("")) {
                                 frame.updateQuestionBox("Microphone didn't pickup any sound");
+                                frame.updateAnswerBox("");
                                 askPanel.revalidate();
+                                buttonCoordinator.setCurQ(false);
+                                buttonCoordinator.setCurButton(null);
                             } else {
                                 frame.updateQuestionBox(question);
                                 String answer = chat.askQuestion(question);
