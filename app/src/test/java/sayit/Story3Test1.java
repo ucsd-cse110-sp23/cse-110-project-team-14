@@ -1,12 +1,11 @@
 package sayit;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class Story3Test1 {
     private Storage storage;
@@ -17,7 +16,7 @@ public class Story3Test1 {
     }
 
     @Test
-    public void testDeleteQuestionWithoutSelection() {
+    public void testDeleteQuestionWithoutSelection() { // Test question deletion without a selected question
         // Add some questions and answers to the storage
         storage.addQuestion("Question 1", "Answer 1");
         storage.addQuestion("Question 2", "Answer 2");

@@ -17,7 +17,7 @@ public class Story3Test2 {
     }
 
     @Test
-    public void testDeleteQuestionWithSelection() {
+    public void testDeleteQuestionWithSelection() { // Test deleting question when a question has been selected
         // Add some questions and answers to the storage
         storage.addQuestion("Question 1", "Answer 1");
         storage.addQuestion("Question 2", "Answer 2");
