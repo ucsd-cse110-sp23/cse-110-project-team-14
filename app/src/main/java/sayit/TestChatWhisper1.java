@@ -12,17 +12,17 @@ import javax.swing.JFrame;
  * Test uses ST1.wav as audio input, which contains Darren saying what is 1 + 1
  * Expected output is 1 + 1 = 2 in the command line
  */
-public class Story1Test1 extends JFrame {
+public class TestChatWhisper1 extends JFrame {
 
   private JButton startButton;
   private IAudioConverter converter;
   private IChatBot chat;
 
   public static void main(String[] args) {
-    new Story1Test1(new Whisper(), new ChatGPT());
+    new TestChatWhisper1(new Whisper(), new ChatGPT());
   }
 
-  public Story1Test1(IAudioConverter converter, IChatBot chat) {
+  public TestChatWhisper1(IAudioConverter converter, IChatBot chat) {
     this.converter = converter;
     this.chat = chat;
 

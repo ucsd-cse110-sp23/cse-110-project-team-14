@@ -30,7 +30,7 @@ public class AskQuestion {
         buttonCoordinator = co;
     }
 
-    public void ask(){
+    public void ask() {
         if (askStop) {
             recorder.stopRecording();
             askButton.setText("Ask Question"); // change button text

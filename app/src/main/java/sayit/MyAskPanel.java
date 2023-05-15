@@ -85,6 +85,8 @@ public class MyAskPanel extends JPanel {
             this.add(text, BorderLayout.CENTER);
             text.setAlignmentX(CENTER_ALIGNMENT);
             text.setAlignmentY(CENTER_ALIGNMENT);
+            text.setLineWrap(true);
+            text.setEditable(false);
         }
     }
 
@@ -111,6 +113,8 @@ public class MyAskPanel extends JPanel {
             this.add(text, BorderLayout.CENTER);
             text.setAlignmentX(CENTER_ALIGNMENT);
             text.setAlignmentY(CENTER_ALIGNMENT);
+            text.setLineWrap(true);
+            text.setEditable(false);
         }
     }
 }
