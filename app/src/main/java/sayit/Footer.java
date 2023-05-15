@@ -22,6 +22,5 @@ public class Footer extends JPanel{
         this.setPreferredSize(FTSIZE);
         this.setMinimumSize(FTSIZE);
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        
     }
 }
