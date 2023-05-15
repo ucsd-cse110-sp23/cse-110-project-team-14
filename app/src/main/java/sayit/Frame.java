@@ -44,6 +44,7 @@ public class Frame extends JFrame {
     private boolean askStop = false;
     private boolean curQ = false;
     ImportFiles importFiles;
+    ExportFiles exportFiles;
 
     static Storage storage = new Storage();
 
@@ -118,6 +119,7 @@ public class Frame extends JFrame {
         setButtons(footer, askButton, delButton, clrButton);
         importFiles = new ImportFiles(storage, buttonCoordinator, this, fileToLoad, sideBar);
         importFiles.importFiles();
+        exportFiles = new ExportFiles(storage, fileToLoad);
 
 
         addListeners();
@@ -168,6 +170,7 @@ public class Frame extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e){
+                exportFiles.exportFile();
                 System.exit(0);
             }
         });
