@@ -4,12 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.WindowConstants;
+
 
 // This code is defining a new class called `Frame` that extends the `JFrame` class
 // in Java's Swing library. This class is used to create the main window of the
@@ -30,7 +35,6 @@ public class Frame extends JFrame {
     private JButton delButton;
     private JButton currButton = null;
     private ButtonCoordinator buttonCoordinator;
-    //private DeleteQuestion deleteQuestion = new DeleteQuestion();
 
     AskQuestion askQuestion;
     DeleteQuestion deleteQuestion;
@@ -38,11 +42,14 @@ public class Frame extends JFrame {
 
     private boolean askStop = false;
     private boolean curQ = false;
+    ImportFiles importFiles;
+    ExportFiles exportFiles;
 
     static Storage storage = new Storage();
 
     IAudioConverter converter;
     IChatBot chat;
+    File fileToLoad = new File("questions.txt");
 
     // These two methods are updating the text displayed in the GUI for the question
     // and answer boxes. They take in a string parameter and pass it to the
@@ -104,11 +111,13 @@ public class Frame extends JFrame {
         deleteQuestion = new DeleteQuestion(storage, currButton, sideBar, this, buttonCoordinator);
         clearQuestions = new ClearQuestions(this, storage, sideBar, buttonCoordinator);
         
-
-        
         this.add(splitPane, BorderLayout.CENTER);
         this.add(footer, BorderLayout.SOUTH);
         setButtons(footer, askButton, delButton, clrButton);
+        importFiles = new ImportFiles(storage, buttonCoordinator, this, fileToLoad, sideBar);
+        importFiles.importFiles();
+        exportFiles = new ExportFiles(storage, fileToLoad);
+
 
         addListeners();
         revalidate();
@@ -122,58 +131,6 @@ public class Frame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 askQuestion.ask();
-                /*if (askStop) {
-                    recorder.stopRecording();
-                    askButton.setText("Ask Question"); // change button text
-                    askStop = false; // change toggle
-                    Thread t = new Thread( // use another thread for answer computation to not lag UI
-                            () -> {
-                                try {
-                                    /*
-                                     * Takes a recording and transcribes it into text using Whisper. After
-                                     * transcription, the21v
-                                     * string is saved as a question. Then, that string is asked to ChatGPT. The
-                                     * question/answer
-                                     * pairs are then stored and displayed in the GUI.
-                                     
-                                    String question = converter.audioToString();
-                                    if (question.equals("")) {
-                                        updateQuestionBox("Microphone didn't pickup any sound");
-                                        askPanel.revalidate();
-                                    } else {
-                                        updateQuestionBox(question);
-                                        String answer = chat.askQuestion(question);
-                                        System.out.println(answer);
-                                        updateAnswerBox(answer);
-                                        storage.addQuestion(question, answer);
-                                        askPanel.revalidate();
-                                        JButton b = new JButton(question);
-                                        b.addActionListener(
-                                                (ActionEvent event) -> {
-                                                    updateQuestionBox(b.getText());
-                                                    currButton = b;
-                                                    updateAnswerBox(storage.getAnswer(b.getText()));
-                                                    System.out.println("BUTTON PRESSED");
-                                                });
-                                        sideBar.sideBarAddButton(b);
-                                        currButton = b;
-                                        curQ = false;
-                                        System.out.println("CurQ = false");
-                                    }
-
-                                } catch (Exception ex) {
-                                    System.out.println("Error occured");
-                                }
-                            });
-                    t.start(); // start the new thread
-                } else {
-                    recorder.startRecording();
-                    askButton.setText("Stop Question"); // change text back
-                    System.out.println("CurQ = true");
-                    curQ = true;
-                    askStop = true; // change toggle back
-
-                }*/
             }
         });
 
@@ -188,20 +145,6 @@ public class Frame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 deleteQuestion.delete();
-                //new DeleteQuestion(storage, currButton, sideBar, buttonCoordinator);
-                // Thread t = new Thread(
-                //         () -> {
-                //             System.out.println("Deleted Question");
-                //             storage.deleteQuestion(currButton.getText());
-                //             sideBar.deleteButton(currButton);
-                //             currButton = null;
-                //             updateAnswerBox(" ");
-                //             updateQuestionBox(" ");
-                //             sideBar.revalidate();
-                //             sideBar.repaint();
-                //             revalidate();
-                //         });
-                // t.start();
             }
         });
 
@@ -218,25 +161,20 @@ public class Frame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearQuestions.clearAll();
-                /*Thread t = new Thread(
-                        () -> {
-                            if (curQ) {
-                                System.out.println("Unable to clear all. Currently asking question.");
-                            }
+            }
+        });
 
-                        else {
-                                System.out.println("You clicked the clear all button!");
-                                sideBar.deleteAll();
-                                storage.clearAll();
-                                currButton = null;
-                                updateAnswerBox(" ");
-                                updateQuestionBox(" ");
-                                sideBar.revalidate();
-                                sideBar.repaint();
-                                revalidate();
-                            }
-                        });
-                t.start();*/
+        // This code is adding a window listener to the `Frame` object. When the
+        // user clicks the close button on the window, the `windowClosing` method
+        // is called. This method exports the current state of the `storage` object
+        // to a file and then exits the application by calling `System.exit(0)`.
+        // This ensures that the data is saved before the application is closed.
+        // Autogenerated by Mintlify 
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                exportFiles.exportFile();
+                System.exit(0);
             }
         });
     }
