@@ -102,9 +102,7 @@ Story 4:
         Step 3: Check UI
             a: Side bar should have no questions
             b: In top panel, there should be no question text
-            c: In bottom panel, there should be no answer text
-
-
+            c: In bottom panel, there should be no answer getText
 
     Test 2: User clears history 
         Step 1: Start app
@@ -119,9 +117,6 @@ Story 4:
             a: Side bar should have no questions
             b: In top panel, there should be no question text
             c: In botton panel, there should be no answer text
-    
-    
-
     
     Test 3: User clears history while answer to question is still loading
         Step 1: Start app
@@ -141,10 +136,6 @@ Story 4:
             a: Side bar should have two question buttons: "What is 1 plus 1?", and "What is 2 plus 2?"
             b: Top Panel should have the question "What is 2 plus 2?"
             b: Bottom Panel should have the response "2 plus 2 is 4."
-
-
-
-
 
 Story 5:
     Test 1: Test that Ctrl-C allows for copying highlighted text
@@ -166,5 +157,3 @@ Story 5:
         Step 6: Open a place where you can paste text and use Ctrl-V
         Step 7: Check output
             a: Should paste "1 plus 1 is 2."
-
-

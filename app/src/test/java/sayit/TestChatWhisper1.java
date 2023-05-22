@@ -22,7 +22,7 @@ public class TestChatWhisper1 extends JFrame {
     new TestChatWhisper1(new Whisper(), new ChatGPT());
   }
 
-  public TestChatWhisper1(IAudioConverter converter, IChatBot chat) {
+  public TestChatWhisper1(IAudioConverter converter, IChatBot chat) { 
     this.converter = converter;
     this.chat = chat;
 

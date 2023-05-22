@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.WindowConstants;
 
-
 // This code is defining a new class called `Frame` that extends the `JFrame` class
 // in Java's Swing library. This class is used to create the main window of the
 // application and contains various GUI components such as a sidebar, query and

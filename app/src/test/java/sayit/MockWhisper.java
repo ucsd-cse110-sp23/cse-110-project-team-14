@@ -7,7 +7,7 @@ public class MockWhisper implements IAudioConverter {
         return audioToString("ST1.wav");
     }
 
-    public String audioToString(String filename) throws IOException {
+    public String audioToString(String filename) throws IOException { // Mock converting voice conversions into text to avoid using credits
         if(filename.equals("ST1.wav")) {
             return "What is 1 + 1";
         } else if (filename.equals("ST2.wav")) {

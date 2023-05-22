@@ -16,7 +16,7 @@ class ConnectTest {
     }
 
     @Test
-    void audioFound() {
+    void audioFound() { // Test audio received and converted to string
         try {
             String question = converter.audioToString("ST1.wav");
             assertEquals("What is 1 + 1", question);
@@ -27,7 +27,7 @@ class ConnectTest {
         
     }
     @Test
-    void audioNotFound() {
+    void audioNotFound() { // Test audio not received
         try {
             String question = converter.audioToString("ST2.wav");
             assertEquals("", question);

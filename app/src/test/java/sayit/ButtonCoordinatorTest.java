@@ -16,14 +16,14 @@ class ButtonCoordinatorTest {
     
     
     @Test
-    void testgetCurButton() {
+    void testgetCurButton() { // Test button retrieval
         JButton wantedQuestion = new JButton();
         myButtonCoordinator.curButton = wantedQuestion;
         assertEquals(wantedQuestion,myButtonCoordinator.getCurButton());
     }
 
     @Test
-    void testgetCurQ() {
+    void testgetCurQ() { // Test question in progress functionality.
         myButtonCoordinator.curQ = false;    
         assertEquals(false, myButtonCoordinator.getCurQ());
 
@@ -32,7 +32,7 @@ class ButtonCoordinatorTest {
     }
 
     @Test
-    void testsetCurButton() {
+    void testsetCurButton() { // Test button set
         JButton actualButton = new JButton();
         //myButtonCoordinator.currButton = actualButton;
         myButtonCoordinator.setCurButton(actualButton);
@@ -41,7 +41,7 @@ class ButtonCoordinatorTest {
 
    
     @Test
-    void testsetCurQ() {
+    void testsetCurQ() { // Test question progress set
         myButtonCoordinator.setCurQ(false);
         assertEquals(false, myButtonCoordinator.curQ);
 

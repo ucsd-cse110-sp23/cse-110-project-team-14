@@ -24,7 +24,7 @@ public class TestAudioRecorder extends JFrame {
     new TestAudioRecorder(new Whisper(), new ChatGPT());
   }
 
-  public TestAudioRecorder(IAudioConverter converter, IChatBot chat) {
+  public TestAudioRecorder(IAudioConverter converter, IChatBot chat) { // Test audio recorder functionality (MANUAL)
     setTitle("Audio Recorder");
     setLayout(new GridLayout(1, 3));
 
