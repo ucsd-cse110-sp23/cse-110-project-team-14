@@ -3,12 +3,6 @@ package sayit;
 import javax.swing.JButton;
 
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
@@ -23,7 +17,6 @@ public class AskQuestion {
     MySideBar sideBar;
     ButtonCoordinator buttonCoordinator;
     private boolean askStop = false;
-    final String URL = "http://localhost:8100/";
 
     public AskQuestion(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co) {
         recorder = r;
@@ -35,45 +28,6 @@ public class AskQuestion {
         storage = s;
         sideBar = bar;
         buttonCoordinator = co;
-    }
-
-    public String askHTTPRequest(String query){
-        String response = "HTTP REQUEST SENT";
-        String line;
-
-        try{
-            URL url = new URL(URL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
-            out.write(query);
-            out.flush();
-            out.close();
-
-
-            BufferedReader in = new BufferedReader(
-                new InputStreamReader(conn.getInputStream())
-            );
-
-            //Debugging
-            System.out.println("READING LINES FROM BUFFER");
-            in.readLine();
-            in.readLine();
-
-            response = in.readLine();
-            in.close();
-            System.out.println("\n CLIENT: RETURNING RESPONSE FROM SERVER" + response);
-            
-            return response;
-
-        }catch (MalformedURLException exception){
-            exception.printStackTrace();
-        }catch (IOException exception){
-            exception.printStackTrace();
-        }
-
-        return response;
     }
 
     public void ask() {
@@ -103,7 +57,7 @@ public class AskQuestion {
                             } else {
                                 String questionTime = question +"\t"+ dtf.format(currTime);
                                 frame.updateQuestionBox(questionTime);
-                                String answer = askHTTPRequest(question);
+                                String answer = chat.askQuestion(question);
                                 System.out.println(answer);
                                 frame.updateAnswerBox(answer);
                                 storage.addQuestion(questionTime, answer);
