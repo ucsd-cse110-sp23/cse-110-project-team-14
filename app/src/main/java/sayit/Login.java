@@ -9,8 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.*;
 
 
-public class Login {
-    static final String URL = "http://localhost:8100/account";
+public class Login implements ILogin{
+    final String URL = "http://localhost:8100/account";
 
     /**
      * 
@@ -18,7 +18,7 @@ public class Login {
      * @param password password to check
      * @return "true" if both are in db, "No account with that username" if no account, "Incorrect password" for wrong password
      */
-    public static String login(String username, String password) {
+    public String login(String username, String password) {
 
         String response = "HTTP REQUEST SENT";
         System.out.println(response);
