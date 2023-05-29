@@ -8,10 +8,15 @@ public class LoginTest {
     //TODO needs mocking
     @BeforeEach
     void setUp() {
-        
+        try {
+            MyServer server = new MyServer();
+        } catch (Exception e) {
+            
+        }
     }
 
     @Test
     void correctLogin() {
+        
     }
 }

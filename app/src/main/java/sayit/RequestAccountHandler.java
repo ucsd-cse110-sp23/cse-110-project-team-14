@@ -16,7 +16,9 @@ public class RequestAccountHandler implements HttpHandler {
         String method = httpExchange.getRequestMethod();
         try{
             if (method.equals("GET")){
-                response = handleGet(httpExchange);
+              response = handleGet(httpExchange);
+            } else if (method.equals("POST")) {
+              response = handlePost(httpExchange);
             }
             else{
                 response = "Unimplemented HTTP Request Recieved";
@@ -54,5 +56,23 @@ public class RequestAccountHandler implements HttpHandler {
         }
         return response;
     }
+
+    private String handlePost(HttpExchange httpExchange) throws IOException {
+      String response = "Other error occured";
+      URI uri = httpExchange.getRequestURI();
+      String query = uri.getRawQuery();
+      if (query != null) {
+        String nameAndPass = query.substring(query.indexOf("=") + 1);
+        String username = nameAndPass.substring(0, nameAndPass.indexOf(",")); // get just the username
+        String password = nameAndPass.substring(nameAndPass.indexOf(",") + 1);
+        if(DBReadAccount.doesAccountExist(username)) {
+          response = "Username taken";
+        } else {
+          DBCreateAccount.create(username, password);
+          response = "Created Account";
+        }
+      }
+      return response;
+  }
 
 }

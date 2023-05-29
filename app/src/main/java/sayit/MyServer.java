@@ -12,16 +12,14 @@ public class MyServer {
     private static final String SERVER_HOSTNAME = "localhost";
 
     MyServer() throws IOException{
+        
         ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor)
         Executors.newFixedThreadPool(10);
-
-        Map <String,String> data = new HashMap<>();
         
         HttpServer server = HttpServer.create(
             new InetSocketAddress(SERVER_HOSTNAME, SERVER_PORT),
             0
         );
-
 
         server.createContext("/", new RequestHandler());
         server.createContext("/account", new RequestAccountHandler());
