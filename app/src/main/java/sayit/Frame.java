@@ -110,6 +110,7 @@ public class Frame extends JFrame {
         deleteQuestion = new DeleteQuestion(storage, currButton, sideBar, this, buttonCoordinator);
         clearQuestions = new ClearQuestions(this, storage, sideBar, buttonCoordinator);
         
+        
         this.add(splitPane, BorderLayout.CENTER);
         this.add(footer, BorderLayout.SOUTH);
         setButtons(footer, askButton, delButton, clrButton);
