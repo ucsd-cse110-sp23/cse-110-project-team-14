@@ -22,14 +22,12 @@ public class MyServer {
             0
         );
 
-        System.out.println("Started Server");
 
-
-
-        HttpContext context = server.createContext("/", new RequestHandler());
+        server.createContext("/", new RequestHandler());
+        server.createContext("/account", new RequestAccountHandler());
         server.setExecutor(threadPoolExecutor);
         server.start();
-        System.out.println("server started");
+        System.out.println("Started Server");
     }
     
 }

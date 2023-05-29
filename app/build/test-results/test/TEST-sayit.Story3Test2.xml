@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<testsuite name="sayit.Story3Test2" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-15T04:30:41" hostname="DESKTOP-R65DMBE" time="0.001">
+<testsuite name="sayit.Story3Test2" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-29T00:58:27" hostname="LAPTOP-NHC17941" time="0.017">
   <properties/>
-  <testcase name="testDeleteQuestionWithSelection()" classname="sayit.Story3Test2" time="0.001"/>
-=======
-<testsuite name="sayit.Story3Test2" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-15T03:43:12" hostname="LAPTOP-NHC17941" time="0.004">
-  <properties/>
-  <testcase name="testDeleteQuestionWithSelection()" classname="sayit.Story3Test2" time="0.004"/>
->>>>>>> main
+  <testcase name="testDeleteQuestionWithSelection()" classname="sayit.Story3Test2" time="0.017"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
