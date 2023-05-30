@@ -10,8 +10,8 @@ import java.net.*;
  * Class to handle create account, doesn't interface w/ DB
  * Use 
  */
-public class CreateAccount {
-    static final String URL = "http://localhost:8100/account";
+public class CreateAccount implements ICreate{
+    final String URL = "http://localhost:8100/account";
 
     /**
      * 
@@ -19,7 +19,7 @@ public class CreateAccount {
      * @param password password to check
      * @return "true" if both are in db, "No account with that username" if no account, "Incorrect password" for wrong password
      */
-    public static String create(String username, String password) {
+    public String create(String username, String password) {
 
         String response = "HTTP REQUEST SENT";
         System.out.println(response);
