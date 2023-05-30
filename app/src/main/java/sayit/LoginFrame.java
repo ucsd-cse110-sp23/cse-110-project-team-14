@@ -2,7 +2,6 @@
 package sayit;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,8 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 
-import java.awt.font.TextAttribute;
-
 import javax.swing.WindowConstants;
 
 
@@ -26,6 +23,7 @@ public class LoginFrame extends JFrame {
     private JLabel titleLabel;
     private JLabel usernameLabel;
     private JLabel passwordLabel;
+    private JLabel errorLabel;
 
     private JTextField usernameTextField;
     private JTextField passwordTextField;
@@ -38,13 +36,41 @@ public class LoginFrame extends JFrame {
      * Method for setting the location of the button in the footer area of the 
      * app
      */
-    private void setElements(JLabel usernameLabel, JLabel passwordLabel, JTextField usernameTextField, JTextField passwordTextField) {
+    private void setElements(SpringLayout myLayout, JLabel titleLabel,
+        JLabel usernameLabel, JLabel passwordLabel, 
+        JTextField usernameTextField, JTextField passwordTextField,
+        JButton logInButton, JButton createAccountButton, JLabel errorLabel) {
+        
+        this.add(titleLabel);
         this.add(usernameLabel);
-        //this.add(usernameTextField);
-        //this.add(passwordLabel);
-        //this.add(passwordTextField);
-    }
+        this.add(usernameTextField);
+        this.add(passwordLabel);
+        this.add(passwordTextField);
+        this.add(logInButton);
+        this.add(createAccountButton);
+        this.add(errorLabel);
 
+        myLayout.putConstraint(SpringLayout.HORIZONTAL_CENTER, titleLabel, 400, SpringLayout.WEST, this);
+        myLayout.putConstraint(SpringLayout.NORTH, titleLabel, 80, SpringLayout.NORTH, this);
+
+        myLayout.putConstraint(SpringLayout.WEST, usernameLabel, 250, SpringLayout.WEST, this);
+        myLayout.putConstraint(SpringLayout.NORTH, usernameLabel, 150, SpringLayout.NORTH, this);
+        myLayout.putConstraint(SpringLayout.WEST, usernameTextField, 50, SpringLayout.EAST, usernameLabel);
+        myLayout.putConstraint(SpringLayout.NORTH, usernameTextField, 0, SpringLayout.NORTH, usernameLabel);
+
+        myLayout.putConstraint(SpringLayout.WEST, passwordLabel, 0, SpringLayout.WEST, usernameLabel);
+        myLayout.putConstraint(SpringLayout.NORTH, passwordLabel, 50, SpringLayout.NORTH, usernameLabel);
+        myLayout.putConstraint(SpringLayout.WEST, passwordTextField, 50, SpringLayout.EAST, usernameLabel);
+        myLayout.putConstraint(SpringLayout.NORTH, passwordTextField, 0, SpringLayout.NORTH, passwordLabel);
+
+        myLayout.putConstraint(SpringLayout.WEST, errorLabel, 0, SpringLayout.WEST, passwordTextField);
+        myLayout.putConstraint(SpringLayout.NORTH, errorLabel, 30, SpringLayout.NORTH, passwordTextField);
+
+        myLayout.putConstraint(SpringLayout.WEST, createAccountButton, 20, SpringLayout.WEST, usernameLabel);
+        myLayout.putConstraint(SpringLayout.NORTH, createAccountButton, 50, SpringLayout.NORTH, passwordLabel);
+        myLayout.putConstraint(SpringLayout.WEST, logInButton, 30, SpringLayout.EAST, createAccountButton);
+        myLayout.putConstraint(SpringLayout.NORTH, logInButton, 0, SpringLayout.NORTH, createAccountButton);
+    }
 
     LoginFrame () {
         this.setSize(800, 450);
@@ -70,39 +96,41 @@ public class LoginFrame extends JFrame {
         createAccountButton.setContentAreaFilled(false);
         createAccountButton.setForeground(Color.BLUE);
 
+        errorLabel = new JLabel();
+        errorLabel.setForeground(Color.RED);
 
-        this.add(titleLabel);
-        this.add(usernameLabel);
-        this.add(usernameTextField);
-        this.add(passwordLabel);
-        this.add(passwordTextField);
+        setElements(myLayout, titleLabel, usernameLabel, passwordLabel, 
+            usernameTextField, passwordTextField, logInButton,createAccountButton,
+            errorLabel);
 
-        this.add(logInButton);
-        this.add(createAccountButton);
-
-        
-        myLayout.putConstraint(SpringLayout.HORIZONTAL_CENTER, titleLabel, 400, SpringLayout.WEST, this);
-        myLayout.putConstraint(SpringLayout.NORTH, titleLabel, 80, SpringLayout.NORTH, this);
-
-        myLayout.putConstraint(SpringLayout.WEST, usernameLabel, 250, SpringLayout.WEST, this);
-        myLayout.putConstraint(SpringLayout.NORTH, usernameLabel, 150, SpringLayout.NORTH, this);
-        myLayout.putConstraint(SpringLayout.WEST, usernameTextField, 50, SpringLayout.EAST, usernameLabel);
-        myLayout.putConstraint(SpringLayout.NORTH, usernameTextField, 0, SpringLayout.NORTH, usernameLabel);
-
-        myLayout.putConstraint(SpringLayout.WEST, passwordLabel, 0, SpringLayout.WEST, usernameLabel);
-        myLayout.putConstraint(SpringLayout.NORTH, passwordLabel, 50, SpringLayout.NORTH, usernameLabel);
-        myLayout.putConstraint(SpringLayout.WEST, passwordTextField, 50, SpringLayout.EAST, usernameLabel);
-        myLayout.putConstraint(SpringLayout.NORTH, passwordTextField, 0, SpringLayout.NORTH, passwordLabel);
-
-        myLayout.putConstraint(SpringLayout.WEST, createAccountButton, 20, SpringLayout.WEST, usernameLabel);
-        myLayout.putConstraint(SpringLayout.NORTH, createAccountButton, 50, SpringLayout.NORTH, passwordLabel);
-        myLayout.putConstraint(SpringLayout.WEST, logInButton, 30, SpringLayout.EAST, createAccountButton);
-        myLayout.putConstraint(SpringLayout.NORTH, logInButton, 0, SpringLayout.NORTH, createAccountButton);
-
-        //setElements(usernameLabel, passwordLabel, usernameTextField, passwordTextField);
-
-
+        addListeners();
         revalidate();
+    }
+
+    public void addListeners() {
+        createAccountButton.addActionListener(new ActionListener() { // start recording on click
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Create Account Button Pressed!");
+            }
+        });
+
+        // This code is adding an action listener to the `delButton` JButton. When
+        // the button is clicked, it creates a new thread that deletes the
+        // currently selected question from the `storage` object and removes the
+        // corresponding button from the `questionHistory` in sideBar. It also sets
+        // the `currButton` variable to null, updates the answer
+        // and question boxes to display empty strings, and revalidates the GUI
+        // components. - Autogenerated by MINTLIFY
+        logInButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Log In Button Pressed!");
+                errorLabel.setText("Username or Password Error");
+                
+                new Frame(new Whisper(), new ChatGPT());
+            }
+        });
     }
 }
 
