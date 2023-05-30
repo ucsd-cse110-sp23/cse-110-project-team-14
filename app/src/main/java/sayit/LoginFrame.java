@@ -96,7 +96,7 @@ public class LoginFrame extends JFrame {
         createAccountButton.setContentAreaFilled(false);
         createAccountButton.setForeground(Color.BLUE);
 
-        errorLabel = new JLabel();
+        errorLabel = new JLabel("TEST ERROR LABEL");
         errorLabel.setForeground(Color.RED);
 
         setElements(myLayout, titleLabel, usernameLabel, passwordLabel, 
