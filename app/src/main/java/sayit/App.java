@@ -5,7 +5,8 @@ package sayit;
  */
 public class App { // main class
     public static void main(String[] args) throws Exception {
-        new Frame(new Whisper(), new ChatGPT());
+        new LoginFrame();
+        //new Frame(new Whisper(), new ChatGPT());
         new MyServer();       
     }
 }
