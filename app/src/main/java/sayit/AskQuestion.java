@@ -76,6 +76,55 @@ public class AskQuestion {
         return response;
     }
 
+
+    public void ask(String question){
+        Thread t = new Thread(
+            () -> {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss MM/dd/uuuu");
+                LocalDateTime currTime = LocalDateTime.now();
+                try {
+                    /*
+                     * Takes a recording and transcribes it into text using Whisper. After
+                     * transcription, the
+                     * string is saved as a question. Then, that string is asked to ChatGPT. The
+                     * question/answer
+                     * pairs are then stored and displayed in the GUI.
+                     */
+                    if (question.equals("")) {
+                        frame.updateQuestionBox("Microphone didn't pickup any sound");
+                        frame.updateAnswerBox("");
+                        askPanel.revalidate();
+                        buttonCoordinator.setCurQ(false);
+                        buttonCoordinator.setCurButton(null);
+                    } else {
+                        String questionTime = question +"\t"+ dtf.format(currTime);
+                        frame.updateQuestionBox(questionTime);
+                        String answer = askHTTPRequest(question);
+                        System.out.println(answer);
+                        frame.updateAnswerBox(answer);
+                        storage.addQuestion(questionTime, answer);
+                        askPanel.revalidate();
+                        JButton b = new JButton(questionTime);
+                        b.addActionListener(
+                                (ActionEvent event) -> {
+                                    frame.updateQuestionBox(b.getText());
+                                    buttonCoordinator.setCurButton(b);
+                                    frame.updateAnswerBox(storage.getAnswer(b.getText()));
+                                    System.out.println("BUTTON PRESSED");
+                                });
+                        sideBar.sideBarAddButton(b);
+                        buttonCoordinator.setCurButton(b);
+                        buttonCoordinator.setCurQ(false);
+                        System.out.println("CurQ = false");
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Error occured");
+                }
+            }); 
+            t.start();
+    }
+
+
     public void ask() {
         if (askStop) {
             recorder.stopRecording();

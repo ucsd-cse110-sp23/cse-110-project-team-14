@@ -39,7 +39,7 @@ public class ExportFiles {
             for (HashMap.Entry<String, String> entry : storage.getHashMap().entrySet()) {
                 String question = entry.getKey();
                 String answer = entry.getValue().replace("\n", "");
-                String toReturn = question + "," + answer + "\n";
+                String toReturn = question + ";" + answer + "\n";
                 writer.write(toReturn);
                 System.out.println("Writing to file");
             }
