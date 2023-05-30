@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="sayit.LoginTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-30T06:19:52" hostname="DENNIS-XPS-15" time="0.022">
+<testsuite name="sayit.LoginTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-30T18:29:01" hostname="DENNIS-XPS-15" time="0.03">
   <properties/>
-  <testcase name="correctLogin()" classname="sayit.LoginTest" time="0.022"/>
+  <testcase name="correctLogin()" classname="sayit.LoginTest" time="0.03"/>
   <system-out><![CDATA[Started Server
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -19,8 +19,10 @@ import javax.swing.WindowConstants;
 
 public class AutoLoginFrame extends JFrame {
 
-    private JLabel questionLabel;
+    AutoLoginFrame myAutoLoginFrame;
+    LoginFrame myLoginFrame;
 
+    private JLabel questionLabel;
     private JButton yesButton;
     private JButton noButton;
 
@@ -47,9 +49,14 @@ public class AutoLoginFrame extends JFrame {
     }
 
     AutoLoginFrame () {
+        myAutoLoginFrame = this;
+
         this.setSize(500, 300);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        // Set location of frame in the center of the window
+        this.setLocationRelativeTo(null);
 
         SpringLayout myLayout = new SpringLayout();
         this.setLayout(myLayout);
@@ -70,6 +77,10 @@ public class AutoLoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Yes button pressed!");
+                new Frame(new Whisper(), new ChatGPT());
+                myAutoLoginFrame.dispose();
+
+                
             }
         });
 
@@ -77,9 +88,11 @@ public class AutoLoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("No button pressed!");
+                new Frame(new Whisper(), new ChatGPT());
+                myAutoLoginFrame.dispose();
             }
         });
-
+        
     }
 }
 

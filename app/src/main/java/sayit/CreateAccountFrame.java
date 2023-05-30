@@ -19,6 +19,7 @@ import javax.swing.WindowConstants;
 
 public class CreateAccountFrame extends JFrame {
 
+    CreateAccountFrame myCreateAccountFrame;
     private JLabel usernameLabel;
     private JLabel passwordLabel;
     private JLabel confirmPasswordLabel;
@@ -71,9 +72,15 @@ public class CreateAccountFrame extends JFrame {
     }
 
     CreateAccountFrame () {
+
+        myCreateAccountFrame = this;
+
         this.setSize(800, 450);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        // Set location of frame in the center of the window
+        this.setLocationRelativeTo(null);
 
         SpringLayout myLayout = new SpringLayout();
         this.setLayout(myLayout);
@@ -105,6 +112,17 @@ public class CreateAccountFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Create Account Button Pressed!");
+
+                String username = usernameTextField.getText();
+                String password = passwordTextField.getText();
+                String confirmPassword = confirmPasswordTextField.getText();
+
+                System.out.println("Username input: " + username);
+                System.out.println("Password input " + password);
+                System.out.println("Confirm password input " + confirmPassword);
+
+                myCreateAccountFrame.dispose();
+                new AutoLoginFrame();
             }
         });
 

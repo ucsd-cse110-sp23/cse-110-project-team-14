@@ -6,8 +6,8 @@ package sayit;
 public class App { // main class
     public static void main(String[] args) throws Exception {
         new LoginFrame();
-        new CreateAccountFrame();
-        new AutoLoginFrame();
+        //new CreateAccountFrame();
+        //new AutoLoginFrame();
         //new Frame(new Whisper(), new ChatGPT());
         new MyServer();       
     }

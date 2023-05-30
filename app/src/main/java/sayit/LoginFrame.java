@@ -19,7 +19,7 @@ import javax.swing.WindowConstants;
 
 public class LoginFrame extends JFrame {
 
-    
+    LoginFrame myLoginFrame;
     private JLabel titleLabel;
     private JLabel usernameLabel;
     private JLabel passwordLabel;
@@ -73,9 +73,15 @@ public class LoginFrame extends JFrame {
     }
 
     LoginFrame () {
+
+        myLoginFrame = this;
+
         this.setSize(800, 450);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        // Set location of frame in the center of the window
+        this.setLocationRelativeTo(null);
 
         SpringLayout myLayout = new SpringLayout();
         this.setLayout(myLayout);
@@ -112,6 +118,9 @@ public class LoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Create Account Button Pressed!");
+
+                new CreateAccountFrame();
+                myLoginFrame.dispose();
             }
         });
 
@@ -125,10 +134,18 @@ public class LoginFrame extends JFrame {
         logInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String username = usernameTextField.getText();
+                String password = passwordTextField.getText();
+
+                System.out.println("Username input: " + username);
+                System.out.println("Password input " + password);
                 System.out.println("Log In Button Pressed!");
                 errorLabel.setText("Username or Password Error");
-                
-                new Frame(new Whisper(), new ChatGPT());
+
+                new AutoLoginFrame();
+                myLoginFrame.dispose();
+
+                //new Frame(new Whisper(), new ChatGPT());
             }
         });
     }
