@@ -121,8 +121,23 @@ public class CreateAccountFrame extends JFrame {
                 System.out.println("Password input " + password);
                 System.out.println("Confirm password input " + confirmPassword);
 
-                myCreateAccountFrame.dispose();
-                new AutoLoginFrame();
+                if (password.equals(confirmPassword)) {
+                    Thread t = new Thread( // use another thread for answer computation to not lag UI
+                    () -> {
+                        CreateAccount.create(username, confirmPassword);
+                        
+                    });
+                    t.start();
+                    myCreateAccountFrame.dispose();
+                    new AutoLoginFrame();
+                } else if (!password.equals(confirmPassword)) {
+                    errorLabel.setText("Your passwords do not match");
+                } else {
+                    errorLabel.setText("Your went wrong");
+                }
+
+
+                
             }
         });
 

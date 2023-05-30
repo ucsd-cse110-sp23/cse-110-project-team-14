@@ -1,19 +1,13 @@
 
 package sayit;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 import javax.swing.JLabel;
-
+import javax.swing.SpringLayout;
 import javax.swing.WindowConstants;
 
 
@@ -26,7 +20,7 @@ public class AutoLoginFrame extends JFrame {
     private JButton yesButton;
     private JButton noButton;
 
-/*
+    /*
      * Method for setting the location of the button in the footer area of the 
      * app
      */
@@ -79,8 +73,6 @@ public class AutoLoginFrame extends JFrame {
                 System.out.println("Yes button pressed!");
                 new Frame(new Whisper(), new ChatGPT());
                 myAutoLoginFrame.dispose();
-
-                
             }
         });
 

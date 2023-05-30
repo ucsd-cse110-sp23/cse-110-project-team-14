@@ -32,7 +32,7 @@ public class LoginFrame extends JFrame {
     private JButton logInButton;
     private JButton createAccountButton;
 
-/*
+    /*
      * Method for setting the location of the button in the footer area of the 
      * app
      */
@@ -142,10 +142,16 @@ public class LoginFrame extends JFrame {
                 System.out.println("Log In Button Pressed!");
                 errorLabel.setText("Username or Password Error");
 
-                new AutoLoginFrame();
-                myLoginFrame.dispose();
+                Thread t = new Thread( // use another thread for answer computation to not lag UI
+                    () -> {
+                        if (Login.login(username, password).equals("true")) {
+                            new AutoLoginFrame();
+                            myLoginFrame.dispose();
+                        }
+                    });
+                t.start();
 
-                //new Frame(new Whisper(), new ChatGPT());
+                
             }
         });
     }
