@@ -114,7 +114,7 @@ public class Frame extends JFrame {
         this.add(footer, BorderLayout.SOUTH);
         setButtons(footer, askButton, delButton, clrButton);
         importFiles = new ImportFiles(storage, buttonCoordinator, this, fileToLoad, sideBar);
-        importFiles.importFiles();
+        importFiles.importFiles("abcd@ucsd.edu"); //TODO change to work off of Login info
         exportFiles = new ExportFiles(storage, fileToLoad);
 
 
