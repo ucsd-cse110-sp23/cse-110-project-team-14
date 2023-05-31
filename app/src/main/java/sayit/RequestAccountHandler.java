@@ -8,8 +8,11 @@ import java.util.*;
 import javax.annotation.meta.Exhaustive;
 
 public class RequestAccountHandler implements HttpHandler {
-    
-    
+    AccountUIToServer connecter;
+    public RequestAccountHandler(AccountUIToServer connecter) {
+      this.connecter = connecter;
+    }  
+
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         String response = "Request Recieved";
@@ -19,6 +22,8 @@ public class RequestAccountHandler implements HttpHandler {
               response = handleGet(httpExchange);
             } else if (method.equals("POST")) {
               response = handlePost(httpExchange);
+            } else if (method.equals("DELETE")) {
+              response = handleDelete(httpExchange);
             }
             else{
                 response = "Unimplemented HTTP Request Recieved";
@@ -74,5 +79,16 @@ public class RequestAccountHandler implements HttpHandler {
       }
       return response;
   }
+
+  private String handleDelete(HttpExchange httpExchange) throws IOException {
+    String response = "Other error occured";
+    URI uri = httpExchange.getRequestURI();
+    String query = uri.getRawQuery();
+    if (query != null) {
+      connecter.setUsername("abcd@ucsd.edu"); //TODO remove this once connected to login button
+      DBClearAll.clearAll(connecter.getUsername());
+    }
+    return response;
+}
 
 }

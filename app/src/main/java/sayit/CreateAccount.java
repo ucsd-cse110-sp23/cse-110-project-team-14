@@ -22,7 +22,6 @@ public class CreateAccount implements ICreate{
     public String create(String username, String password) {
 
         String response = "HTTP REQUEST SENT";
-        System.out.println(response);
         try {
             URL url = new URL(URL + "?=" + username + "," + password);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -49,10 +48,11 @@ public class CreateAccount implements ICreate{
     /* // Use for testing purposes only
     public static void main(String[] args) {
         try {
-            MyServer server = new MyServer();
+            MyServer server = new MyServer(new AccountUIToServer(new Login(), new CreateAccount()));
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
-        System.out.println(CreateAccount.create("abcd@ucsd.edu", "abcd1234"));
+        CreateAccount acc = new CreateAccount();
+        System.out.println(acc.create("abcd@ucsd.edu", "abcd1234"));
     }*/
 }

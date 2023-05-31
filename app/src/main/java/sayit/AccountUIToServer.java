@@ -42,4 +42,10 @@ public class AccountUIToServer {
     public String getPassword() {
         return password;
     }
+    /**
+     * ONLY TO BE USED FOR TESTING
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

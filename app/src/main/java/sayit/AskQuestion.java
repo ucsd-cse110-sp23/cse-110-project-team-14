@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.TimeUnit;
 
 public class AskQuestion {
     AudioRecorder recorder;
@@ -56,14 +57,16 @@ public class AskQuestion {
                 new InputStreamReader(conn.getInputStream())
             );
 
-            //Debugging
-            System.out.println("READING LINES FROM BUFFER");
-            in.readLine();
-            in.readLine();
-
+            //Debugging MUST KEEP OR CODE BREAKS FOR SOME REASON
+            System.out.println("\nREADING LINES FROM BUFFER\n");            
+            String temp = "";
             response = in.readLine();
+            while(temp != null) {
+                response += temp;
+                temp = in.readLine();
+            }
             in.close();
-            System.out.println("\n CLIENT: RETURNING RESPONSE FROM SERVER" + response);
+            //System.out.println("Response in AskQuestion" + response);
             
             return response;
 
@@ -103,8 +106,8 @@ public class AskQuestion {
                             } else {
                                 String questionTime = question +"\t"+ dtf.format(currTime);
                                 frame.updateQuestionBox(questionTime);
-                                String answer = askHTTPRequest(question);
-                                System.out.println(answer);
+                                String answer = askHTTPRequest(questionTime);
+                                System.out.println("Answer:" + answer);
                                 frame.updateAnswerBox(answer);
                                 storage.addQuestion(questionTime, answer);
                                 askPanel.revalidate();

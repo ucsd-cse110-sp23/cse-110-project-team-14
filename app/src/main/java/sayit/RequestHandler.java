@@ -12,30 +12,50 @@ public class RequestHandler implements HttpHandler {
     Map <String,String> data;
 
     IChatBot ChatGPT = new ChatGPT();
+    AccountUIToServer connecter;
 
     public RequestHandler(Map <String, String> data){
         this.data = data;
     }
 
-    public RequestHandler(){}
+    public RequestHandler(AccountUIToServer connect){
+        connecter = connect;
+    }
     
     public String askQuestion(HttpExchange exchange){
         InputStream inputStream = exchange.getRequestBody();
         Scanner scanner = new Scanner(inputStream);
         String postData = scanner.nextLine();
+        String question = postData.substring(0,postData.indexOf("\t"));
+        System.out.println(question);
         String response;
         try{
-            response = ChatGPT.askQuestion(postData);
+            response = ChatGPT.askQuestion(question);
         }
         catch(Exception e){
             response = "Sorry. There was an error trying to process your response. Please try again";
         }
         scanner.close();
+        String output = response;
+        connecter.setUsername("abcd@ucsd.edu"); //TODO remove this once connected to login button
+        Thread t = new Thread( // use another thread for answer computation to not lag UI
+            () -> {
+                DBAddCommand.addCommand(postData, output, connecter.getUsername());
+            });
+        t.start();
         return response;
     };
 
     /*To be implemented. Currently question history is stored locally.*/
-    public void deleteQuestion(){}
+    public String deleteQuestion(HttpExchange exchange){
+        InputStream inputStream = exchange.getRequestBody();
+        Scanner scanner = new Scanner(inputStream);
+        String postData = scanner.nextLine();
+        scanner.close();
+        connecter.setUsername("abcd@ucsd.edu"); //TODO remove this once connected to login button
+        DBDeleteCommand.deleteCommand(postData, connecter.getUsername());
+        return "Deleted command";
+    }
     public void deleteQuestionHistory(){}
     public void saveQuestionHistory(){}
     public void loadQuestionHistory(){}
@@ -48,8 +68,9 @@ public class RequestHandler implements HttpHandler {
         try{
             if (method.equals("POST")){
                 response = askQuestion(httpExchange);
-            }
-            else{
+            } else if (method.equals("DELETE")) {
+                response = deleteQuestion(httpExchange);
+            }else{
                 response = "Unimplemented HTTP Request Recieved";
             }
         }
