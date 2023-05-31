@@ -158,5 +158,65 @@ Story 5:
         Step 7: Check output
             a: Should paste "1 plus 1 is 2."
 
+    
+Story 6:
+    Test 1: Creating an account, check if it exists in database
+        Step 1: Start app
+        Step 2: Click on the "Create Account" button
+        Step 3: Type "testUser" in the Username field
+        Step 4: Type "abcde" in the Password field
+        Step 5: Type "abcde" in the Confirm Password field
+        Step 6: Click on the the "Create Account" button
+        Step 7: Check output
+            a: No error message should appear about the Create Account button if the username is not taken
+            b: A popup should appear asking :Do you want to automatically login next time?
+        Step 8: Click on "Yes" or "No"
+        Step 9: Check ouput
+            a: The chat app should appear
+        Step 10: Go to Atlas database and check if the username and password using "Browse Collecitons"
 
+    Test 2: Check UI, make sure buttons call correct functions and text fields properly recieve text input
+        Step 1: Start app
+        Step 2: Click on the "Create Account" button
+        Step 3: Check output:
+            a: The frame should switch to the Create Account frame
+        Step 4: Click on the "Create Account" button
+        Step 5: Check output:
+            a: The frame should switch to asking the user about automatically logging in next time
+        Step 6: Restart the app
+        Step 7: Enter "testUser" for the username and "abcde" for the password
+        Step 8: Click on the "Log In" button
+        Step 9: Check output
+            a: The frame should switch to asking the user about automatically logging in next time
+        Step 10: Click on "Yes" or "No"
+        Step 11: Check output
+            a: The frame should switch to the Say It app
 
+    Test 3: Check if the create account feature detects invalid accounts username and passwords
+        Step 1: Start app
+        Step 2: Click on the "Create Account" button
+        Step 3: Type "testUser" in the Username field
+        Step 4: Type "abcde" in the Password field
+        Step 5: Type "12345" in the Confirm Password field
+        Step 6: Click on the the "Create Account" button
+        Step 7: Check output
+            a: The error message should show up saying "passwords do not match"
+        Step 8: Type "testUser" in the Username field
+        Step 9: Type "abcde" in the Password field
+        Step 10: Type "abcd" in the Confirm Password field
+        Step 11: Check output
+            a: The error message should show up saying "Username taken"
+    
+    Test 4: Check if the login feature detects invalid login attempts
+        Step 1: Start app
+        Step 2: Type "testUser" in the Username field
+        Step 3: Type "12345" in the Password field
+        Step 4: Click on the the "Log In" button
+        Step 5: Check output
+            a: The error message should show up saying "Incorrect password"
+        Step 6: Type "testUser1234" in the Username field
+        Step 7: Type "abcde" in the Password field
+        Step 8: Click on the the "Log In" button
+        Step 9: Check output
+            a: The error message should show up saying "No account with that username"
+        
