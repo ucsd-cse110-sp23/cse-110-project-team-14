@@ -2,18 +2,14 @@
 package sayit;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
-import javax.swing.JLabel;
-
 import javax.swing.WindowConstants;
 
 
@@ -30,6 +26,9 @@ public class CreateAccountFrame extends JFrame {
     private JTextField confirmPasswordTextField;
 
     private JButton createAccountButton;
+
+    AccountUIToServer test;
+
 
 /*
      * Method for setting the location of the button in the footer area of the 
@@ -121,21 +120,22 @@ public class CreateAccountFrame extends JFrame {
                 System.out.println("Password input " + password);
                 System.out.println("Confirm password input " + confirmPassword);
 
-                if (password.equals(confirmPassword)) {
-                    Thread t = new Thread( // use another thread for answer computation to not lag UI
-                    () -> {
-                        CreateAccount.create(username, confirmPassword);
-                        
-                    });
-                    t.start();
-                    myCreateAccountFrame.dispose();
-                    new AutoLoginFrame();
-                } else if (!password.equals(confirmPassword)) {
-                    errorLabel.setText("Your passwords do not match");
-                } else {
-                    errorLabel.setText("Your went wrong");
-                }
+                test = new AccountUIToServer(new Login(), new CreateAccount());
 
+                Thread t = new Thread( // use another thread for answer computation to not lag UI
+                () -> {
+                    String response = test.createAccount(username, password, confirmPassword);
+                    if (response.equals("Created Account")) {
+                        new AutoLoginFrame();
+                        myCreateAccountFrame.dispose();
+                    } else {
+                        errorLabel.setText(response);
+                    }
+                });
+                t.start();
+
+                
+                
 
                 
             }

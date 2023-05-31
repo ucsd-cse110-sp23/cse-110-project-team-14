@@ -5,9 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -28,9 +25,10 @@ public class LoginFrame extends JFrame {
     private JTextField usernameTextField;
     private JTextField passwordTextField;
 
-
     private JButton logInButton;
     private JButton createAccountButton;
+
+    AccountUIToServer test;
 
     /*
      * Method for setting the location of the button in the footer area of the 
@@ -102,7 +100,7 @@ public class LoginFrame extends JFrame {
         createAccountButton.setContentAreaFilled(false);
         createAccountButton.setForeground(Color.BLUE);
 
-        errorLabel = new JLabel("TEST ERROR LABEL");
+        errorLabel = new JLabel();
         errorLabel.setForeground(Color.RED);
 
         setElements(myLayout, titleLabel, usernameLabel, passwordLabel, 
@@ -114,11 +112,12 @@ public class LoginFrame extends JFrame {
     }
 
     public void addListeners() {
+
         createAccountButton.addActionListener(new ActionListener() { // start recording on click
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Create Account Button Pressed!");
-
+                
                 new CreateAccountFrame();
                 myLoginFrame.dispose();
             }
@@ -140,18 +139,25 @@ public class LoginFrame extends JFrame {
                 System.out.println("Username input: " + username);
                 System.out.println("Password input " + password);
                 System.out.println("Log In Button Pressed!");
-                errorLabel.setText("Username or Password Error");
+
+               test = new AccountUIToServer(new Login(), new CreateAccount());
 
                 Thread t = new Thread( // use another thread for answer computation to not lag UI
                     () -> {
-                        if (Login.login(username, password).equals("true")) {
+                        String response = test.login(username, password);
+                        if (response.equals("true")) {
                             new AutoLoginFrame();
                             myLoginFrame.dispose();
+                        } else if (response.equals("Incorrect password")) {
+                            errorLabel.setText(response);
+                        } else if (response.equals("No account with that username")) {
+                            errorLabel.setText(response);
+                        } else {
+                            errorLabel.setText("Something went wrong");
                         }
-                    });
+                });
                 t.start();
 
-                
             }
         });
     }
