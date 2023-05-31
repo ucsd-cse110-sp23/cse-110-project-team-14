@@ -5,7 +5,11 @@ package sayit;
  */
 public class App { // main class
     public static void main(String[] args) throws Exception {
-        new MyServer(new AccountUIToServer(new Login(), new CreateAccount())); 
-        new Frame(new Whisper(), new ChatGPT());
+        AccountUIToServer connecter = new AccountUIToServer(new Login(), new CreateAccount());
+        new MyServer(connecter); 
+        new LoginFrame(connecter);
+        //new CreateAccountFrame();
+        //new AutoLoginFrame();
+        //new Frame(new Whisper(), new ChatGPT());       
     }
 }

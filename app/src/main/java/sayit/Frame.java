@@ -88,7 +88,7 @@ public class Frame extends JFrame {
      * set sideBar and a dynamic query and
      * response area for ChatGPT.
      */
-    Frame(IAudioConverter converter, IChatBot chat) {
+    Frame(IAudioConverter converter, IChatBot chat, AccountUIToServer connecter) {
         this.converter = converter;
         this.chat = chat;
 
@@ -114,7 +114,7 @@ public class Frame extends JFrame {
         this.add(footer, BorderLayout.SOUTH);
         setButtons(footer, askButton, delButton, clrButton);
         importFiles = new ImportFiles(storage, buttonCoordinator, this, fileToLoad, sideBar);
-        importFiles.importFiles("abcd@ucsd.edu"); //TODO change to work off of Login info
+        importFiles.importFiles(connecter.getUsername());
         exportFiles = new ExportFiles(storage, fileToLoad);
 
 

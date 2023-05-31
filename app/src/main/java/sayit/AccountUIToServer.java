@@ -26,6 +26,12 @@ public class AccountUIToServer {
         return response;
     }
 
+    /**
+     * attempts to login with info, if success, then saves user info
+     * @param username 
+     * @param password
+     * @return "true" if succesful login, error message otherwise
+     */
     public String login(String username, String password) {
         String response = accLogin.login(username, password);
         if(response.equals("true")) {

@@ -37,7 +37,6 @@ public class RequestHandler implements HttpHandler {
         }
         scanner.close();
         String output = response;
-        connecter.setUsername("abcd@ucsd.edu"); //TODO remove this once connected to login button
         Thread t = new Thread( // use another thread for answer computation to not lag UI
             () -> {
                 DBAddCommand.addCommand(postData, output, connecter.getUsername());
@@ -52,7 +51,6 @@ public class RequestHandler implements HttpHandler {
         Scanner scanner = new Scanner(inputStream);
         String postData = scanner.nextLine();
         scanner.close();
-        connecter.setUsername("abcd@ucsd.edu"); //TODO remove this once connected to login button
         DBDeleteCommand.deleteCommand(postData, connecter.getUsername());
         return "Deleted command";
     }

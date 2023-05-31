@@ -85,7 +85,6 @@ public class RequestAccountHandler implements HttpHandler {
     URI uri = httpExchange.getRequestURI();
     String query = uri.getRawQuery();
     if (query != null) {
-      connecter.setUsername("abcd@ucsd.edu"); //TODO remove this once connected to login button
       DBClearAll.clearAll(connecter.getUsername());
     }
     return response;
