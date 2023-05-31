@@ -51,7 +51,7 @@ public class ParseVoice {
         Matcher clearMatcher = clearAll.matcher(input);
 
          if (questionMatcher.find()){
-            query = input.substring(questionMatcher.end());
+            query = input.substring(questionMatcher.end() + 2);
          }
 
          else if (deleteMatcher.find()){
