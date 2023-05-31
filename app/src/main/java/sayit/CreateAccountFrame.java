@@ -95,7 +95,7 @@ public class CreateAccountFrame extends JFrame {
 
         createAccountButton = new JButton("Create Account");
 
-        errorLabel = new JLabel("TEST ERROR LABEL");
+        errorLabel = new JLabel();
         errorLabel.setForeground(Color.RED);
 
         setElements(myLayout, usernameLabel, passwordLabel, confirmPasswordLabel,
