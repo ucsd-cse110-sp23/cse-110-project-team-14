@@ -35,9 +35,9 @@ public class RequestHandler implements HttpHandler {
     };
 
     /*To be implemented. Currently question history is stored locally.*/
-    public void deleteQuestion(){};
-    public void deleteQuestionHistory(){};
-    public void saveQuestionHistory(){};
+    public void deleteQuestion(){}
+    public void deleteQuestionHistory(){}
+    public void saveQuestionHistory(){}
     public void loadQuestionHistory(){}
 
     @Override
