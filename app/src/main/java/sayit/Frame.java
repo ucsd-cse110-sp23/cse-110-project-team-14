@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.WindowConstants;
 
-
 // This code is defining a new class called `Frame` that extends the `JFrame` class
 // in Java's Swing library. This class is used to create the main window of the
 // application and contains various GUI components such as a sidebar, query and
@@ -33,12 +32,14 @@ public class Frame extends JFrame {
     private JButton askButton;
     private JButton clrButton;
     private JButton delButton;
+    private JButton voiceButton;
     private JButton currButton = null;
     private ButtonCoordinator buttonCoordinator;
 
     AskQuestion askQuestion;
     DeleteQuestion deleteQuestion;
     ClearQuestions clearQuestions;
+    VoiceInterface voiceInterface;
 
     private boolean askStop = false;
     private boolean curQ = false;
@@ -105,15 +106,18 @@ public class Frame extends JFrame {
         askButton = new JButton("Ask Question");
         clrButton = new JButton("Clear All");
         delButton = new JButton("Delete Question");
+        voiceButton = new JButton("Start");
         buttonCoordinator = new ButtonCoordinator();
 
         askQuestion = new AskQuestion(recorder, askButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator);
         deleteQuestion = new DeleteQuestion(storage, currButton, sideBar, this, buttonCoordinator);
         clearQuestions = new ClearQuestions(this, storage, sideBar, buttonCoordinator);
+        voiceInterface = new VoiceInterface(recorder, voiceButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator,askQuestion, clearQuestions,deleteQuestion);
+        
         
         this.add(splitPane, BorderLayout.CENTER);
         this.add(footer, BorderLayout.SOUTH);
-        setButtons(footer, askButton, delButton, clrButton);
+        setButtons(footer, voiceButton, delButton, clrButton);
         importFiles = new ImportFiles(storage, buttonCoordinator, this, fileToLoad, sideBar);
         importFiles.importFiles();
         exportFiles = new ExportFiles(storage, fileToLoad);
@@ -131,6 +135,13 @@ public class Frame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 askQuestion.ask();
+            }
+        });
+
+        voiceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                voiceInterface.takeVoice();
             }
         });
 

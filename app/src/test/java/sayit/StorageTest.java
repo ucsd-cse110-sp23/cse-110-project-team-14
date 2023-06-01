@@ -5,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class StorageTest {
-    @Test void addQuestion() {
+    @Test void addQuestion() { // Test adding question to storage
         Storage store = new Storage();
         store.addQuestion("What is the capital of France?", "Paris");
         
         assertEquals("Paris", store.getAnswer("What is the capital of France?"));
     }
 
-    @Test void deleteQuestion() {
+    @Test void deleteQuestion() { // Test deleting question from storage
         Storage store = new Storage();
         store.addQuestion("What is the capital of France?", "Paris");
         store.addQuestion("What is the capital of Italy?", "Rome");
@@ -22,7 +22,7 @@ class StorageTest {
         assertEquals("Sorry, I don't have an answer for that.", store.getAnswer("What is the capital of Italy?"));
     }
 
-    @Test void clearAll() {
+    @Test void clearAll() { // Test clearing all questions from storage
         Storage store = new Storage();
         store.addQuestion("What is the capital of France?", "Paris");
         store.addQuestion("What is the capital of Italy?", "Rome");
@@ -32,7 +32,7 @@ class StorageTest {
         assertEquals("Sorry, I don't have an answer for that.", store.getAnswer("What is the capital of Italy?"));
     }
 
-    @Test void getAnswer() {
+    @Test void getAnswer() { // Test answer retrieval from storage
         Storage store = new Storage();
         store.addQuestion("What is the capital of France?", "Paris");
 
