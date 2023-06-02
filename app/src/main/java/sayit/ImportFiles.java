@@ -69,7 +69,7 @@ public class ImportFiles {
             FileReader reader = new FileReader(file);
             BufferedReader buf = new BufferedReader(reader);
             while (buf.ready()) {
-                String[] split = buf.readLine().split("[,]");
+                String[] split = buf.readLine().split("[;]");
                 storage.addQuestion(split[0], split[1]);
                 JButton b = new JButton(split[0]);
                 b.addActionListener(

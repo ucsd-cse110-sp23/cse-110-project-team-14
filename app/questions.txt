@@ -1,2 +1,1 @@
-Who is Louis Braille?	21:03:45 05/30/2023,Louis Braille (1809-1852) was a French educator and inventor. He developed the Braille system of reading and writing for the blind and visually impaired, and he is considered the father of modern braille.
-What is 1 plus 1?	21:07:40 05/30/2023,1 plus 1 is 2.
+what is 2 plus 2?	18:08:46 06/01/2023;2 + 2 = 4

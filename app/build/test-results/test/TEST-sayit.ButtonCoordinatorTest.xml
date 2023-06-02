@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="sayit.ButtonCoordinatorTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-05-31T04:06:59" hostname="LAPTOP-NHC17941" time="0.567">
+<testsuite name="sayit.ButtonCoordinatorTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-06-02T01:28:18" hostname="LAPTOP-NHC17941" time="0.462">
   <properties/>
-  <testcase name="testgetCurQ()" classname="sayit.ButtonCoordinatorTest" time="0.003"/>
-  <testcase name="testsetCurQ()" classname="sayit.ButtonCoordinatorTest" time="0.007"/>
-  <testcase name="testgetCurButton()" classname="sayit.ButtonCoordinatorTest" time="0.527"/>
-  <testcase name="testsetCurButton()" classname="sayit.ButtonCoordinatorTest" time="0.006"/>
+  <testcase name="testgetCurQ()" classname="sayit.ButtonCoordinatorTest" time="0.008"/>
+  <testcase name="testsetCurQ()" classname="sayit.ButtonCoordinatorTest" time="0.009"/>
+  <testcase name="testgetCurButton()" classname="sayit.ButtonCoordinatorTest" time="0.419"/>
+  <testcase name="testsetCurButton()" classname="sayit.ButtonCoordinatorTest" time="0.01"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -136,9 +136,9 @@ public class LoginFrame extends JFrame {
                 String username = usernameTextField.getText();
                 String password = passwordTextField.getText();
 
-                System.out.println("Username input: " + username);
-                System.out.println("Password input " + password);
-                System.out.println("Log In Button Pressed!");
+                //System.out.println("Username input: " + username);
+                //System.out.println("Password input " + password);
+                //System.out.println("Log In Button Pressed!");
 
                 Thread t = new Thread( // use another thread for answer computation to not lag UI
                     () -> {

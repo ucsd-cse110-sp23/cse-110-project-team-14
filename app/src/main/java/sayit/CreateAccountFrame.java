@@ -116,9 +116,9 @@ public class CreateAccountFrame extends JFrame {
                 String password = passwordTextField.getText();
                 String confirmPassword = confirmPasswordTextField.getText();
 
-                System.out.println("Username input: " + username);
-                System.out.println("Password input " + password);
-                System.out.println("Confirm password input " + confirmPassword);
+                //System.out.println("Username input: " + username);
+                //System.out.println("Password input " + password);
+                //System.out.println("Confirm password input " + confirmPassword);
 
                 Thread t = new Thread( // use another thread for answer computation to not lag UI
                 () -> {
