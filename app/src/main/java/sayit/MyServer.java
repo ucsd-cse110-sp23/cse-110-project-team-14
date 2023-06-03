@@ -11,7 +11,7 @@ public class MyServer {
     private static final int SERVER_PORT = 8100;
     private static final String SERVER_HOSTNAME = "localhost";
 
-    MyServer(AccountUIToServer connecter) throws IOException{
+    MyServer(AccountUIToServer connecter, ServerToDB database) throws IOException{
         
         ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor)
         Executors.newFixedThreadPool(10);
@@ -21,8 +21,8 @@ public class MyServer {
             0
         );
 
-        server.createContext("/", new RequestHandler(connecter));
-        server.createContext("/account", new RequestAccountHandler(connecter));
+        server.createContext("/", new RequestHandler(connecter, database));
+        server.createContext("/account", new RequestAccountHandler(connecter, database));
         server.setExecutor(threadPoolExecutor);
         server.start();
         System.out.println("Started Server");

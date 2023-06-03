@@ -9,8 +9,11 @@ import javax.annotation.meta.Exhaustive;
 
 public class RequestAccountHandler implements HttpHandler {
     AccountUIToServer connecter;
-    public RequestAccountHandler(AccountUIToServer connecter) {
+    ServerToDB database;
+
+    public RequestAccountHandler(AccountUIToServer connecter, ServerToDB db) {
       this.connecter = connecter;
+      database = db;
     }  
 
     @Override
@@ -85,7 +88,7 @@ public class RequestAccountHandler implements HttpHandler {
     URI uri = httpExchange.getRequestURI();
     String query = uri.getRawQuery();
     if (query != null) {
-      DBClearAll.clearAll(connecter.getUsername());
+      database.clearAll(connecter.getUsername());
     }
     return response;
 }

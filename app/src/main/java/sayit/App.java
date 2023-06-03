@@ -6,7 +6,7 @@ package sayit;
 public class App { // main class
     public static void main(String[] args) throws Exception {
         AccountUIToServer connecter = new AccountUIToServer(new Login(), new CreateAccount());
-        new MyServer(connecter); 
+        new MyServer(connecter, new ServerToDB()); 
         new LoginFrame(connecter);
         //new CreateAccountFrame();
         //new AutoLoginFrame();

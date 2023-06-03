@@ -56,15 +56,17 @@ public class AskQuestion {
             );
 
             //Debugging MUST KEEP OR CODE BREAKS FOR SOME REASON
+            //TODO possible error here? sometimes when asking who is louis braille it reads null
             System.out.println("\nREADING LINES FROM BUFFER\n");            
             String temp = "";
             response = in.readLine();
+            System.out.println(response);
             while(temp != null) {
-                response += temp;
+                response += temp + "\n";
+                System.out.println(temp);
                 temp = in.readLine();
             }
             in.close();
-            //System.out.println("Response in AskQuestion" + response);
             
             return response;
 

@@ -12,8 +12,17 @@ public class AccountUIToServer {
     }
 
     public String createAccount(String username, String password, String checkPass) {
-        if(username.indexOf(",") != -1) {
-            return "username can not contain commas";
+        if(username.equals("")) {
+            return "please enter a username";
+        }
+        if(password.equals("")) {
+            return "please enter a password";
+        }
+        if(username.indexOf(",") != -1 || username.indexOf(" ") != -1) {
+            return "username can not contain commas or spaces";
+        }
+        if(password.indexOf(",") != -1 || password.indexOf(" ") != -1) {
+            return "password can not contain commas or spaces";
         }
         if(!password.equals(checkPass)) {
             return "passwords do not match";

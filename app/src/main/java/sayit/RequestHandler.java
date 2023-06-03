@@ -13,13 +13,15 @@ public class RequestHandler implements HttpHandler {
 
     IChatBot ChatGPT = new ChatGPT();
     AccountUIToServer connecter;
+    ServerToDB database;
 
     public RequestHandler(Map <String, String> data){
         this.data = data;
     }
 
-    public RequestHandler(AccountUIToServer connect){
+    public RequestHandler(AccountUIToServer connect, ServerToDB db){
         connecter = connect;
+        database = db;
     }
     
     public String askQuestion(HttpExchange exchange){
@@ -27,9 +29,8 @@ public class RequestHandler implements HttpHandler {
         Scanner scanner = new Scanner(inputStream);
         String postData = scanner.nextLine();
         String question = postData.substring(0,postData.indexOf("\t"));
-        System.out.println(question);
         String response;
-        try{
+        try{    
             response = ChatGPT.askQuestion(question);
         }
         catch(Exception e){
@@ -39,7 +40,7 @@ public class RequestHandler implements HttpHandler {
         String output = response;
         Thread t = new Thread( // use another thread for answer computation to not lag UI
             () -> {
-                DBAddCommand.addCommand(postData, output, connecter.getUsername());
+                database.addCommand(postData, output, connecter.getUsername());
             });
         t.start();
         return response;
@@ -51,12 +52,9 @@ public class RequestHandler implements HttpHandler {
         Scanner scanner = new Scanner(inputStream);
         String postData = scanner.nextLine();
         scanner.close();
-        DBDeleteCommand.deleteCommand(postData, connecter.getUsername());
+        database.deleteCommand(postData, connecter.getUsername());
         return "Deleted command";
     }
-    public void deleteQuestionHistory(){}
-    public void saveQuestionHistory(){}
-    public void loadQuestionHistory(){}
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
@@ -79,10 +77,10 @@ public class RequestHandler implements HttpHandler {
             e.printStackTrace();
         }
 
-        System.out.println("SERVER:RESPONSE FROM SERVER IS " + response);
         httpExchange.sendResponseHeaders(200, response.length());
-        OutputStream outputStream = httpExchange.getResponseBody();
-        outputStream.write(response.getBytes());
+        OutputStreamWriter outputStream = new OutputStreamWriter(httpExchange.getResponseBody());
+        // byte[] bytes = response.getBytes();
+        outputStream.write(response);
         outputStream.close();
     };
 
