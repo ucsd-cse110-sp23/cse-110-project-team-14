@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="sayit.StorageTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-06-03T23:34:56" hostname="LAPTOP-NHC17941" time="0.017">
+<testsuite name="sayit.StorageTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-06-04T04:32:50" hostname="LAPTOP-NHC17941" time="0.037">
   <properties/>
-  <testcase name="addQuestion()" classname="sayit.StorageTest" time="0.006"/>
+  <testcase name="addQuestion()" classname="sayit.StorageTest" time="0.017"/>
   <testcase name="getAnswer()" classname="sayit.StorageTest" time="0.003"/>
   <testcase name="clearAll()" classname="sayit.StorageTest" time="0.001"/>
-  <testcase name="deleteQuestion()" classname="sayit.StorageTest" time="0.002"/>
+  <testcase name="deleteQuestion()" classname="sayit.StorageTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

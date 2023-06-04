@@ -57,6 +57,7 @@ public class AskQuestion {
 
             //Debugging MUST KEEP OR CODE BREAKS FOR SOME REASON
             //TODO possible error here? sometimes when asking who is louis braille it reads null
+            //code sometimes doesn't even get here.
             System.out.println("\nREADING LINES FROM BUFFER\n");            
             String temp = "";
             response = in.readLine();
@@ -72,10 +73,12 @@ public class AskQuestion {
 
         }catch (MalformedURLException exception){
             exception.printStackTrace();
+            System.out.println(exception.getMessage());
         }catch (IOException exception){
             exception.printStackTrace();
+            
+            System.out.println(exception.getMessage());
         }
-
         return response;
     }
 
