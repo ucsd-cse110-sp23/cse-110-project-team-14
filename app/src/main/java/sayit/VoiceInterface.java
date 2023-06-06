@@ -96,6 +96,9 @@ public class VoiceInterface {
                 System.out.println("Delete Switch");
                 deleteQuestion.delete();
                 break;
+            case "Create Email":
+                System.out.println("Create Email Switch");
+                break;
 
             default: System.out.println("ERROR!");
         }
