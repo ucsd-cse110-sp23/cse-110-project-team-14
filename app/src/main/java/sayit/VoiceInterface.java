@@ -28,11 +28,16 @@ public class VoiceInterface {
     AskQuestion askQuestion;
     ClearQuestions clearQuestions;
     DeleteQuestion deleteQuestion;
+    CreateEmail createEmail;
+    SendEmail sendEmail;
     String query;
     String intent;
 
-    public VoiceInterface(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, 
-    AskQuestion ask, ClearQuestions clearQuestions, DeleteQuestion deleteQuestion) {
+    public VoiceInterface(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, 
+        MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, 
+        AskQuestion ask, ClearQuestions clearQuestions, DeleteQuestion deleteQuestion,
+        CreateEmail createEmail, SendEmail sendEmail) {
+
         recorder = r;
         startButton = b;
         converter = con;
@@ -46,6 +51,8 @@ public class VoiceInterface {
         askQuestion = ask;
         this.clearQuestions = clearQuestions;
         this.deleteQuestion = deleteQuestion;
+        this.createEmail = createEmail;
+        this.sendEmail = sendEmail;
     }
     
     public void takeVoice(){
@@ -98,6 +105,11 @@ public class VoiceInterface {
                 break;
             case "Create Email":
                 System.out.println("Create Email Switch");
+                createEmail.create(query);
+                break;
+            case "Send Email":
+                System.out.println("Send Email Swtich");
+                sendEmail.send(query);
                 break;
 
             default: System.out.println("ERROR!");
