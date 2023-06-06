@@ -54,7 +54,7 @@ public class EmailConnecter {
         
     }
 
-    public void getInfo() {
+    public void getEmailInfo() {
         String response = "HTTP REQUEST SENT";
 
         try{
@@ -67,27 +67,7 @@ public class EmailConnecter {
             );
 
             response = in.readLine();
-            String temp = response;
-            // TODO FIX THIS
-            first = response.substring(temp.indexOf("First=") + 6, temp.indexOf(","));
-            temp = temp.substring(temp.indexOf(",") + 1);
-            
-            last = temp.substring(temp.indexOf("Last=") + 5, temp.indexOf(","));
-            temp = temp.substring(temp.indexOf(",") + 1);
-
-            display = temp.substring(temp.indexOf("Display=") + 8, temp.indexOf(","));
-            temp = temp.substring(temp.indexOf(",") + 1);
-
-            email = temp.substring(temp.indexOf("Email=") + 6, temp.indexOf(","));
-            temp = temp.substring(temp.indexOf(",") + 1);
-            
-            SMTP = temp.substring(temp.indexOf("SMTP=") + 5, temp.indexOf(","));
-            temp = temp.substring(temp.indexOf(",") + 1);
-            
-            TLS = temp.substring(temp.indexOf("TLS=") + 4, temp.indexOf(","));
-            temp = temp.substring(temp.indexOf(",") + 1);
-
-            password = temp.substring(temp.indexOf("password=") + 9, temp.indexOf("}"));
+            updateVal(response);
             
 
         }catch (MalformedURLException exception){
@@ -99,6 +79,30 @@ public class EmailConnecter {
         }
 
         System.out.println(response);
+    }
+
+    public void updateVal(String input) {
+        String temp = input;
+            
+        first = temp.substring(temp.indexOf("First=") + 6, temp.indexOf(","));
+        temp = temp.substring(temp.indexOf(",") + 1);
+        
+        last = temp.substring(temp.indexOf("Last=") + 5, temp.indexOf(","));
+        temp = temp.substring(temp.indexOf(",") + 1);
+
+        display = temp.substring(temp.indexOf("Display=") + 8, temp.indexOf(","));
+        temp = temp.substring(temp.indexOf(",") + 1);
+
+        email = temp.substring(temp.indexOf("Email=") + 6, temp.indexOf(","));
+        temp = temp.substring(temp.indexOf(",") + 1);
+            
+        SMTP = temp.substring(temp.indexOf("SMTP=") + 5, temp.indexOf(","));
+        temp = temp.substring(temp.indexOf(",") + 1);
+            
+        TLS = temp.substring(temp.indexOf("TLS=") + 4, temp.indexOf(","));
+        temp = temp.substring(temp.indexOf(",") + 1);
+
+        password = temp.substring(temp.indexOf("password=") + 9, temp.indexOf("}"));
     }
 
     public String getFirst() {
