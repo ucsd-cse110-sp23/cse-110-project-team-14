@@ -33,10 +33,12 @@ public class ParseVoice {
 
          if (questionMatcher.find() && questionMatcher.start() == 0){
             intent = "Question";
+            System.out.println("Intent declared as Question");
          }
 
          else if (deleteMatcher.find() && deleteMatcher.start() == 0){
             intent = "Delete Prompt";
+            System.out.println("Intent declared as Delete");
          }
 
          else if (clearMatcher.find() && clearMatcher.start() == 0){

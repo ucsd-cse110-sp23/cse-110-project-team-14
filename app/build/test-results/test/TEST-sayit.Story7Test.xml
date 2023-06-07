@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="sayit.Story7Test" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-06-07T16:03:33" hostname="DENNIS-XPS-15" time="3.524">
+  <properties/>
+  <testcase name="loginValid()" classname="sayit.Story7Test" time="1.435"/>
+  <testcase name="loginInvalidPassword()" classname="sayit.Story7Test" time="1.083"/>
+  <testcase name="loginInvalidUser()" classname="sayit.Story7Test" time="1.004"/>
+  <system-out><![CDATA[Started Server
+HTTP REQUEST SENT
+true
+HTTP REQUEST SENT
+Incorrect password
+HTTP REQUEST SENT
+No account with that username
+]]></system-out>
+  <system-err><![CDATA[Jun 07, 2023 9:03:33 AM com.mongodb.internal.diagnostics.logging.Loggers shouldUseSLF4J
+WARNING: SLF4J not found on the classpath.  Logging is disabled for the 'org.mongodb.driver' component
+]]></system-err>
+</testsuite>

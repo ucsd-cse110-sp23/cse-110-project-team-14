@@ -20,6 +20,7 @@ public class AutoLoginFrame extends JFrame {
     private JButton yesButton;
     private JButton noButton;
 
+    AccountUIToServer connecter;
     /*
      * Method for setting the location of the button in the footer area of the 
      * app
@@ -42,7 +43,8 @@ public class AutoLoginFrame extends JFrame {
 
     }
 
-    AutoLoginFrame () {
+    AutoLoginFrame (AccountUIToServer connecter) {
+        this.connecter = connecter;
         myAutoLoginFrame = this;
 
         this.setSize(500, 300);
@@ -71,7 +73,7 @@ public class AutoLoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Yes button pressed!");
-                new Frame(new Whisper(), new ChatGPT());
+                new Frame(new Whisper(), new ChatGPT(), connecter);
                 myAutoLoginFrame.dispose();
             }
         });
@@ -80,7 +82,7 @@ public class AutoLoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("No button pressed!");
-                new Frame(new Whisper(), new ChatGPT());
+                new Frame(new Whisper(), new ChatGPT(), connecter);
                 myAutoLoginFrame.dispose();
             }
         });

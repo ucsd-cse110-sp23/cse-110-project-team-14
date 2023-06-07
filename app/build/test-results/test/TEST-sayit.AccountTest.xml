@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="sayit.AccountTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-06-07T23:22:31" hostname="DENNIS-XPS-15" time="0.014">
   <properties/>
   <testcase name="loginTest()" classname="sayit.AccountTest" time="0.012"/>
   <testcase name="createTest()" classname="sayit.AccountTest" time="0.001"/>
+=======
+<testsuite name="sayit.AccountTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-06-04T04:32:50" hostname="LAPTOP-NHC17941" time="0.069">
+  <properties/>
+  <testcase name="loginTest()" classname="sayit.AccountTest" time="0.06"/>
+  <testcase name="createTest()" classname="sayit.AccountTest" time="0.007"/>
+>>>>>>> US8
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
