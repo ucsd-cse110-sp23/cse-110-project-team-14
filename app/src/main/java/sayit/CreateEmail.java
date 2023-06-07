@@ -16,7 +16,7 @@ public class CreateEmail {
     AudioRecorder recorder;
     JButton askButton;
     IAudioConverter converter;
-    //IChatBot chat;
+    IChatBot chat;
     MyAskPanel askPanel;
     Frame frame;
     Storage storage;
@@ -25,11 +25,11 @@ public class CreateEmail {
     private boolean askStop = false;
     final String URL = "http://localhost:8100/";
 
-    public CreateEmail(AudioRecorder r, JButton b, IAudioConverter con, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co) {
+    public CreateEmail(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co) {
         recorder = r;
         askButton = b;
         converter = con;
-        //chat = bot;
+        chat = bot;
         askPanel = pan;
         frame = f;
         storage = s;
@@ -40,7 +40,7 @@ public class CreateEmail {
     public void create(String message) {
         Thread t = new Thread(
             () -> {
-                
+
             }); 
         
         t.start();
