@@ -219,4 +219,62 @@ Story 6:
         Step 8: Click on the the "Log In" button
         Step 9: Check output
             a: The error message should show up saying "No account with that username"
+
+
+Story 7:
+    Test 1: Creating a new account and checking history.
+        Step 1: Start App
+        Step 2: Press create account button
+        Step 3: Enter a valid username and password combination
+            Step 3A: For this example, StoryTest7 will be the username and password
+            will serve as the password
+        Step 4: The GUI for asking a question will now display. Check the question history.
+        Question history should be blank.
+
+    Test 2: Creating a new account and asking a question.
+        Step 1: Start App
+        Step 2: Press create account button
+        Step 3: Enter a valid username and password combination
+            Step 3A: For this example, StoryTest7 will be the username and password
+            will serve as the password
+        Step 4: The GUI for asking a question will now display. Check the question history.
+        Question history should be blank. 
+        Step 5: Press start and say 'What is 3 + 3'
+        Step 6: The answer textbox should update with the response '6'.
+        Step 7: Check the question history. Question history should display
+        'Question: what is 3 + 3'
+    Test 3: Asking a question on an account and checking history on the same computer
+        Step 1: Start App 
+        Step 2: Enter valid login credentials and press login
+            a: Credentials used will be Username: StoryTest7 and password:password
+        Step 3: Press start and say clear all. The question history should now be clear.
+        Step 4: Press start and say 'What is 3 + 3'
+        Step 5: The answer textbox should update with the response '6'.
+        Step 6: Check the question history. Question history should display
+        'Question: what is 3 + 3'
+        Step 7: Close the app
+        Step 8: Open the App
+        Step 9: Check the question history. Question history should display
+        'Question: what is 3 + 3'
+    
+    Test 4: Asking a question on an account and checking history on another computer
+        Step 1: Start App 
+        Step 2: Enter valid login credentials and press login
+            a: Credentials used will be Username: StoryTest7 and password:password
+        Step 3: Press start and say clear all. The question history should now be clear.
+        Step 4: Press start and say 'What is 3 + 3'
+        Step 5: The answer textbox should update with the response '6'.
+        Step 6: Check the question history. Question history should display
+        'Question: what is 3 + 3'
+        Step 7: Close the app
+        Step 8: Open the App on another computer
+        Step 9: Check the question history. Question history should display
+        'Question: what is 3 + 3'
+
+    
+
+
+
+    
+        
         
