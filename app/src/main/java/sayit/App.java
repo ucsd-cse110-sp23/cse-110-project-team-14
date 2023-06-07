@@ -8,6 +8,7 @@ public class App { // main class
         AccountUIToServer connecter = new AccountUIToServer(new Login(), new CreateAccount());
         new MyServer(connecter, new ServerToDB()); 
         new LoginFrame(connecter);
+        //new EmailFrame();
         //new CreateAccountFrame();
         //new AutoLoginFrame();
         //new Frame(new Whisper(), new ChatGPT());       
