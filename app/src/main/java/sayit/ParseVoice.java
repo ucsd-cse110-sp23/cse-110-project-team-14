@@ -97,19 +97,21 @@ public class ParseVoice {
                query = query.replace("dot", ".");
                //Remove all blank spaces
                query = query.replaceAll("\\s", "");
+               
+               //Remove period if there is one at the end
+               if (query.charAt(query.length() - 1) == '.') {
+                  query = query.substring(0, query.length() - 1);
+               }
             } else {
-               System.out.println("Does not contain the right format: \"Send email to ...\"");
+               System.out.println("Command not in the correct format: \"Send email to ...\"");
             }
             
-         }
-
-         else {
+         } else {
             System.out.println("Something went wrong");
          }
 
         return query;
     }
-
 
 
     public static void main(String[] args) {

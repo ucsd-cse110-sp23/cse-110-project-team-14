@@ -33,10 +33,25 @@ public class SendEmail {
         buttonCoordinator = co;
     }
 
-    public void send(String message, String fromEmail, String toEmail,
+    public SendEmail() {
+
+    }
+
+    public void send(String fromEmail, String toEmail,
         String smtpHost, String tlsPort, String password) {
-		
-		System.out.println("TLSEmail Start");
+        String message = storage.getAnswer(buttonCoordinator.getCurButton().getText());
+        
+        System.out.println(message); 
+        
+        //Seperate the subject from the message
+        String subject = message.substring(message.indexOf("Subject:") + 9, message.indexOf("\n"));
+        System.out.println("Subject: " + subject);
+
+        //Seperate the body from the message
+        String body = message.substring(message.indexOf("\n") + 2);
+        System.out.println("body: " + body);
+
+		System.out.println("TLS Email Start");
 		Properties props = new Properties();
 		props.put("mail.smtp.host", smtpHost); //SMTP Host
 		props.put("mail.smtp.port", tlsPort); //TLS Port
@@ -52,13 +67,15 @@ public class SendEmail {
 		};
 		Session session = Session.getInstance(props, auth);
 		
-		EmailUtil.sendEmail(session, toEmail,"TLSEmail Testing Subject", message);
-        /*Thread t = new Thread(
-            () -> {
-                
-            }); 
+		EmailUtil.sendEmail(session, toEmail, subject, body);
         
-        t.start(); */
+    }
+
+    public static void main(String[] args) {
+        
+        SendEmail sendEmail = new SendEmail();
+        sendEmail.send("dennisliang01@gmail.com",
+            "dbliang@ucsd.edu", "", "", "");
         
     }
 }
