@@ -2,15 +2,11 @@ package sayit;
 
 import javax.swing.JButton;
 
-import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.*;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 
 public class SendEmail {
     AudioRecorder recorder;
@@ -37,12 +33,32 @@ public class SendEmail {
         buttonCoordinator = co;
     }
 
-    public void send(String message) {
-        Thread t = new Thread(
+    public void send(String message, String fromEmail, String toEmail,
+        String smtpHost, String tlsPort, String password) {
+		
+		System.out.println("TLSEmail Start");
+		Properties props = new Properties();
+		props.put("mail.smtp.host", smtpHost); //SMTP Host
+		props.put("mail.smtp.port", tlsPort); //TLS Port
+		props.put("mail.smtp.auth", "true"); //enable authentication
+		props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+		
+        //create Authenticator object to pass in Session.getInstance argument
+		Authenticator auth = new Authenticator() {
+			//override the getPasswordAuthentication method
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(fromEmail, password);
+			}
+		};
+		Session session = Session.getInstance(props, auth);
+		
+		EmailUtil.sendEmail(session, toEmail,"TLSEmail Testing Subject", message);
+        /*Thread t = new Thread(
             () -> {
                 
             }); 
         
-        t.start();
+        t.start(); */
+        
     }
 }

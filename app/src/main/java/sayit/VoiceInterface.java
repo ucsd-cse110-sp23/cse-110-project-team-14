@@ -109,7 +109,8 @@ public class VoiceInterface {
                 break;
             case "Send Email":
                 System.out.println("Send Email Swtich");
-                sendEmail.send(query);
+                sendEmail.send(query, "dennisliang01@gmail.com", "dbliang@ucsd.edu", "smtp.gmail.com", "587", "PASSWORD");
+                //(String message, String fromEmail, String toEmail, String smtpHost, String tlsPort, String password)
                 break;
 
             default: System.out.println("ERROR!");

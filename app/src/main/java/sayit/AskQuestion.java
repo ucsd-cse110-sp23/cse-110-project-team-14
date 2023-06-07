@@ -39,7 +39,6 @@ public class AskQuestion {
 
     public String askHTTPRequest(String query){
         String response = "HTTP REQUEST SENT";
-        String line;
 
         try{
             URL url = new URL(URL);

@@ -26,6 +26,11 @@ dependencies {
     implementation 'org.json:json:20220924'
 
     implementation 'org.mongodb:mongodb-driver-sync:4.9.1'
+
+    // https://mvnrepository.com/artifact/com.sun.mail/javax.mail
+    implementation 'com.sun.mail:javax.mail:1.6.2'
+
+    implementation 'javax.activation:activation:1.1.1'
 }
 
 application {
