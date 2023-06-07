@@ -10,11 +10,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 import javax.swing.WindowConstants;
 
 
 public class EmailFrame extends JFrame {
+    /*
+     * Create private JLabels, JTextFields, and JButton objects.
+     */
     private JLabel firstNameLabel;
     private JLabel lastNameLabel;
     private JLabel displayLabel;
@@ -35,8 +37,7 @@ public class EmailFrame extends JFrame {
     private JButton cancelButton;
 
     /*
-     * Method for setting the location of the button in the footer area of the 
-     * app
+     * Add elements in order using the GridBagLayout. Adds all the labels and fields from left to right and then up to down.
      */
     private void setElements(GridBagLayout myLayout, GridBagConstraints confine, JLabel firstNameLabel, JLabel lastNameLabel, JLabel displayLabel, JLabel eAddressLabel, 
     JLabel SMTPHostLabel, JLabel TLSPortLabel, JLabel emailPassLabel, JTextField firstNameField, JTextField lastNameField, JTextField displayField, JTextField eAddressField, 
@@ -89,12 +90,14 @@ public class EmailFrame extends JFrame {
         this.add(saveButton, confine);
     }
 
+    /*
+     * This method initializes the frame and creates new Objects for all Labels, Text Fields, and Buttons. Also creates the GridBagLayout, GridBagConstraints, and Padding for 
+     * the GridBagLayoout.
+     */
     EmailFrame() {
         this.setSize(700, 350);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        // Set location of frame in the center of the window
         this.setLocationRelativeTo(null);
 
         GridBagLayout myLayout = new GridBagLayout();
@@ -136,17 +139,17 @@ public class EmailFrame extends JFrame {
 
     public void addListeners() {
 
-        cancelButton.addActionListener(new ActionListener() { // start recording on click
+        cancelButton.addActionListener(new ActionListener() { // Cancel Button listener
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Cancel Button clicked!");
+                System.out.println("Cancel Button clicked!"); // Cancel Functionality
             }
         });
         
-        saveButton.addActionListener(new ActionListener() {
+        saveButton.addActionListener(new ActionListener() { // Save Button listener
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Save Button clicked!");
+                System.out.println("Save Button clicked!"); // Save Functionality
             }
         });
     }
