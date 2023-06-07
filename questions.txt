@@ -1,3 +1,2 @@
-What is the capital of Oregon?	19:16:13 05/30/2023,Salem is the capital of Oregon.
-Can you provide me a summary of what to the slave is the 4th of July?	19:16:30 05/30/2023,The Fourth of July is a major holiday in the United States
-What is the capital of Kansas?	19:16:01 05/30/2023,The capital of Kansas is Topeka.
+Create email in the format that adds best regards and my name at the end. And tell Joe about our study session tomorrow.	22:20:24 06/06/2023;Dear Joe,Hope you�re doing well! I wanted to remind you about the study session we had planned for tomorrow. I�m looking forward to catching up then!Best,[Your Name]
+Create email in one line to tell Joe about our study session tomorrow.	22:18:20 06/06/2023;Subject: Study Session Tomorrow - Joe, Hi Joe, just wanted to let you know that our study session is still set for tomorrow! Looking forward to seeing you then.

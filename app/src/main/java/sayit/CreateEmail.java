@@ -37,12 +37,107 @@ public class CreateEmail {
         buttonCoordinator = co;
     }
 
-    public void create(String message) {
+    public String askHTTPRequest(String query){
+        String response = "";
+        String inputLine = "";
+
+        try{
+            URL url = new URL(URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+            out.write(query);
+            out.flush();
+            out.close();
+
+
+            BufferedReader in = new BufferedReader(
+                new InputStreamReader(conn.getInputStream())
+            );
+
+            //Debugging
+            System.out.println("READING LINES FROM BUFFER");
+            in.readLine();
+            in.readLine();
+
+            
+            inputLine = in.readLine();
+            //response = inputLine;
+
+            while(inputLine != null) {
+                response = response + inputLine + "\n";
+                inputLine = in.readLine();
+            }
+
+
+            in.close();
+            System.out.println("\n CLIENT: RETURNING RESPONSE FROM SERVER" + response);
+            
+            return response;
+
+        }catch (MalformedURLException exception){
+            exception.printStackTrace();
+        }catch (IOException exception){
+            exception.printStackTrace();
+        }
+
+        return response;
+    }
+
+
+    public void create(String message){
         Thread t = new Thread(
             () -> {
-
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss MM/dd/uuuu");
+                LocalDateTime currTime = LocalDateTime.now();
+                try {
+                    /*
+                     * Takes a recording and transcribes it into text using Whisper. After
+                     * transcription, the
+                     * string is saved as a question. Then, that string is asked to ChatGPT. The
+                     * question/answer
+                     * pairs are then stored and displayed in the GUI.
+                     */
+                    if (message.equals("")) {
+                        frame.updateQuestionBox("Microphone didn't pickup any sound");
+                        frame.updateAnswerBox("");
+                        askPanel.revalidate();
+                        buttonCoordinator.setCurQ(false);
+                        buttonCoordinator.setCurButton(null);
+                    } else {
+                        String questionTime = message +"\t"+ dtf.format(currTime);
+                        frame.updateQuestionBox(questionTime);
+                        String answer = askHTTPRequest(message);
+                        System.out.println(answer);
+                        answer = addSignature(answer, "[DISPLAY NAME]");
+                        frame.updateAnswerBox(answer);
+                        storage.addQuestion(questionTime, answer);
+                        askPanel.revalidate();
+                        JButton b = new JButton(questionTime);
+                        b.addActionListener(
+                                (ActionEvent event) -> {
+                                    frame.updateQuestionBox(b.getText());
+                                    buttonCoordinator.setCurButton(b);
+                                    frame.updateAnswerBox(storage.getAnswer(b.getText()));
+                                    System.out.println("BUTTON PRESSED");
+                                });
+                        sideBar.sideBarAddButton(b);
+                        buttonCoordinator.setCurButton(b);
+                        buttonCoordinator.setCurQ(false);
+                        System.out.println("CurQ = false");
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Error occured");
+                }
             }); 
-        
-        t.start();
+            t.start();
+    }
+
+    public String addSignature(String message, String displayName) {
+        String modifiedMessage = message;
+
+        modifiedMessage += "\nBest Regards,\n\n" + displayName;
+        return modifiedMessage;
     }
 }

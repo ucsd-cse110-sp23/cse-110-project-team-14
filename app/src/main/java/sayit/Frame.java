@@ -148,6 +148,7 @@ public class Frame extends JFrame {
         voiceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
+                System.out.println("Voice interface");
                 voiceInterface.takeVoice();
             }
         });

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="sayit.ParseVoiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-06-07T03:14:58" hostname="DENNIS-XPS-15" time="0.011">
+<testsuite name="sayit.ParseVoiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-06-07T05:46:49" hostname="DENNIS-XPS-15" time="0.008">
   <properties/>
-  <testcase name="parsingIntentClearAll()" classname="sayit.ParseVoiceTest" time="0.007"/>
-  <testcase name="parsingIntentDelete()" classname="sayit.ParseVoiceTest" time="0.0"/>
+  <testcase name="parsingIntentClearAll()" classname="sayit.ParseVoiceTest" time="0.005"/>
+  <testcase name="parsingIntentDelete()" classname="sayit.ParseVoiceTest" time="0.001"/>
   <testcase name="parsingIntentQuestion()" classname="sayit.ParseVoiceTest" time="0.0"/>
   <testcase name="parsingQueryQuestion()" classname="sayit.ParseVoiceTest" time="0.001"/>
   <system-out><![CDATA[Intent declared as Clear

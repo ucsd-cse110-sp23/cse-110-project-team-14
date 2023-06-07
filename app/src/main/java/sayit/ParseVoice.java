@@ -83,14 +83,7 @@ public class ParseVoice {
          }
 
          else if (createEmailMatcher.find() && createEmailMatcher.start() == 0) {
-            String afterCommand = input.substring(createEmailMatcher.end()+1);
-
-            if (afterCommand.substring(0, input.indexOf(" ")).contains("to")) {
-               query =  input;
-            } else {
-               System.out.println("Does not contain the right format: \"Create email to ...\"");
-            }
-            
+            query =  input;
          }
 
          else if (sendEmailMatcher.find() && sendEmailMatcher.start() == 0) {
@@ -138,7 +131,6 @@ public class ParseVoice {
         String input5 = "Send email to Jill B at UCSD dot EDU";
         System.out.println(parser.parseIntent(input5));
         System.out.println(parser.parseQuery(input5));
-
 
         String input6 = "Send email Jill B at UCSD dot EDU";
         System.out.println(parser.parseIntent(input6));
