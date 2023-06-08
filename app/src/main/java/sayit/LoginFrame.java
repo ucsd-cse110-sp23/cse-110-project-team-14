@@ -28,7 +28,7 @@ public class LoginFrame extends JFrame {
     private JButton logInButton;
     private JButton createAccountButton;
 
-    AccountUIToServer test;
+    AccountUIToServer connecter;
 
     /*
      * Method for setting the location of the button in the footer area of the 
@@ -70,8 +70,8 @@ public class LoginFrame extends JFrame {
         myLayout.putConstraint(SpringLayout.NORTH, logInButton, 0, SpringLayout.NORTH, createAccountButton);
     }
 
-    LoginFrame () {
-
+    LoginFrame (AccountUIToServer connecter) {
+        this.connecter = connecter;
         myLoginFrame = this;
 
         this.setSize(800, 450);
@@ -118,7 +118,7 @@ public class LoginFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Create Account Button Pressed!");
                 
-                new CreateAccountFrame();
+                new CreateAccountFrame(connecter);
                 myLoginFrame.dispose();
             }
         });
@@ -140,13 +140,11 @@ public class LoginFrame extends JFrame {
                 //System.out.println("Password input " + password);
                 //System.out.println("Log In Button Pressed!");
 
-                test = new AccountUIToServer(new Login(), new CreateAccount());
-
                 Thread t = new Thread( // use another thread for answer computation to not lag UI
                     () -> {
-                        String response = test.login(username, password);
+                        String response = connecter.login(username, password);
                         if (response.equals("true")) {
-                            new AutoLoginFrame();
+                            new AutoLoginFrame(connecter);
                             myLoginFrame.dispose();
                         } else if (response.equals("Incorrect password")) {
                             errorLabel.setText(response);

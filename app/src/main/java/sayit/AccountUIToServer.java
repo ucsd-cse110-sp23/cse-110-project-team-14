@@ -12,8 +12,17 @@ public class AccountUIToServer {
     }
 
     public String createAccount(String username, String password, String checkPass) {
-        if(username.indexOf(",") != -1) {
-            return "username can not contain commas";
+        if(username.equals("")) {
+            return "please enter a username";
+        }
+        if(password.equals("")) {
+            return "please enter a password";
+        }
+        if(username.indexOf(",") != -1 || username.indexOf(" ") != -1) {
+            return "username can not contain commas or spaces";
+        }
+        if(password.indexOf(",") != -1 || password.indexOf(" ") != -1) {
+            return "password can not contain commas or spaces";
         }
         if(!password.equals(checkPass)) {
             return "passwords do not match";
@@ -26,6 +35,12 @@ public class AccountUIToServer {
         return response;
     }
 
+    /**
+     * attempts to login with info, if success, then saves user info
+     * @param username 
+     * @param password
+     * @return "true" if succesful login, error message otherwise
+     */
     public String login(String username, String password) {
         String response = accLogin.login(username, password);
         if(response.equals("true")) {
@@ -41,5 +56,11 @@ public class AccountUIToServer {
 
     public String getPassword() {
         return password;
+    }
+    /**
+     * ONLY TO BE USED FOR TESTING
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
