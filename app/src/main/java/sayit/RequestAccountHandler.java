@@ -81,7 +81,7 @@ public class RequestAccountHandler implements HttpHandler {
         }
       }
       return response;
-  }
+    }
 
   private String handleDelete(HttpExchange httpExchange) throws IOException {
     String response = "Other error occured";

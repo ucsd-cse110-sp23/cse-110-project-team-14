@@ -30,6 +30,7 @@ public class ParseVoice {
         Matcher clearMatcher = clearAll.matcher(input);
         Matcher createEmailMatcher = createEmail.matcher(input);
         Matcher sendEmailMatcher = sendEmail.matcher(input);
+        Pattern setUpEmail = Pattern.compile("Set Up Email" , Pattern.CASE_INSENSITIVE);
 
          if (questionMatcher.find() && questionMatcher.start() == 0){
             intent = "Question";
@@ -44,7 +45,7 @@ public class ParseVoice {
          else if (clearMatcher.find() && clearMatcher.start() == 0){
             intent = "Clear All"; 
             System.out.println("Intent declared as Clear");
-         }
+         } 
 
          else if (createEmailMatcher.find() && createEmailMatcher.start() == 0){
             intent = "Create Email";
@@ -53,6 +54,11 @@ public class ParseVoice {
          else if (sendEmailMatcher.find() && sendEmailMatcher.start() == 0){
             intent = "Send Email";
 
+         }
+
+         else if (setUpEmail.matcher(input).find()){
+            intent = "Set Up Email"; 
+            System.out.println("Intent declared as Set Up Email");
          }
 
         return intent;
@@ -65,11 +71,13 @@ public class ParseVoice {
         Pattern clearAll = Pattern.compile("Clear",Pattern.CASE_INSENSITIVE);
         Pattern createEmail = Pattern.compile("Create Email" , Pattern.CASE_INSENSITIVE);
         Pattern sendEmail = Pattern.compile("Send Email" , Pattern.CASE_INSENSITIVE);
+        Pattern setUpEmail = Pattern.compile("Set Up Email",Pattern.CASE_INSENSITIVE);
         Matcher questionMatcher = question.matcher(input);
         Matcher deleteMatcher = deleteQuestion.matcher(input);
         Matcher clearMatcher = clearAll.matcher(input);
         Matcher createEmailMatcher = createEmail.matcher(input);
         Matcher sendEmailMatcher = sendEmail.matcher(input);
+        Matcher setUpMatcher = setUpEmail.matcher(input);
 
          if (questionMatcher.find() && questionMatcher.start() == 0){
             query = input.substring(questionMatcher.end() + 2);
@@ -81,9 +89,37 @@ public class ParseVoice {
 
          else if (clearMatcher.find() && clearMatcher.start() == 0){
             query =  input.substring(clearMatcher.end());
-            System.out.println("On statement clearMatcher.find(). Query is :" + input);
+         }
+         else if (setUpMatcher.find() && setUpMatcher.start() == 0){
+            query =  input.substring(setUpMatcher.end());
          }
 
+         else if (createEmailMatcher.find() && createEmailMatcher.start() == 0) {
+            query =  input;
+         }
+
+         else if (sendEmailMatcher.find() && sendEmailMatcher.start() == 0) {
+            String afterCommand = input.substring(sendEmailMatcher.end()+1);
+
+            if (afterCommand.substring(0, input.indexOf(" ")).contains("to")) {
+               query =  input.substring(sendEmailMatcher.end() + 3);
+               //Replace at with @
+               query = query.replace("at", "@");
+               //Replace dot with .
+               query = query.replace("dot", ".");
+               //Remove all blank spaces
+               query = query.replaceAll("\\s", "");
+               
+               //Remove period if there is one at the end
+               if (query.charAt(query.length() - 1) == '.') {
+                  query = query.substring(0, query.length() - 1);
+               }
+            } else {
+               System.out.println("Command not in the correct format: \"Send email to ...\"");
+            }
+            
+         }
+         
          else if (createEmailMatcher.find() && createEmailMatcher.start() == 0) {
             query =  input;
          }

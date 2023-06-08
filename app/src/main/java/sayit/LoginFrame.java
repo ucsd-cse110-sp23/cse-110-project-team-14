@@ -117,7 +117,6 @@ public class LoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Create Account Button Pressed!");
-                
                 new CreateAccountFrame(connecter);
                 myLoginFrame.dispose();
             }

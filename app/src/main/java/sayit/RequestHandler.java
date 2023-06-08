@@ -85,6 +85,7 @@ public class RequestHandler implements HttpHandler {
         byte[] bytes = response.getBytes();
 
         outputStream.write(bytes);
+        outputStream.flush();
         outputStream.close();
 
         //outputStream2.write("Handler:"+ response);

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="sayit.ParseVoiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-06-08T05:45:03" hostname="DENNIS-XPS-15" time="0.004">
   <properties/>
   <testcase name="parsingIntentClearAll()" classname="sayit.ParseVoiceTest" time="0.002"/>
@@ -6,6 +7,17 @@
   <testcase name="parsingIntentQuestion()" classname="sayit.ParseVoiceTest" time="0.0"/>
   <testcase name="parsingQueryQuestion()" classname="sayit.ParseVoiceTest" time="0.0"/>
   <system-out><![CDATA[Intent declared as Clear
+=======
+<testsuite name="sayit.ParseVoiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-06-08T05:38:50" hostname="LAPTOP-NHC17941" time="0.047">
+  <properties/>
+  <testcase name="parsingIntentSetUp()" classname="sayit.ParseVoiceTest" time="0.013"/>
+  <testcase name="parsingIntentClearAll()" classname="sayit.ParseVoiceTest" time="0.002"/>
+  <testcase name="parsingIntentDelete()" classname="sayit.ParseVoiceTest" time="0.005"/>
+  <testcase name="parsingIntentQuestion()" classname="sayit.ParseVoiceTest" time="0.002"/>
+  <testcase name="parsingQueryQuestion()" classname="sayit.ParseVoiceTest" time="0.01"/>
+  <system-out><![CDATA[Intent declared as Set Up Email
+Intent declared as Clear
+>>>>>>> US10
 Intent declared as Delete
 Intent declared as Delete
 Intent declared as Question

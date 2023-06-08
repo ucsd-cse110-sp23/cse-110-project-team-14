@@ -68,7 +68,11 @@ goto fail
 :execute
 @rem Setup the command line
 
+<<<<<<< HEAD
 set CLASSPATH=%APP_HOME%\lib\app.jar;%APP_HOME%\lib\guava-31.1-jre.jar;%APP_HOME%\lib\json-20220924.jar;%APP_HOME%\lib\mongodb-driver-sync-4.9.1.jar;%APP_HOME%\lib\slf4j-log4j12-1.7.29.jar;%APP_HOME%\lib\javax.mail-1.6.2.jar;%APP_HOME%\lib\activation-1.1.1.jar;%APP_HOME%\lib\failureaccess-1.0.1.jar;%APP_HOME%\lib\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;%APP_HOME%\lib\jsr305-3.0.2.jar;%APP_HOME%\lib\checker-qual-3.12.0.jar;%APP_HOME%\lib\error_prone_annotations-2.11.0.jar;%APP_HOME%\lib\j2objc-annotations-1.3.jar;%APP_HOME%\lib\mongodb-driver-core-4.9.1.jar;%APP_HOME%\lib\bson-record-codec-4.9.1.jar;%APP_HOME%\lib\bson-4.9.1.jar;%APP_HOME%\lib\slf4j-api-1.7.29.jar;%APP_HOME%\lib\log4j-1.2.17.jar
+=======
+set CLASSPATH=%APP_HOME%\lib\app.jar;%APP_HOME%\lib\guava-31.1-jre.jar;%APP_HOME%\lib\json-20220924.jar;%APP_HOME%\lib\mongodb-driver-sync-4.9.1.jar;%APP_HOME%\lib\slf4j-log4j12-1.7.29.jar;%APP_HOME%\lib\failureaccess-1.0.1.jar;%APP_HOME%\lib\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;%APP_HOME%\lib\jsr305-3.0.2.jar;%APP_HOME%\lib\checker-qual-3.12.0.jar;%APP_HOME%\lib\error_prone_annotations-2.11.0.jar;%APP_HOME%\lib\j2objc-annotations-1.3.jar;%APP_HOME%\lib\mongodb-driver-core-4.9.1.jar;%APP_HOME%\lib\bson-record-codec-4.9.1.jar;%APP_HOME%\lib\bson-4.9.1.jar;%APP_HOME%\lib\slf4j-api-1.7.29.jar;%APP_HOME%\lib\log4j-1.2.17.jar
+>>>>>>> US10
 
 
 @rem Execute app
