@@ -1,19 +1,12 @@
 package sayit;
 
-import javax.swing.JButton;
 import java.awt.event.ActionEvent;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.*;
+import javax.swing.JButton;
 
 
 public class SendEmail {
@@ -27,7 +20,7 @@ public class SendEmail {
     MySideBar sideBar;
     ButtonCoordinator buttonCoordinator;
     AccountUIToServer connector;
-    private boolean askStop = false;
+    //private boolean askStop = false;
     final String URL = "http://localhost:8100/";
 
     public SendEmail(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, AccountUIToServer connector) {
