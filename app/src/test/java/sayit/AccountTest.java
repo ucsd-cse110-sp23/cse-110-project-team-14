@@ -26,7 +26,7 @@ public class AccountTest {
     @Test
     void createTest() {
         assertEquals("Created Account", logic.createAccount("test@ucsd.edu", "abcd1234","abcd1234"));
-        assertEquals("username can not contain commas", logic.createAccount("ab,cd@ucsd.edu", "1234","1234"));
+        assertEquals("username can not contain commas or spaces", logic.createAccount("ab,cd@ucsd.edu", "1234","1234"));
         assertEquals("passwords do not match", logic.createAccount("dwng@ucsd.edu", "abcd1234","dwng@ucsd.edu"));
         assertEquals("Username taken", logic.createAccount("dwng@ucsd.edu", "abcd1234","abcd1234"));
     }

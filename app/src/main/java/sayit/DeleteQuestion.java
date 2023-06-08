@@ -2,12 +2,21 @@ package sayit;
 
 import javax.swing.JButton;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.*;
+
 public class DeleteQuestion {
     Storage storage;
     JButton currButton;
     MySideBar sideBar;
     Frame frame;
     ButtonCoordinator buttonCoordinator;
+
+    final String URL = "http://localhost:8100/";
 
     public DeleteQuestion(Storage storage, JButton currButton, MySideBar sideBar, Frame frame,
             ButtonCoordinator buttonCoordinator) {
@@ -27,11 +36,42 @@ public class DeleteQuestion {
                 () -> {
                     if (buttonCoordinator.getCurQ() == true) {
                         return;
-                    }
+                    } else {
+                    
+                        String response = "HTTP REQUEST SENT";
+                        String curQuestion = buttonCoordinator.getCurButton().getText();
+                        try {
+                            URL url = new URL(URL);
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("DELETE");
+                            conn.setDoOutput(true);
+                            OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                            out.write(curQuestion);
+                            out.flush();
+                            out.close();
+                
+                
+                            BufferedReader in = new BufferedReader(
+                                new InputStreamReader(conn.getInputStream())
+                            );
+                
+                            //Debugging
+                            //System.out.println("READING LINES FROM BUFFER");
+                            in.readLine();
+                            in.readLine();
+                
+                            response = in.readLine();
+                            in.close();
+                            //System.out.println("\n CLIENT: RETURNING RESPONSE FROM SERVER" + response);
+                
+                        }catch (MalformedURLException exception){
+                            exception.printStackTrace();
+                        }catch (IOException exception){
+                            exception.printStackTrace();
+                        }
 
-                else {
-                        System.out.println("Deleted Question");
-                        storage.deleteQuestion(buttonCoordinator.getCurButton().getText());
+                        System.out.println(response);
+                        storage.deleteQuestion(curQuestion);
                         sideBar.deleteButton(buttonCoordinator.getCurButton());
                         buttonCoordinator.setCurButton(null);
                         frame.updateAnswerBox(" ");

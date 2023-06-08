@@ -27,7 +27,7 @@ public class CreateAccountFrame extends JFrame {
 
     private JButton createAccountButton;
 
-    AccountUIToServer test;
+    AccountUIToServer connecter;
 
 
 /*
@@ -70,8 +70,8 @@ public class CreateAccountFrame extends JFrame {
         myLayout.putConstraint(SpringLayout.NORTH, createAccountButton, 50, SpringLayout.NORTH, confirmPasswordTextfield);
     }
 
-    CreateAccountFrame () {
-
+    CreateAccountFrame (AccountUIToServer connecter) {
+        this.connecter = connecter;
         myCreateAccountFrame = this;
 
         this.setSize(800, 450);
@@ -120,13 +120,11 @@ public class CreateAccountFrame extends JFrame {
                 //System.out.println("Password input " + password);
                 //System.out.println("Confirm password input " + confirmPassword);
 
-                test = new AccountUIToServer(new Login(), new CreateAccount());
-
                 Thread t = new Thread( // use another thread for answer computation to not lag UI
                 () -> {
-                    String response = test.createAccount(username, password, confirmPassword);
+                    String response = connecter.createAccount(username, password, confirmPassword);
                     if (response.equals("Created Account")) {
-                        new AutoLoginFrame();
+                        new AutoLoginFrame(connecter);
                         myCreateAccountFrame.dispose();
                     } else {
                         errorLabel.setText(response);
@@ -134,10 +132,6 @@ public class CreateAccountFrame extends JFrame {
                 });
                 t.start();
 
-                
-                
-
-                
             }
         });
 
