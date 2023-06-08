@@ -143,8 +143,6 @@ public class CreateEmail {
     }
 
     public String addSignature(String message, String displayName) {
-        //String modifiedMessage = message.replace("[Your Name]", displayName);
-        //String modifiedMessage = message + "End";
         String modifiedMessage = message.substring(0, message.lastIndexOf("["));
         modifiedMessage = modifiedMessage + "\n" + displayName;
         return modifiedMessage;

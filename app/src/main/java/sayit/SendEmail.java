@@ -76,6 +76,11 @@ public class SendEmail {
             subject = prompt;
             body = message;
         }
+
+        System.out.println("Body: " + body);
+
+        eConnecter.getEmailInfo();
+        body = addSignature(body, eConnecter.getDisplay());
         
         System.out.println("Subject: " + subject);
         System.out.println("body: " + body);
@@ -123,5 +128,11 @@ public class SendEmail {
         System.out.println(connector.getUsername());
         DBAddCommand.addCommand(command, response, connector.getUsername());
         
+    }
+
+    public String addSignature(String message, String displayName) {
+        String modifiedMessage = message.substring(0, message.lastIndexOf("["));
+        modifiedMessage = modifiedMessage + "\n" + displayName;
+        return modifiedMessage;
     }
 }
