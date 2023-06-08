@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="sayit.ConnectTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-06-08T03:23:02" hostname="DENNIS-XPS-15" time="0.001">
+<testsuite name="sayit.ConnectTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-06-08T04:39:33" hostname="DENNIS-XPS-15" time="0.001">
   <properties/>
   <testcase name="audioNotFound()" classname="sayit.ConnectTest" time="0.001"/>
   <testcase name="audioFound()" classname="sayit.ConnectTest" time="0.0"/>

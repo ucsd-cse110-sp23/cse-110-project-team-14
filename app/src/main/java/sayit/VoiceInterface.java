@@ -32,11 +32,12 @@ public class VoiceInterface {
     SendEmail sendEmail;
     String query;
     String intent;
+    AccountUIToServer connector;
 
     public VoiceInterface(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, 
         MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, 
         AskQuestion ask, ClearQuestions clearQuestions, DeleteQuestion deleteQuestion,
-        CreateEmail createEmail, SendEmail sendEmail) {
+        CreateEmail createEmail, SendEmail sendEmail, AccountUIToServer connecter) {
 
         recorder = r;
         startButton = b;
@@ -53,6 +54,7 @@ public class VoiceInterface {
         this.deleteQuestion = deleteQuestion;
         this.createEmail = createEmail;
         this.sendEmail = sendEmail;
+        this.connector = connector;
     }
     
     public void takeVoice(){

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="sayit.AccountTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-06-08T03:23:02" hostname="DENNIS-XPS-15" time="0.016">
+<testsuite name="sayit.AccountTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-06-08T04:39:33" hostname="DENNIS-XPS-15" time="0.013">
   <properties/>
-  <testcase name="loginTest()" classname="sayit.AccountTest" time="0.014"/>
-  <testcase name="createTest()" classname="sayit.AccountTest" time="0.001"/>
+  <testcase name="loginTest()" classname="sayit.AccountTest" time="0.012"/>
+  <testcase name="createTest()" classname="sayit.AccountTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

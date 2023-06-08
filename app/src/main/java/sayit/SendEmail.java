@@ -2,12 +2,19 @@ package sayit;
 
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
-
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.*;
+
 
 public class SendEmail {
     AudioRecorder recorder;
@@ -19,10 +26,11 @@ public class SendEmail {
     Storage storage;
     MySideBar sideBar;
     ButtonCoordinator buttonCoordinator;
+    AccountUIToServer connector;
     private boolean askStop = false;
     final String URL = "http://localhost:8100/";
 
-    public SendEmail(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co) {
+    public SendEmail(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, AccountUIToServer connector) {
         recorder = r;
         askButton = b;
         converter = con;
@@ -32,6 +40,7 @@ public class SendEmail {
         storage = s;
         sideBar = bar;
         buttonCoordinator = co;
+        this.connector = connector;
     }
 
     public SendEmail() {
@@ -41,6 +50,7 @@ public class SendEmail {
     public void send(String fromEmail, String toEmail,
         String smtpHost, String tlsPort, String password) {
         String subject;
+        String body;
         String prompt = buttonCoordinator.getCurButton().getText();
         String message = storage.getAnswer(prompt);
         //System.out.println(message);
@@ -49,18 +59,17 @@ public class SendEmail {
         String command = "Send email to " + toEmail;
         frame.updateQuestionBox(command);
         
-        
+        //Seperate the subject and body in the message
         if (message.indexOf("Subject:") == 0) {
-            //Seperate the subject from the message
             subject = message.substring(message.indexOf("Subject:") + 9, message.indexOf("\n"));
+            body = message.substring(message.indexOf("\n") + 2);
+            
         } else {
             subject = prompt;
+            body = message;
         }
         
         System.out.println("Subject: " + subject);
-
-        //Seperate the body from the message
-        String body = message.substring(message.indexOf("\n") + 2);
         System.out.println("body: " + body);
         
         
@@ -100,14 +109,8 @@ public class SendEmail {
         sideBar.sideBarAddButton(b);
         buttonCoordinator.setCurButton(b);
         buttonCoordinator.setCurQ(false);
-        
-    }
-    
-    public static void main(String[] args) {
-        
-        SendEmail sendEmail = new SendEmail();
-        sendEmail.send("dennisliang01@gmail.com",
-            "dbliang@ucsd.edu", "", "", "");
+        System.out.println(connector.getUsername());
+        DBAddCommand.addCommand(command, response, connector.getUsername());
         
     }
 }

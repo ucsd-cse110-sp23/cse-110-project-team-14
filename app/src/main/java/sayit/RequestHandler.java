@@ -83,15 +83,11 @@ public class RequestHandler implements HttpHandler {
         OutputStream outputStream = httpExchange.getResponseBody();
         OutputStreamWriter outputStream2 = new OutputStreamWriter(System.out);
         byte[] bytes = response.getBytes();
-        
-        
 
         outputStream.write(bytes);
-
         outputStream.close();
 
         //outputStream2.write("Handler:"+ response);
-        
         //outputStream2.close();
     };
 
