@@ -19,6 +19,9 @@ public class AutoLoginFrame extends JFrame {
     private JLabel questionLabel;
     private JButton yesButton;
     private JButton noButton;
+    private ExportLoginInformation exportLoginInformation;
+    private String username;
+    private String password;
 
     AccountUIToServer connecter;
     /*
@@ -28,6 +31,8 @@ public class AutoLoginFrame extends JFrame {
     private void setElements(SpringLayout myLayout, JLabel  questionLabel,
         JButton yesButton,  JButton noButton) {
         
+
+
         this.add(questionLabel);
         this.add(yesButton);
         this.add(noButton);
@@ -43,8 +48,11 @@ public class AutoLoginFrame extends JFrame {
 
     }
 
-    AutoLoginFrame (AccountUIToServer connecter) {
+    AutoLoginFrame (AccountUIToServer connecter, String username, String password) {
         this.connecter = connecter;
+        this.username = username;
+        this.password = password;
+        exportLoginInformation = new ExportLoginInformation();
         myAutoLoginFrame = this;
 
         this.setSize(500, 300);
@@ -73,6 +81,7 @@ public class AutoLoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Yes button pressed!");
+                exportLoginInformation.exportLogin(username, password, true);
                 new Frame(new Whisper(), new ChatGPT(), connecter, new EmailConnecter());
                 myAutoLoginFrame.dispose();
             }
@@ -82,6 +91,7 @@ public class AutoLoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("No button pressed!");
+                exportLoginInformation.exportLogin(username, password, false);
                 new Frame(new Whisper(), new ChatGPT(), connecter, new EmailConnecter());
                 myAutoLoginFrame.dispose();
             }

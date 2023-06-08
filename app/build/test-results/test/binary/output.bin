@@ -1,5 +1,16 @@
-!Intent declared as Set Up Email
-Intent declared as Clear
-Intent declared as Delete
-Intent declared as Delete
-Intent declared as Question
+Running export login
+!Testing if autologin is enabled
+Reading file
+String Boolean: true
+Returning true
+Running export login
+Running export login
+!Testing if autologin is enabled
+Reading file
+String Boolean: true
+Returning true
+!Intent declared as Set Up Email
+Intent declared as Clear
+Intent declared as Delete
+Intent declared as Delete
+Intent declared as Question
