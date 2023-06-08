@@ -70,6 +70,7 @@ public class CreateEmail {
                 inputLine = in.readLine();
             }
 
+            System.out.println("Reponse: " + response);
 
             in.close();
             System.out.println("\n CLIENT: RETURNING RESPONSE FROM SERVER" + response);
@@ -78,8 +79,11 @@ public class CreateEmail {
 
         }catch (MalformedURLException exception){
             exception.printStackTrace();
+            System.out.println(exception.getMessage());
+            
         }catch (IOException exception){
             exception.printStackTrace();
+            System.out.println(exception.getMessage());
         }
 
         return response;
@@ -106,11 +110,13 @@ public class CreateEmail {
                         buttonCoordinator.setCurQ(false);
                         buttonCoordinator.setCurButton(null);
                     } else {
-                        String questionTime = message +"\t"+ dtf.format(currTime);
+                        String questionTime = message +"\t \n" +  "Time: " + dtf.format(currTime);
+                        //String questionTime = message +"\t"+ dtf.format(currTime);
                         frame.updateQuestionBox(questionTime);
-                        String answer = askHTTPRequest(message);
+                        String answer = askHTTPRequest(questionTime);
                         System.out.println(answer);
-                        answer = addSignature(answer, "[DISPLAY NAME]");
+                        
+                        answer = addSignature(answer, "Dennis Liang");
                         frame.updateAnswerBox(answer);
                         storage.addQuestion(questionTime, answer);
                         askPanel.revalidate();
@@ -120,12 +126,12 @@ public class CreateEmail {
                                     frame.updateQuestionBox(b.getText());
                                     buttonCoordinator.setCurButton(b);
                                     frame.updateAnswerBox(storage.getAnswer(b.getText()));
-                                    System.out.println("BUTTON PRESSED");
+                                    //System.out.println("BUTTON PRESSED");
                                 });
                         sideBar.sideBarAddButton(b);
                         buttonCoordinator.setCurButton(b);
                         buttonCoordinator.setCurQ(false);
-                        System.out.println("CurQ = false");
+                        //System.out.println("CurQ = false");
                     }
                 } catch (Exception ex) {
                     System.out.println("Error occured");
@@ -135,9 +141,9 @@ public class CreateEmail {
     }
 
     public String addSignature(String message, String displayName) {
-        String modifiedMessage = message;
-
-        modifiedMessage += "\nBest Regards,\n\n" + displayName;
+        String modifiedMessage = message.replace("[Your Name]", displayName);
+        //answer = answer.replace("[Name]", "Dennis Liang");
+        //answer = answer.replace("[Name]", "Dennis Liang");
         return modifiedMessage;
     }
 }

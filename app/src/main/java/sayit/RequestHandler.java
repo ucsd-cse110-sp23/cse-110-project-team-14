@@ -28,10 +28,12 @@ public class RequestHandler implements HttpHandler {
         InputStream inputStream = exchange.getRequestBody();
         Scanner scanner = new Scanner(inputStream);
         String postData = scanner.nextLine();
+        System.out.println("Post Data: " + postData);
         String question = postData.substring(0,postData.indexOf("\t"));
         String response;
         try{    
             response = ChatGPT.askQuestion(question);
+            //System.out.println("CHAT GPT RESPONSE: " + response);
         }
         catch(Exception e){
             response = "Sorry. There was an error trying to process your response. Please try again";
@@ -82,11 +84,17 @@ public class RequestHandler implements HttpHandler {
         OutputStreamWriter outputStream2 = new OutputStreamWriter(System.out);
         byte[] bytes = response.getBytes();
         
-        outputStream2.write("Handler:"+response);
-        outputStream2.close();
+        
+
         outputStream.write(bytes);
+
         outputStream.close();
+
+        //outputStream2.write("Handler:"+ response);
+        
+        //outputStream2.close();
     };
+
 
 
 }

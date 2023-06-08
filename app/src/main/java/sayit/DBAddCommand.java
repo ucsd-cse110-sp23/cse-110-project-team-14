@@ -21,7 +21,7 @@ public class DBAddCommand {
             //Bson updateOperation = addToSet("Commands", "What is 2 + 2?$?=2 + 2 is 4.");
             Bson updateOperation = addToSet("Commands", new Document("Command",command).append("Response", response));
             accountsCollection.updateOne(filter, updateOperation);
-            System.out.println("Created command dwng@ucsd.edu");
+            System.out.println("Created command " + username);
         }
     }
 }

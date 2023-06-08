@@ -97,8 +97,8 @@ public class Frame extends JFrame {
         askQuestion = new AskQuestion(recorder, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator);
         deleteQuestion = new DeleteQuestion(storage, currButton, sideBar, this, buttonCoordinator);
         clearQuestions = new ClearQuestions(this, storage, sideBar, buttonCoordinator);
-        createEmail = new CreateEmail(recorder, askButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator);
-        sendEmail = new SendEmail(recorder, askButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator);
+        createEmail = new CreateEmail(recorder, voiceButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator);
+        sendEmail = new SendEmail(recorder, voiceButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator);
 
         voiceInterface = new VoiceInterface(recorder, voiceButton, converter, chat, 
             askPanel, this, storage, sideBar, buttonCoordinator, askQuestion, 

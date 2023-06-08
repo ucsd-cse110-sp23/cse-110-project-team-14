@@ -19,7 +19,7 @@ public class ChatGPT implements IChatBot{
     public String askQuestion(String query) throws IOException, InterruptedException{
         // Set request parameters
         String prompt = query;
-        int maxTokens = 100;
+        int maxTokens = 300;
 
         // Create a request body which you will pass into request object
         JSONObject requestBody = new JSONObject();

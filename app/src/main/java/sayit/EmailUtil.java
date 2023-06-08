@@ -28,7 +28,7 @@ public class EmailUtil {
 	 * @param subject
 	 * @param body
 	 */
-	public static void sendEmail(Session session, String toEmail, String subject, String body){
+	public static boolean sendEmail(Session session, String toEmail, String subject, String body){
 		try {
 			MimeMessage msg = new MimeMessage(session);
 			//set message headers
@@ -47,12 +47,14 @@ public class EmailUtil {
 			msg.setSentDate(new Date());
 
 			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
-			System.out.println("Message is ready");
+			//System.out.println("Message is ready");
 			Transport.send(msg);  
 
-			System.out.println("Email Sent Successfully!!");
+			//System.out.println("Email Sent Successfully!!");
+			return true;
 	    } catch (Exception e) {
-	      e.printStackTrace();
+			e.printStackTrace();
+			return false;
 	    }
 	}
 }

@@ -60,7 +60,7 @@ public class VoiceInterface {
             recorder.stopRecording();
             startButton.setText("Start");
             askStop = false;
-            System.out.println("CurQ = false");
+            //System.out.println("CurQ = false");
             Thread t = new Thread(
                 () -> {
                     try{
@@ -83,7 +83,7 @@ public class VoiceInterface {
         else{
             recorder.startRecording();
             startButton.setText("Listening...");
-            System.out.println("CurQ = true");
+            //System.out.println("CurQ = true");
             buttonCoordinator.setCurQ(true);
             askStop = true;
         }
@@ -109,14 +109,8 @@ public class VoiceInterface {
                 break;
             case "Send Email":
                 System.out.println("Send Email Swtich");
-                /*sendEmail.send("Subject: Hello World\n This is a message\n",
-                    "dennisliang01@gmail.com", query, 
-                    "smtp.gmail.com", "587", "abrqfnuvepunucxt"); */
-                
                 sendEmail.send("dennisliang01@gmail.com", query, 
                     "smtp.gmail.com", "587", "abrqfnuvepunucxt");
-
-                //(String message, String fromEmail, String toEmail, String smtpHost, String tlsPort, String password)
                 break;
 
             default: System.out.println("ERROR!");
