@@ -80,7 +80,7 @@ public class SendEmail {
         System.out.println("Body: " + body);
 
         eConnecter.getEmailInfo();
-        body = addSignature(body, eConnecter.getDisplay());
+        //body = addSignature(body, eConnecter.getDisplay());
         
         System.out.println("Subject: " + subject);
         System.out.println("body: " + body);

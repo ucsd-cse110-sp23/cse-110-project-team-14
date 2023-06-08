@@ -40,6 +40,7 @@ public class RequestHandler implements HttpHandler {
         }
         scanner.close();
         String output = response;
+        
         Thread t = new Thread( // use another thread for answer computation to not lag UI
             () -> {
                 database.addCommand(postData, output, connecter.getUsername());
@@ -81,7 +82,7 @@ public class RequestHandler implements HttpHandler {
 
         httpExchange.sendResponseHeaders(200, response.length());
         OutputStream outputStream = httpExchange.getResponseBody();
-        OutputStreamWriter outputStream2 = new OutputStreamWriter(System.out);
+        //OutputStreamWriter outputStream2 = new OutputStreamWriter(System.out);
         byte[] bytes = response.getBytes();
 
         outputStream.write(bytes);

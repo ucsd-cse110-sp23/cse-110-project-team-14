@@ -23,10 +23,11 @@ public class CreateEmail {
     Storage storage;
     MySideBar sideBar;
     ButtonCoordinator buttonCoordinator;
+    AccountUIToServer connecter;
     EmailConnecter eConnecter;
     final String URL = "http://localhost:8100/";
 
-    public CreateEmail(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, EmailConnecter eConnecter) {
+    public CreateEmail(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, AccountUIToServer connecter, EmailConnecter eConnecter) {
         recorder = r;
         askButton = b;
         converter = con;
@@ -36,6 +37,7 @@ public class CreateEmail {
         storage = s;
         sideBar = bar;
         buttonCoordinator = co;
+        this.connecter = connecter;
         this.eConnecter = eConnecter;
     }
 
@@ -116,11 +118,16 @@ public class CreateEmail {
                         //String questionTime = message +"\t"+ dtf.format(currTime);
                         frame.updateQuestionBox(questionTime);
                         String answer = askHTTPRequest(questionTime);
-                        //System.out.println(answer);
                         eConnecter.getEmailInfo();
                         answer = addSignature(answer, eConnecter.getDisplay());
                         frame.updateAnswerBox(answer);
+                        System.out.println("Storage answer: " + answer);
                         storage.addQuestion(questionTime, answer);
+                        
+                        //Change message to include the display name
+                        DBDeleteCommand.deleteCommand(message + "\t ", connecter.getUsername());
+                        DBAddCommand.addCommand(message + "\t ", answer, connecter.getUsername());
+
                         askPanel.revalidate();
                         JButton b = new JButton(questionTime);
                         b.addActionListener(

@@ -21,6 +21,7 @@ public class DBDeleteCommand {
             Bson filter = eq("username", username);
             Bson updateOperation = pull("Commands", new Document("Command", command));
             accountsCollection.updateOne(filter, updateOperation);
+            System.out.println("Deleted command " + username);
         }
     }
 }

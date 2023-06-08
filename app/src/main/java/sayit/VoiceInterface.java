@@ -31,7 +31,7 @@ public class VoiceInterface {
         MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, 
         AskQuestion ask, ClearQuestions clearQuestions, DeleteQuestion deleteQuestion,
         CreateEmail createEmail, SendEmail sendEmail, AccountUIToServer connecter,
-        EmailConnecter eConnector) {
+        EmailConnecter eConnecter) {
         recorder = r;
         startButton = b;
         converter = con;
@@ -48,7 +48,7 @@ public class VoiceInterface {
         this.createEmail = createEmail;
         this.sendEmail = sendEmail;
         this.connector = connecter;
-        this.eConnecter = eConnector;
+        this.eConnecter = eConnecter;
     }
     
   /**
@@ -116,14 +116,11 @@ public class VoiceInterface {
                 System.out.println("Send Email Swtich");
                 sendEmail.send(query);
                 break;
-            
-
             default: 
                 System.out.println("ERROR!");
                 frame.updateQuestionBox("Please use one of the commands");
                 frame.updateAnswerBox("");
                 buttonCoordinator.setCurButton(null);
-
         }
         
     }
