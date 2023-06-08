@@ -101,7 +101,7 @@ public class AskQuestion {
                         buttonCoordinator.setCurQ(false);
                         buttonCoordinator.setCurButton(null);
                     } else {
-                        String questionTime = "Question: " + question +"\t \n"+  "Time: " + dtf.format(currTime);
+                        String questionTime = "Question: " + question +"\t"+  "Time: " + dtf.format(currTime);
                         frame.updateQuestionBox(questionTime);
                         String answer = askHTTPRequest(questionTime);
                         System.out.println(answer);
