@@ -28,7 +28,7 @@ public class EmailUtil {
 	 * @param subject
 	 * @param body
 	 */
-	public static boolean sendEmail(Session session, String toEmail, String subject, String body){
+	public static String sendEmail(Session session, String toEmail, String subject, String body){
 		try {
 			MimeMessage msg = new MimeMessage(session);
 			//set message headers
@@ -51,10 +51,10 @@ public class EmailUtil {
 			Transport.send(msg);  
 
 			//System.out.println("Email Sent Successfully!!");
-			return true;
+			return "true";
 	    } catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return e.getMessage();
 	    }
 	}
 }

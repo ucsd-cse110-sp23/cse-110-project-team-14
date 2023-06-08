@@ -53,8 +53,8 @@ public class SendEmail {
         String body;
         String prompt = buttonCoordinator.getCurButton().getText();
         String message = storage.getAnswer(prompt);
-        //System.out.println(message);
         String response;
+        
 
         String command = "Send email to " + toEmail;
         frame.updateQuestionBox(command);
@@ -87,13 +87,16 @@ public class SendEmail {
                 return new PasswordAuthentication(fromEmail, password);
             }
         };
+
+
         Session session = Session.getInstance(props, auth);
-        
-        if(EmailUtil.sendEmail(session, toEmail, subject, body)) {
+        String sentStatus = EmailUtil.sendEmail(session, toEmail, subject, body);
+        if(sentStatus == "true") {
             response = "Email successfully sent.";
         } else {
-            response =  "Something went wrong";
+            response =  sentStatus;
         }
+
         frame.updateAnswerBox(response);
 
 

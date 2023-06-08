@@ -112,7 +112,7 @@ public class VoiceInterface {
             case "Send Email":
                 System.out.println("Send Email Swtich");
                 sendEmail.send("dennisliang01@gmail.com", query, 
-                    "smtp.gmail.com", "587", "abrqfnuvepunucxt");
+                    "smtp.gmail.com", "586", "abrqfnuvepunucxt");
                 break;
 
             default: System.out.println("ERROR!");
