@@ -138,6 +138,7 @@ public class CreateEmail {
                                     //System.out.println("BUTTON PRESSED");
                                 });
                         sideBar.sideBarAddButton(b);
+                        sideBar.revalidate();
                         buttonCoordinator.setCurButton(b);
                         buttonCoordinator.setCurQ(false);
                         //System.out.println("CurQ = false");
