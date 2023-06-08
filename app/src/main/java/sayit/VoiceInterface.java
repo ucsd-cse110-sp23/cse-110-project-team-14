@@ -108,7 +108,12 @@ public class VoiceInterface {
                 new EmailFrame(eConnecter);
                 break;
 
-            default: System.out.println("ERROR!");
+            default: 
+                System.out.println("ERROR!");
+                frame.updateQuestionBox("Please use one of the commands");
+                frame.updateAnswerBox("");
+                buttonCoordinator.setCurButton(null);
+
         }
         
     }

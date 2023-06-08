@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="sayit.ParseVoiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-06-08T02:53:46" hostname="LAPTOP-NHC17941" time="0.077">
+<testsuite name="sayit.ParseVoiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-06-08T03:06:58" hostname="LAPTOP-NHC17941" time="0.065">
   <properties/>
-  <testcase name="parsingIntentSetUp()" classname="sayit.ParseVoiceTest" time="0.02"/>
-  <testcase name="parsingIntentClearAll()" classname="sayit.ParseVoiceTest" time="0.007"/>
-  <testcase name="parsingIntentDelete()" classname="sayit.ParseVoiceTest" time="0.008"/>
-  <testcase name="parsingIntentQuestion()" classname="sayit.ParseVoiceTest" time="0.006"/>
-  <testcase name="parsingQueryQuestion()" classname="sayit.ParseVoiceTest" time="0.009"/>
+  <testcase name="parsingIntentSetUp()" classname="sayit.ParseVoiceTest" time="0.014"/>
+  <testcase name="parsingIntentClearAll()" classname="sayit.ParseVoiceTest" time="0.006"/>
+  <testcase name="parsingIntentDelete()" classname="sayit.ParseVoiceTest" time="0.011"/>
+  <testcase name="parsingIntentQuestion()" classname="sayit.ParseVoiceTest" time="0.012"/>
+  <testcase name="parsingQueryQuestion()" classname="sayit.ParseVoiceTest" time="0.003"/>
   <system-out><![CDATA[Intent declared as Set Up Email
 Intent declared as Clear
 Intent declared as Delete
