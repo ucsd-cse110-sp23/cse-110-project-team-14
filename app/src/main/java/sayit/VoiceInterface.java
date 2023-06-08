@@ -112,19 +112,19 @@ public class VoiceInterface {
                 System.out.println("Delete Switch");
                 deleteQuestion.delete();
                 break;
+            case "Set Up Email" :
+                System.out.println("Set up email");
+                new EmailFrame(eConnecter);
+                break;
             case "Create Email":
                 System.out.println("Create Email Switch");
                 createEmail.create(query);
                 break;
             case "Send Email":
                 System.out.println("Send Email Swtich");
-                sendEmail.send("dennisliang01@gmail.com", query, 
-                    "smtp.gmail.com", "586", "abrqfnuvepunucxt");
+                sendEmail.send(query);
                 break;
-            case "Set Up Email" :
-                System.out.println("Set up email");
-                new EmailFrame(eConnecter);
-                break;
+            
 
             default: 
                 System.out.println("ERROR!");

@@ -20,10 +20,12 @@ public class SendEmail {
     MySideBar sideBar;
     ButtonCoordinator buttonCoordinator;
     AccountUIToServer connector;
+    EmailConnecter eConnecter;
     //private boolean askStop = false;
     final String URL = "http://localhost:8100/";
 
-    public SendEmail(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, AccountUIToServer connector) {
+    public SendEmail(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, AccountUIToServer connector,
+        EmailConnecter eConnecter) {
         recorder = r;
         askButton = b;
         converter = con;
@@ -34,14 +36,23 @@ public class SendEmail {
         sideBar = bar;
         buttonCoordinator = co;
         this.connector = connector;
+        this.eConnecter = eConnecter;
     }
 
     public SendEmail() {
 
     }
 
-    public void send(String fromEmail, String toEmail,
-        String smtpHost, String tlsPort, String password) {
+    public void send(String toEmail) {
+        /*String fromEmail, String toEmail,
+        String smtpHost, String tlsPort, String password */
+        eConnecter.getEmailInfo();
+        String fromEmail = eConnecter.getEmail();
+        String smtpHost = eConnecter.getSMTP();
+        System.out.println("SMTP Host: " + smtpHost);
+        String tlsPort = eConnecter.getTLS();
+        System.out.println("TLS Port: " + tlsPort);
+        String password = eConnecter.getPassword();
         String subject;
         String body;
         String prompt = buttonCoordinator.getCurButton().getText();
@@ -62,8 +73,8 @@ public class SendEmail {
             body = message;
         }
         
-        System.out.println("Subject: " + subject);
-        System.out.println("body: " + body);
+        //System.out.println("Subject: " + subject);
+        //System.out.println("body: " + body);
         
         
         //System.out.println("TLS Email Start");
