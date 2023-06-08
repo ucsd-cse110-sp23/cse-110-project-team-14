@@ -1,5 +1,8 @@
 Running export login
+<<<<<<< HEAD
 <File does not exist. Attempting to create a file to write.
+=======
+>>>>>>> main
 !Testing if autologin is enabled
 Reading file
 String Boolean: true
@@ -10,8 +13,16 @@
 Reading file
 String Boolean: true
 Returning true
+<<<<<<< HEAD
 !Intent declared as Set Up Email
 Intent declared as Clear
 Intent declared as Delete
 Intent declared as Delete
 Intent declared as Question
+=======
+!Intent declared as Set Up Email
+Intent declared as Clear
+Intent declared as Delete
+Intent declared as Delete
+Intent declared as Question
+>>>>>>> main

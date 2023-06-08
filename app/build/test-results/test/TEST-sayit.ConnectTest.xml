@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="sayit.ConnectTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-06-08T17:50:20" hostname="DENNIS-XPS-15" time="0.001">
   <properties/>
   <testcase name="audioNotFound()" classname="sayit.ConnectTest" time="0.001"/>
   <testcase name="audioFound()" classname="sayit.ConnectTest" time="0.0"/>
+=======
+<testsuite name="sayit.ConnectTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-06-08T07:24:21" hostname="LAPTOP-NHC17941" time="0.009">
+  <properties/>
+  <testcase name="audioNotFound()" classname="sayit.ConnectTest" time="0.005"/>
+  <testcase name="audioFound()" classname="sayit.ConnectTest" time="0.002"/>
+>>>>>>> main
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
