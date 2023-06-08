@@ -38,7 +38,6 @@ public class AskQuestion {
 
     public String askHTTPRequest(String query){
         String response = "HTTP REQUEST SENT";
-        String line;
 
         try{
             URL url = new URL(URL);
@@ -76,7 +75,6 @@ public class AskQuestion {
             System.out.println(exception.getMessage());
         }catch (IOException exception){
             exception.printStackTrace();
-            
             System.out.println(exception.getMessage());
         }
         return response;
@@ -121,7 +119,7 @@ public class AskQuestion {
                         sideBar.sideBarAddButton(b);
                         buttonCoordinator.setCurButton(b);
                         buttonCoordinator.setCurQ(false);
-                        System.out.println("CurQ = false");
+                        //System.out.println("CurQ = false");
                     }
                 } catch (Exception ex) {
                     System.out.println("Error occured");

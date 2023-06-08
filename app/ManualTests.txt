@@ -219,4 +219,68 @@ Story 6:
         Step 8: Click on the the "Log In" button
         Step 9: Check output
             a: The error message should show up saying "No account with that username"
-        
+
+Story 7:
+    Test 1: Ask question on new account
+        Step 1: Start app and create a new account with username a and password b
+        Step 2: The app should be empty besides the start button
+        Step 3: Click the start button and say "Question: what is 1 plus 1" and wait for a response
+        Step 4: The response "Answer: 1 + 1 = 2" should appear in the answer box
+        Step 5: Close the app
+        Step 6: Reopen the app and login with username a and password b
+        Step 7: Check if the button for the prompt "Question: what is 1 plus 1" is in the side bar
+        Step 8: Click the button and make sure that the question and answer are the same as before
+        Step 9: Check the database and go to the account a and make sure that the question is saved under the Commands tab
+
+Story 8: All done through automated testing
+
+Story 9:
+    Test 1: Test no automatic login
+        Step 1: Start the app
+        Step 2: login with username test@test.com and password abcd1234
+        Step 3: You should be asked if you want to automatically login, click no
+        Step 4: Close the app
+        Step 5: Reopen the app and you should be at the login screen.
+
+    Test 2: Test automatic login
+        Step 1: Start the app
+        Step 2: login with username test@test.com and password abcd1234
+        Step 3: You should be asked if you want to automatically login, click yes
+        Step 4: Close the app
+        Step 5: Reopen the app and you should be at the main screen with the ask button.
+    
+Story 10: All done through automated testing
+    
+Story 11: 
+    Test 1: Create email with everything setup correctly
+        Step 1: Start the app and login
+        Step 2: Click on the start button
+        Step 3: Say “Create email to John. I want to meet up”
+        Step 4: Click stop
+        Step 5: Check output
+            a: The question box should say “Create email to John. I want to meet up”
+            b: The output UI box should have the command with the words “Best Regards, Alex” appended to the end
+    Test 2: Send Email with an email already created and valid sender info
+        Step 1: Run after Test 1
+        Step 2: Click on the start button
+        Step 3: Say “Send email to dwng at UCSD dot edu”
+        Step 4: Click stop
+        Step 5: Check output
+            a: The question box should say "Send email to dwng@ucsd.edu
+            b: The output UI box should have the message “Email sent successfully”
+            c: The email should appear in the email dwng@ucsd.edu saying “To John, I want to meet up. Best Regards, Alex” 
+    Test 3: Send email with an email already created and invalid sender info
+        Step 1: Run after Test 1
+        Step 2: Click on the start button
+        Step 3: Say command “Send email to dwng at UCSD dot edu”
+        Step 4: Check output
+            a: The text “Send email to dwng@ucsd.edu” should appear in the input UI box
+            b: The text “Setup information invalid” should appear in the output UI box
+    Test 4: Send email without an email created
+        Step 0: Run without Test 1, 
+        Step 1: Open the app and login
+        Step 2: Click start
+        Step 3: Say command “Send email to dwng at UCSD dot edu”
+        Step 4: Check ouput
+            a: The text “Send email to dwng@ucsd.edu” should appear in the input UI box
+            b: The text “No email to send” should appear in the output UI box

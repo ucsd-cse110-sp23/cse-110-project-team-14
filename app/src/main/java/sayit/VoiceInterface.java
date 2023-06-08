@@ -1,16 +1,8 @@
 package sayit;
 
-import javax.swing.JButton;
-
-import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.*;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
+
+import javax.swing.JButton;
 
 public class VoiceInterface {
     AudioRecorder recorder;
@@ -28,12 +20,18 @@ public class VoiceInterface {
     AskQuestion askQuestion;
     ClearQuestions clearQuestions;
     DeleteQuestion deleteQuestion;
+    CreateEmail createEmail;
+    SendEmail sendEmail;
     String query;
     String intent;
+    AccountUIToServer connector;
     EmailConnecter eConnecter;
 
-    public VoiceInterface(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, 
-    AskQuestion ask, ClearQuestions clearQuestions, DeleteQuestion deleteQuestion, EmailConnecter connecter) {
+    public VoiceInterface(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, 
+        MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, 
+        AskQuestion ask, ClearQuestions clearQuestions, DeleteQuestion deleteQuestion,
+        CreateEmail createEmail, SendEmail sendEmail, AccountUIToServer connecter,
+        EmailConnecter eConnecter) {
         recorder = r;
         startButton = b;
         converter = con;
@@ -47,7 +45,10 @@ public class VoiceInterface {
         askQuestion = ask;
         this.clearQuestions = clearQuestions;
         this.deleteQuestion = deleteQuestion;
-        eConnecter = connecter;
+        this.createEmail = createEmail;
+        this.sendEmail = sendEmail;
+        this.connector = connecter;
+        this.eConnecter = eConnecter;
     }
     
   /**
@@ -60,7 +61,7 @@ public class VoiceInterface {
             recorder.stopRecording();
             startButton.setText("Start");
             askStop = false;
-            System.out.println("CurQ = false");
+            //System.out.println("CurQ = false");
             Thread t = new Thread(
                 () -> {
                     try{
@@ -83,7 +84,7 @@ public class VoiceInterface {
         else{
             recorder.startRecording();
             startButton.setText("Listening...");
-            System.out.println("CurQ = true");
+            //System.out.println("CurQ = true");
             buttonCoordinator.setCurQ(true);
             askStop = true;
         }
@@ -107,13 +108,19 @@ public class VoiceInterface {
                 System.out.println("Set up email");
                 new EmailFrame(eConnecter);
                 break;
-
+            case "Create Email":
+                System.out.println("Create Email Switch");
+                createEmail.create(query);
+                break;
+            case "Send Email":
+                System.out.println("Send Email Swtich");
+                sendEmail.send(query);
+                break;
             default: 
                 System.out.println("ERROR!");
                 frame.updateQuestionBox("Please use one of the commands");
                 frame.updateAnswerBox("");
                 buttonCoordinator.setCurButton(null);
-
         }
         
     }

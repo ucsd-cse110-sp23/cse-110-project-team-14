@@ -36,6 +36,8 @@ public class Frame extends JFrame {
     AskQuestion askQuestion;
     DeleteQuestion deleteQuestion;
     ClearQuestions clearQuestions;
+    CreateEmail createEmail;
+    SendEmail sendEmail;
     VoiceInterface voiceInterface;
 
     ImportFiles importFiles;
@@ -95,7 +97,12 @@ public class Frame extends JFrame {
         askQuestion = new AskQuestion(recorder, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator);
         deleteQuestion = new DeleteQuestion(storage, currButton, sideBar, this, buttonCoordinator);
         clearQuestions = new ClearQuestions(this, storage, sideBar, buttonCoordinator);
-        voiceInterface = new VoiceInterface(recorder, voiceButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator,askQuestion, clearQuestions,deleteQuestion, eConnecter);
+        createEmail = new CreateEmail(recorder, voiceButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator, connecter, eConnecter);
+        sendEmail = new SendEmail(recorder, voiceButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator, connecter, eConnecter);
+
+        voiceInterface = new VoiceInterface(recorder, voiceButton, converter, chat, 
+            askPanel, this, storage, sideBar, buttonCoordinator, askQuestion, 
+            clearQuestions, deleteQuestion, createEmail, sendEmail, connecter, eConnecter);
         
         
         this.add(splitPane, BorderLayout.CENTER);
@@ -120,6 +127,7 @@ public class Frame extends JFrame {
         voiceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
+                System.out.println("Voice interface");
                 voiceInterface.takeVoice();
             }
         });
