@@ -64,6 +64,10 @@ public class SendEmail {
         frame.updateQuestionBox(command);
         
         //Seperate the subject and body in the message
+        while (message.indexOf("\n") == 0) {
+            message = message.substring(1);
+        }
+
         if (message.indexOf("Subject:") == 0) {
             subject = message.substring(message.indexOf("Subject:") + 9, message.indexOf("\n"));
             body = message.substring(message.indexOf("\n") + 2);
@@ -73,8 +77,8 @@ public class SendEmail {
             body = message;
         }
         
-        //System.out.println("Subject: " + subject);
-        //System.out.println("body: " + body);
+        System.out.println("Subject: " + subject);
+        System.out.println("body: " + body);
         
         
         //System.out.println("TLS Email Start");

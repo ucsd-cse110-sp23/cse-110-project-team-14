@@ -23,9 +23,10 @@ public class CreateEmail {
     Storage storage;
     MySideBar sideBar;
     ButtonCoordinator buttonCoordinator;
+    EmailConnecter eConnecter;
     final String URL = "http://localhost:8100/";
 
-    public CreateEmail(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co) {
+    public CreateEmail(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, EmailConnecter eConnecter) {
         recorder = r;
         askButton = b;
         converter = con;
@@ -35,6 +36,7 @@ public class CreateEmail {
         storage = s;
         sideBar = bar;
         buttonCoordinator = co;
+        this.eConnecter = eConnecter;
     }
 
     public String askHTTPRequest(String query){
@@ -57,7 +59,7 @@ public class CreateEmail {
             );
 
             //Debugging
-            System.out.println("READING LINES FROM BUFFER");
+            //System.out.println("READING LINES FROM BUFFER");
             in.readLine();
             in.readLine();
 
@@ -70,10 +72,10 @@ public class CreateEmail {
                 inputLine = in.readLine();
             }
 
-            System.out.println("Reponse: " + response);
+            //System.out.println("Reponse: " + response);
 
             in.close();
-            System.out.println("\n CLIENT: RETURNING RESPONSE FROM SERVER" + response);
+            //System.out.println("\n CLIENT: RETURNING RESPONSE FROM SERVER" + response);
             
             return response;
 
@@ -114,9 +116,9 @@ public class CreateEmail {
                         //String questionTime = message +"\t"+ dtf.format(currTime);
                         frame.updateQuestionBox(questionTime);
                         String answer = askHTTPRequest(questionTime);
-                        System.out.println(answer);
-                        
-                        answer = addSignature(answer, "Dennis Liang");
+                        //System.out.println(answer);
+                        eConnecter.getEmailInfo();
+                        answer = addSignature(answer, eConnecter.getDisplay());
                         frame.updateAnswerBox(answer);
                         storage.addQuestion(questionTime, answer);
                         askPanel.revalidate();
@@ -141,9 +143,10 @@ public class CreateEmail {
     }
 
     public String addSignature(String message, String displayName) {
-        String modifiedMessage = message.replace("[Your Name]", displayName);
-        //answer = answer.replace("[Name]", "Dennis Liang");
-        //answer = answer.replace("[Name]", "Dennis Liang");
+        //String modifiedMessage = message.replace("[Your Name]", displayName);
+        //String modifiedMessage = message + "End";
+        String modifiedMessage = message.substring(0, message.lastIndexOf("["));
+        modifiedMessage = modifiedMessage + "\n" + displayName;
         return modifiedMessage;
     }
 }

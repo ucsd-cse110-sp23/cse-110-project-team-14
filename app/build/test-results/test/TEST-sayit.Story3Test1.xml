@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="sayit.Story3Test1" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-06-08T08:08:18" hostname="DENNIS-XPS-15" time="0.0">
+<testsuite name="sayit.Story3Test1" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-06-08T09:14:23" hostname="DENNIS-XPS-15" time="0.001">
   <properties/>
-  <testcase name="testDeleteQuestionWithoutSelection()" classname="sayit.Story3Test1" time="0.0"/>
+  <testcase name="testDeleteQuestionWithoutSelection()" classname="sayit.Story3Test1" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
