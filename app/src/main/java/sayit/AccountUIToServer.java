@@ -28,7 +28,7 @@ public class AccountUIToServer {
             return "passwords do not match";
         }
         String response = accCreate.create(username, password);
-        if(response.equals("true")) {
+        if(response.equals("Created Account")) {
             this.username = username;
             this.password = password;
         }

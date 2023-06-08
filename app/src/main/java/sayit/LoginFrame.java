@@ -123,7 +123,7 @@ public class LoginFrame extends JFrame {
         if(readLoginInformation.autoLoginEnabled()){
             connecter.login(readLoginInformation.readUsername(),
             readLoginInformation.readPassword());
-            new Frame(new Whisper(), new ChatGPT(), connecter);
+            new Frame(new Whisper(), new ChatGPT(), connecter, new EmailConnecter());
             myLoginFrame.dispose();
         }
 
@@ -136,7 +136,6 @@ public class LoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Create Account Button Pressed!");
-                
                 new CreateAccountFrame(connecter);
                 myLoginFrame.dispose();
             }

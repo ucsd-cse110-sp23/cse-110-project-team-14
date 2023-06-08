@@ -82,9 +82,11 @@ public class RequestHandler implements HttpHandler {
         OutputStreamWriter outputStream2 = new OutputStreamWriter(System.out);
         byte[] bytes = response.getBytes();
         
-        outputStream2.write("Handler:"+response);
+        outputStream2.write("Handler:" + response);
+        outputStream2.flush();
         outputStream2.close();
         outputStream.write(bytes);
+        outputStream.flush();
         outputStream.close();
     };
 

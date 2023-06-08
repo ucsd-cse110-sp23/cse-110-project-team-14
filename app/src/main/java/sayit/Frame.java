@@ -76,7 +76,7 @@ public class Frame extends JFrame {
      * set sideBar and a dynamic query and
      * response area for ChatGPT.
      */
-    Frame(IAudioConverter converter, IChatBot chat, AccountUIToServer connecter) {
+    Frame(IAudioConverter converter, IChatBot chat, AccountUIToServer connecter, EmailConnecter eConnecter) {
         this.converter = converter;
         this.chat = chat;
 
@@ -95,7 +95,7 @@ public class Frame extends JFrame {
         askQuestion = new AskQuestion(recorder, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator);
         deleteQuestion = new DeleteQuestion(storage, currButton, sideBar, this, buttonCoordinator);
         clearQuestions = new ClearQuestions(this, storage, sideBar, buttonCoordinator);
-        voiceInterface = new VoiceInterface(recorder, voiceButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator,askQuestion, clearQuestions,deleteQuestion);
+        voiceInterface = new VoiceInterface(recorder, voiceButton, converter, chat, askPanel, this, storage, sideBar, buttonCoordinator,askQuestion, clearQuestions,deleteQuestion, eConnecter);
         
         
         this.add(splitPane, BorderLayout.CENTER);

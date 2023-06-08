@@ -82,7 +82,7 @@ public class AutoLoginFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Yes button pressed!");
                 exportLoginInformation.exportLogin(username, password, true);
-                new Frame(new Whisper(), new ChatGPT(), connecter);
+                new Frame(new Whisper(), new ChatGPT(), connecter, new EmailConnecter());
                 myAutoLoginFrame.dispose();
             }
         });
@@ -92,7 +92,7 @@ public class AutoLoginFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("No button pressed!");
                 exportLoginInformation.exportLogin(username, password, false);
-                new Frame(new Whisper(), new ChatGPT(), connecter);
+                new Frame(new Whisper(), new ChatGPT(), connecter, new EmailConnecter());
                 myAutoLoginFrame.dispose();
             }
         });

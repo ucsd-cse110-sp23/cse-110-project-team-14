@@ -23,6 +23,7 @@ public class MyServer {
 
         server.createContext("/", new RequestHandler(connecter, database));
         server.createContext("/account", new RequestAccountHandler(connecter, database));
+        server.createContext("/email", new RequestEmailHandler(connecter));
         server.setExecutor(threadPoolExecutor);
         server.start();
         System.out.println("Started Server");
