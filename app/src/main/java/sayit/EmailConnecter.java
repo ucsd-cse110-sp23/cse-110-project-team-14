@@ -66,7 +66,10 @@ public class EmailConnecter {
             );
 
             response = in.readLine();
-            updateVal(response);
+            if(!response.equals("false")) {
+                updateVal(response);
+            }
+            
             
 
         }catch (MalformedURLException exception){

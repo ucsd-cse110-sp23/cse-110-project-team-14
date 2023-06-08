@@ -14,6 +14,9 @@ public class DBReadEmail {
 
             // find one document with Filters.eq()
             Document account = accountsCollection.find(eq("username", username)).first();
+            if(account.get("Email Info") == null) {
+                return "false";
+            }
             return account.get("Email Info").toString();
         }
     }
