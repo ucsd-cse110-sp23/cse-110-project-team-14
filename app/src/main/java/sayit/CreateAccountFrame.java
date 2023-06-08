@@ -124,7 +124,7 @@ public class CreateAccountFrame extends JFrame {
                 () -> {
                     String response = connecter.createAccount(username, password, confirmPassword);
                     if (response.equals("Created Account")) {
-                        new AutoLoginFrame(connecter);
+                        new AutoLoginFrame(connecter, username, password);
                         myCreateAccountFrame.dispose();
                     } else {
                         errorLabel.setText(response);

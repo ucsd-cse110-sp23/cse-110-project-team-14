@@ -27,6 +27,7 @@ public class LoginFrame extends JFrame {
 
     private JButton logInButton;
     private JButton createAccountButton;
+    private ReadLoginInformation readLoginInformation;
 
     AccountUIToServer connecter;
 
@@ -73,6 +74,9 @@ public class LoginFrame extends JFrame {
     LoginFrame (AccountUIToServer connecter) {
         this.connecter = connecter;
         myLoginFrame = this;
+        readLoginInformation = new ReadLoginInformation();
+
+        
 
         this.setSize(800, 450);
         this.setVisible(true);
@@ -109,6 +113,33 @@ public class LoginFrame extends JFrame {
 
         addListeners();
         revalidate();
+
+        if(readLoginInformation.autoLoginEnabled()){
+            connecter.login(readLoginInformation.readUsername(),
+            readLoginInformation.readPassword());
+            new Frame(new Whisper(), new ChatGPT(), connecter);
+            myLoginFrame.dispose();
+        }
+
+
+
+
+
+        /**
+         * If(ReadLoginInformation.autoLoginEnabled()){
+         * 
+         *     connecter.login
+         *     (ReadLoginInformation.getUsername(), ReadLoginInformation,getPassword());
+         *     new Frame(new Whisper(), new ChatGPT(), connecter);
+         *     myLoginFrame.dispose();
+         * }
+         */
+        //If auto login enabled
+        //Then created panel with connector.login(username,password) from login.txt
+        //If (ReadLoginInformation.autoLoginEnabled()){
+        //
+        //
+        //
     }
 
     public void addListeners() {
@@ -122,6 +153,7 @@ public class LoginFrame extends JFrame {
                 myLoginFrame.dispose();
             }
         });
+
 
         // This code is adding an action listener to the `delButton` JButton. When
         // the button is clicked, it creates a new thread that deletes the
@@ -144,7 +176,7 @@ public class LoginFrame extends JFrame {
                     () -> {
                         String response = connecter.login(username, password);
                         if (response.equals("true")) {
-                            new AutoLoginFrame(connecter);
+                            new AutoLoginFrame(connecter,username,password);
                             myLoginFrame.dispose();
                         } else if (response.equals("Incorrect password")) {
                             errorLabel.setText(response);
