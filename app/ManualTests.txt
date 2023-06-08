@@ -253,7 +253,7 @@ Story 10: All done through automated testing
     
 Story 11: 
     Test 1: Create email with everything setup correctly
-        Step 1: Start the app
+        Step 1: Start the app and login
         Step 2: Click on the start button
         Step 3: Say “Create email to John. I want to meet up”
         Step 4: Click stop
@@ -273,9 +273,14 @@ Story 11:
         Step 1: Run after Test 1
         Step 2: Click on the start button
         Step 3: Say command “Send email to dwng at UCSD dot edu”
-    The text “Send email to dwng@ucsd.edu” should appear in the input UI box
-    The text “Setup information invalid” should appear in the output UI box
+        Step 4: Check output
+            a: The text “Send email to dwng@ucsd.edu” should appear in the input UI box
+            b: The text “Setup information invalid” should appear in the output UI box
     Test 4: Send email without an email created
-    Run without Test 1, say command “Send email to dwng at UCSD dot edu”
-    The text “Send email to dwng@ucsd.edu” should appear in the input UI box
-    The text “No email to send” should appear in the output UI box
+        Step 0: Run without Test 1, 
+        Step 1: Open the app and login
+        Step 2: Click start
+        Step 3: Say command “Send email to dwng at UCSD dot edu”
+        Step 4: Check ouput
+            a: The text “Send email to dwng@ucsd.edu” should appear in the input UI box
+            b: The text “No email to send” should appear in the output UI box
