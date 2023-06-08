@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="sayit.ParseVoiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-06-08T17:31:47" hostname="DENNIS-XPS-15" time="0.006">
+<testsuite name="sayit.ParseVoiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-06-08T17:50:20" hostname="DENNIS-XPS-15" time="0.003">
   <properties/>
-  <testcase name="parsingIntentSetUp()" classname="sayit.ParseVoiceTest" time="0.003"/>
+  <testcase name="parsingIntentSetUp()" classname="sayit.ParseVoiceTest" time="0.0"/>
   <testcase name="parsingIntentClearAll()" classname="sayit.ParseVoiceTest" time="0.001"/>
   <testcase name="parsingIntentDelete()" classname="sayit.ParseVoiceTest" time="0.001"/>
   <testcase name="parsingIntentQuestion()" classname="sayit.ParseVoiceTest" time="0.0"/>

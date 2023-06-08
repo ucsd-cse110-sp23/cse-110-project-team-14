@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="sayit.AutoLoginTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-06-08T17:50:20" hostname="DENNIS-XPS-15" time="0.011">
+  <properties/>
+  <testcase name="loginTest()" classname="sayit.AutoLoginTest" time="0.009"/>
+  <testcase name="createTest()" classname="sayit.AutoLoginTest" time="0.002"/>
+  <system-out><![CDATA[Running export login
+File does not exist. Attempting to create a file to write.
+Testing if autologin is enabled
+Reading file
+String Boolean: true
+Returning true
+Running export login
+Running export login
+Testing if autologin is enabled
+Reading file
+String Boolean: true
+Returning true
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

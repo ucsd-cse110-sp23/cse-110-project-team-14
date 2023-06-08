@@ -123,7 +123,7 @@ public class LoginFrame extends JFrame {
         if(readLoginInformation.autoLoginEnabled()){
             connecter.login(readLoginInformation.readUsername(),
             readLoginInformation.readPassword());
-            new Frame(new Whisper(), new ChatGPT(), connecter);
+            new Frame(new Whisper(), new ChatGPT(), connecter, new EmailConnecter());
             myLoginFrame.dispose();
         }
 
