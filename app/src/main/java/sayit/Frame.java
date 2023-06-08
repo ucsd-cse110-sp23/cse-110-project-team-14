@@ -104,9 +104,11 @@ public class Frame extends JFrame {
         importFiles = new ImportFiles(storage, buttonCoordinator, this, fileToLoad, sideBar);
         importFiles.importFiles(connecter.getUsername());
         exportFiles = new ExportFiles(storage, fileToLoad);
+        CheckServerStatus serverStatus = new CheckServerStatus(this);
 
 
         addListeners();
+        serverStatus.updateServerStatus();
         revalidate();
     }
 
