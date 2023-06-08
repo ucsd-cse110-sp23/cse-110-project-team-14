@@ -20,7 +20,7 @@ public class AccountTest {
     void loginTest() {
         assertEquals("true", logic.login("dwng@ucsd.edu", "abcd1234"));
         assertEquals("Incorrect password", logic.login("dwng@ucsd.edu", "1234"));
-        assertEquals("No account with that username", logic.login("test@ucsd.edu", "abcd1234"));
+        assertEquals("No account with that username", logic.login("test2@ucsd.edu", "abcd1234"));
     }
 
     @Test
