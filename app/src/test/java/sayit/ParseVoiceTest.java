@@ -45,6 +45,13 @@ public class ParseVoiceTest {
 
     }
 
+    @Test
+    void parsingIntentSetUp(){
+        String string = "Set up email";
+        assertEquals(parseVoice.parseIntent(string), "Set Up Email");
+
+    }
+
     
     
 }

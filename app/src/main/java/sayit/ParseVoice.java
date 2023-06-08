@@ -23,6 +23,7 @@ public class ParseVoice {
         Pattern question = Pattern.compile("Question" , Pattern.CASE_INSENSITIVE);
         Pattern deleteQuestion = Pattern.compile("Delete" , Pattern.CASE_INSENSITIVE);
         Pattern clearAll = Pattern.compile("Clear All" , Pattern.CASE_INSENSITIVE);
+        Pattern setUpEmail = Pattern.compile("Set Up Email" , Pattern.CASE_INSENSITIVE);
 
 
          if (question.matcher(input).find()){
@@ -38,6 +39,11 @@ public class ParseVoice {
          else if (clearAll.matcher(input).find()){
             intent = "Clear All"; 
             System.out.println("Intent declared as Clear");
+         } 
+
+         else if (setUpEmail.matcher(input).find()){
+            intent = "Set Up Email"; 
+            System.out.println("Intent declared as Set Up Email");
          }
 
         return intent;
@@ -48,9 +54,11 @@ public class ParseVoice {
         Pattern question = Pattern.compile("Question" , Pattern.CASE_INSENSITIVE);
         Pattern deleteQuestion = Pattern.compile("Delete" , Pattern.CASE_INSENSITIVE);
         Pattern clearAll = Pattern.compile("Clear",Pattern.CASE_INSENSITIVE);
+        Pattern setUpEmail = Pattern.compile("Set Up Email",Pattern.CASE_INSENSITIVE);
         Matcher questionMatcher = question.matcher(input);
         Matcher deleteMatcher = deleteQuestion.matcher(input);
         Matcher clearMatcher = clearAll.matcher(input);
+        Matcher setUpMatcher = setUpEmail.matcher(input);
 
          if (questionMatcher.find()){
             query = input.substring(questionMatcher.end() + 2);
@@ -62,7 +70,9 @@ public class ParseVoice {
 
          else if (clearMatcher.find()){
             query =  input.substring(clearMatcher.end());
-            System.out.println("On statement clearMatcher.find(). Query is :" + input);
+         }
+         else if (setUpMatcher.find()){
+            query =  input.substring(setUpMatcher.end());
          }
 
         return query;

@@ -73,7 +73,7 @@ public class AutoLoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Yes button pressed!");
-                new Frame(new Whisper(), new ChatGPT(), connecter);
+                new Frame(new Whisper(), new ChatGPT(), connecter, new EmailConnecter());
                 myAutoLoginFrame.dispose();
             }
         });
@@ -82,7 +82,7 @@ public class AutoLoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("No button pressed!");
-                new Frame(new Whisper(), new ChatGPT(), connecter);
+                new Frame(new Whisper(), new ChatGPT(), connecter, new EmailConnecter());
                 myAutoLoginFrame.dispose();
             }
         });

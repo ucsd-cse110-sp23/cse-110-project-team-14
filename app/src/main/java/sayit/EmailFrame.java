@@ -36,6 +36,8 @@ public class EmailFrame extends JFrame {
     private JButton saveButton;
     private JButton cancelButton;
 
+    private EmailConnecter eConnecter;
+
     /*
      * Add elements in order using the GridBagLayout. Adds all the labels and fields from left to right and then up to down.
      */
@@ -47,39 +49,46 @@ public class EmailFrame extends JFrame {
         this.add(firstNameLabel, confine);
         confine.gridx = 1;
         this.add(firstNameField, confine);
+        firstNameField.setText(eConnecter.getFirst());
         
         confine.gridx = 2;
         this.add(lastNameLabel, confine);
         confine.gridx = 3;
         this.add(lastNameField, confine);
+        lastNameField.setText(eConnecter.getLast());
 
         confine.gridx = 0;
         confine.gridy = 1;
         this.add(displayLabel, confine);
         confine.gridx = 1;
         this.add(displayField, confine);
+        displayField.setText(eConnecter.getDisplay());
 
         confine.gridx = 2;
         this.add(eAddressLabel, confine);
         confine.gridx = 3;
         this.add(eAddressField, confine);
+        eAddressField.setText(eConnecter.getEmail());
 
         confine.gridx = 0;
         confine.gridy = 2;
         this.add(SMTPHostLabel, confine);
         confine.gridx = 1;
         this.add(SMTPHostField, confine);
+        SMTPHostField.setText(eConnecter.getSMTP());
 
         confine.gridx = 2;
         this.add(TLSPortLabel, confine);
         confine.gridx = 3;
         this.add(TLSPortField, confine);
+        TLSPortField.setText(eConnecter.getTLS());
 
         confine.gridx = 0;
         confine.gridy = 3;
         this.add(emailPassLabel, confine);
         confine.gridx = 1;
         this.add(emailPassField, confine);
+        emailPassField.setText(eConnecter.getPassword());
 
         confine.gridx = 0;
         confine.gridy = 4;
@@ -94,7 +103,10 @@ public class EmailFrame extends JFrame {
      * This method initializes the frame and creates new Objects for all Labels, Text Fields, and Buttons. Also creates the GridBagLayout, GridBagConstraints, and Padding for 
      * the GridBagLayoout.
      */
-    EmailFrame() {
+    EmailFrame(EmailConnecter connecter) {
+        eConnecter = connecter;
+        connecter.getEmailInfo();
+        
         this.setSize(700, 350);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -143,6 +155,7 @@ public class EmailFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Cancel Button clicked!"); // Cancel Functionality
+                closeSelf();
             }
         });
         
@@ -150,7 +163,15 @@ public class EmailFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Save Button clicked!"); // Save Functionality
+
+                eConnecter.setup(firstNameField.getText(),lastNameField.getText(),displayField.getText(),
+                    eAddressField.getText(), SMTPHostField.getText(),TLSPortField.getText(),
+                    emailPassField.getText());
+                closeSelf();
             }
         });
+    }
+    public void closeSelf() {
+        this.dispose();
     }
 }

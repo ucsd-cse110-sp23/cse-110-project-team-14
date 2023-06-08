@@ -30,9 +30,10 @@ public class VoiceInterface {
     DeleteQuestion deleteQuestion;
     String query;
     String intent;
+    EmailConnecter eConnecter;
 
     public VoiceInterface(AudioRecorder r, JButton b, IAudioConverter con, IChatBot bot, MyAskPanel pan, Frame f, Storage s, MySideBar bar, ButtonCoordinator co, 
-    AskQuestion ask, ClearQuestions clearQuestions, DeleteQuestion deleteQuestion) {
+    AskQuestion ask, ClearQuestions clearQuestions, DeleteQuestion deleteQuestion, EmailConnecter connecter) {
         recorder = r;
         startButton = b;
         converter = con;
@@ -46,6 +47,7 @@ public class VoiceInterface {
         askQuestion = ask;
         this.clearQuestions = clearQuestions;
         this.deleteQuestion = deleteQuestion;
+        eConnecter = connecter;
     }
     
     public void takeVoice(){
@@ -95,6 +97,10 @@ public class VoiceInterface {
             case "Delete Prompt": 
                 System.out.println("Delete Switch");
                 deleteQuestion.delete();
+                break;
+            case "Set Up Email" :
+                System.out.println("Set up email");
+                new EmailFrame(eConnecter);
                 break;
 
             default: System.out.println("ERROR!");
